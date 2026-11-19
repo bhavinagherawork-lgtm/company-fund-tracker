@@ -75,15 +75,9 @@ export function normalizeDateToISO(val: any): string | null {
           d = p1;
           m = p0;
         } else {
-          // Ambiguous (e.g. 2/11/26 vs 11/2/26)
-          // In this company's ledger, months are Sep(9), Oct(10), Nov(11)
-          if (p1 === 11 || p1 === 10 || p1 === 9) {
-            d = p0;
-            m = p1;
-          } else if (p0 === 11 || p0 === 10 || p0 === 9) {
-            d = p1;
-            m = p0;
-          }
+          // In standard Indian accounting and this company's spreadsheets, dates are Day/Month/Year
+          d = p0;
+          m = p1;
         }
 
         return `${year}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -110,8 +104,8 @@ export async function cleanupDuplicateRecords(): Promise<{ expensesRemoved: numb
     const seenExpenses = new Map<string, number>();
     const duplicateExpenseIds: number[] = [];
 
-    // Also identify flipped-date duplicates (e.g. Nov expenses inserted into Feb/Mar/Apr due to previous date parser)
-    const validMonths = ['2026-09', '2026-10', '2026-11'];
+    // Also identify flipped-date duplicates outside Jun-Nov 2026
+    const validMonths = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
 
     for (const exp of expenses) {
       if (!exp.id) continue;
@@ -566,6 +560,197 @@ function fetchGoogleSheetJSONP(sheetId: string, gid: string): Promise<any> {
 }
 
 /**
+ * Dedicated parser for the Water Tracker Sheet (gid: 1279840244)
+ * Parses daily water jug deliveries, month payment statuses (Paid vs Pending),
+ * assigns to Elegance Office, and creates categorized drinking water expenses.
+ */
+async function syncWaterSheet(
+  rows: any[],
+  sheetOfficeId: number | undefined,
+  sheetOfficeName: string
+): Promise<{
+  incomesAdded: number;
+  expensesAdded: number;
+  incomesDeleted: number;
+  expensesDeleted: number;
+  message: string;
+}> {
+  // 1. Detect month payment statuses from summary rows and price per jug
+  const monthStatusMap: Record<string, 'Completed' | 'Pending'> = {};
+  let currentMonth: string | null = null;
+  let pricePerJug = 30;
+
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r || !r.c) continue;
+    const c0 = r.c[0] ? (r.c[0].v !== undefined ? r.c[0].v : r.c[0].f) : null;
+    const c1 = r.c[1] ? (r.c[1].v !== undefined ? r.c[1].v : r.c[1].f) : null;
+    const c2 = r.c[2] ? (r.c[2].v !== undefined ? r.c[2].v : r.c[2].f) : null;
+    const c3 = r.c[3] ? (r.c[3].v !== undefined ? r.c[3].v : r.c[3].f) : null;
+
+    const iso = normalizeDateToISO(c0);
+    if (iso) {
+      currentMonth = iso.substring(0, 7);
+    } else if (currentMonth) {
+      if (Number(c1) === 30 || String(c1).trim() === '30' || (c2 && Number(c2) > 100)) {
+        const statusText = String(c3 || '').trim().toLowerCase();
+        const isPaid = statusText.includes('paid');
+        monthStatusMap[currentMonth] = isPaid ? 'Completed' : 'Pending';
+        if (Number(c1) > 0) pricePerJug = Number(c1);
+      }
+    }
+  }
+
+  // 2. Resolve Water Category
+  const existingCategories = await db.expenseCategories.toArray();
+  let waterCat = existingCategories.find(c => c.code === 'WATER' || c.name.toLowerCase().includes('water'));
+  if (!waterCat) {
+    const newCatId = await db.expenseCategories.add({
+      id: 7,
+      name: 'Drinking Water Supply',
+      code: 'WATER',
+      color: '#0284c7',
+      isDefault: true,
+      description: 'Daily 20L drinking water jugs and dispensers'
+    });
+    waterCat = { id: newCatId as number, name: 'Drinking Water Supply', code: 'WATER', color: '#0284c7', isDefault: true, description: '' };
+  }
+
+  // 3. Existing Expenses for 1-to-1 matching
+  const existingExpenses = await db.expenseRecords.toArray();
+  const matchedWaterIds = new Set<number>();
+  const sheetDates: string[] = [];
+  let expensesAdded = 0;
+  let expensesUpdated = 0;
+  let totalJugs = 0;
+
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r || !r.c) continue;
+
+    const rawDate = r.c[0] ? (r.c[0].v !== undefined ? r.c[0].v : r.c[0].f) : null;
+    const isoDate = normalizeDateToISO(rawDate) || normalizeDateToISO(r.c[0]?.f);
+    if (!isoDate) continue;
+    sheetDates.push(isoDate);
+
+    const dayName = r.c[1] ? String(r.c[1].v || r.c[1].f || '').trim() : '';
+    const formattedDay = dayName ? dayName.charAt(0).toUpperCase() + dayName.slice(1) : '';
+    const countVal = r.c[2] ? Number(r.c[2].v !== undefined ? r.c[2].v : r.c[2].f) : 0;
+
+    if (countVal > 0) {
+      totalJugs += countVal;
+      const mKey = isoDate.substring(0, 7);
+      const status: 'Completed' | 'Pending' = monthStatusMap[mKey] || 'Pending';
+      const amount = countVal * pricePerJug;
+      const title = `Drinking Water (${countVal} ${countVal === 1 ? 'Jug' : 'Jugs'})`;
+      const desc = `Daily drinking water supply for Elegance Office (${formattedDay || 'Daily'})`;
+
+      const match = existingExpenses.find(
+        exp => !matchedWaterIds.has(exp.id!) &&
+               exp.expenseDate === isoDate &&
+               ((exp.expenseTitle && exp.expenseTitle.toLowerCase().includes('water')) || (exp.categoryName && exp.categoryName.toLowerCase().includes('water')))
+      );
+
+      if (match) {
+        matchedWaterIds.add(match.id!);
+        const updates: Partial<ExpenseRecord> = {};
+        if (match.amount !== amount) updates.amount = amount;
+        if (match.expenseTitle !== title) updates.expenseTitle = title;
+        if (match.status !== status) updates.status = status;
+        if (match.officeName !== sheetOfficeName) {
+          updates.officeId = sheetOfficeId;
+          updates.officeName = sheetOfficeName;
+        }
+        if (match.categoryId !== waterCat.id) {
+          updates.categoryId = waterCat.id;
+          updates.categoryName = waterCat.name;
+        }
+        if (Object.keys(updates).length > 0) {
+          await db.expenseRecords.update(match.id!, updates);
+          expensesUpdated++;
+        }
+      } else {
+        const newId = await db.expenseRecords.add({
+          expenseDate: isoDate,
+          categoryId: waterCat.id || 7,
+          categoryName: waterCat.name,
+          expenseTitle: title,
+          description: desc,
+          amount,
+          paymentMode: 'Cash',
+          vendor: 'Drinking Water Supply',
+          status,
+          officeId: sheetOfficeId,
+          officeName: sheetOfficeName,
+          createdAt: new Date().toISOString(),
+        });
+        matchedWaterIds.add(newId as number);
+        existingExpenses.push({
+          id: newId as number,
+          expenseDate: isoDate,
+          categoryId: waterCat.id || 7,
+          categoryName: waterCat.name,
+          expenseTitle: title,
+          amount,
+          paymentMode: 'Cash',
+          vendor: 'Drinking Water Supply',
+          status,
+          officeId: sheetOfficeId,
+          officeName: sheetOfficeName,
+          createdAt: new Date().toISOString(),
+        });
+        expensesAdded++;
+      }
+    }
+  }
+
+  // 4. Deletion Reconciliation: ONLY reconcile water expenses within the scope
+  let expensesDeleted = 0;
+  if (sheetDates.length > 0) {
+    const sortedDates = [...sheetDates].sort();
+    const scopeStart = sortedDates[0];
+    const scopeEnd = sortedDates[sortedDates.length - 1];
+
+    const waterExpensesToRemove = existingExpenses.filter(
+      e => e.expenseDate >= scopeStart &&
+           e.expenseDate <= scopeEnd &&
+           ((e.expenseTitle && e.expenseTitle.toLowerCase().includes('water')) || (e.categoryName && e.categoryName.toLowerCase().includes('water'))) &&
+           !matchedWaterIds.has(e.id!)
+    );
+
+    for (const exp of waterExpensesToRemove) {
+      if (exp.id) {
+        await db.expenseRecords.delete(exp.id);
+        expensesDeleted++;
+      }
+    }
+  }
+
+  if (expensesAdded > 0 || expensesUpdated > 0 || expensesDeleted > 0) {
+    await triggerAutoSaveToExcel();
+  }
+
+  currentSyncState.lastSyncedAt = new Date();
+  currentSyncState.lastError = null;
+
+  let message = `Water Tracker synced successfully! ${expensesAdded} new water entries imported, ${expensesUpdated} updated (Total ${totalJugs} jugs @ ₹${pricePerJug}/jug = ₹${totalJugs * pricePerJug} across June-Sept). All mapped to Elegance Office.`;
+  if (expensesDeleted > 0) {
+    message += ` ${expensesDeleted} removed water entries purged.`;
+  }
+  if (expensesAdded === 0 && expensesUpdated === 0 && expensesDeleted === 0) {
+    message = `All ${totalJugs} water jug entries (@ ₹${pricePerJug}/jug) from June to September are already 100% in sync with Elegance Office!`;
+  }
+
+  return {
+    incomesAdded: 0,
+    expensesAdded,
+    incomesDeleted: 0,
+    expensesDeleted,
+    message
+  };
+}
+
+/**
  * Syncs directly from the live public Google Sheet without CORS errors.
  * Features 1-to-1 transaction matching, ISO date normalization, and deletion reconciliation:
  * If an entry was removed from the Google Sheet, it is safely deleted from the website as well.
@@ -596,6 +781,22 @@ export async function syncFromLiveGoogleSheet(
       throw new Error('Google Sheet returned 0 rows.');
     }
 
+    // Resolve Elegance Office for all Google Sheet transactions
+    const eleganceOffice = (await db.offices.filter(o => o.name.toLowerCase().includes('elegance')).first())
+      || (await db.offices.where('isDefault').equals(1).first())
+      || (await db.offices.toCollection().first());
+    const sheetOfficeId = eleganceOffice?.id;
+    const sheetOfficeName = eleganceOffice?.name || 'Elegance Office';
+
+    // Check if this sheet is the Water Tracker Tab (gid 1279840244 or column layout matches daily water count)
+    const isWaterSheet = gid === '1279840244' ||
+      gvizData.table.cols?.some((c: any) => c?.label?.toLowerCase().includes('count')) ||
+      (rows[0]?.c?.[2]?.v === 'Count' || rows[0]?.c?.[1]?.v === 'day');
+
+    if (isWaterSheet) {
+      return await syncWaterSheet(rows, sheetOfficeId, sheetOfficeName);
+    }
+
     // 2. Check Row 0 for opening balance (Only update if DB has no prior historical transactions)
     const row0Val = rows[0]?.c?.[4] ? (rows[0].c[4].f || rows[0].c[4].v) : null;
     const openingNum = Number(String(row0Val || '').replace(/[^0-9.]/g, ''));
@@ -613,13 +814,6 @@ export async function syncFromLiveGoogleSheet(
     const existingIncomes = await db.incomeRecords.toArray();
     const existingCategories = await db.expenseCategories.toArray();
     const defaultCategory = existingCategories[0] || { id: 1, name: 'Snacks & Refreshments (Nasto)' };
-
-    // Resolve Elegance Office for all Google Sheet transactions
-    const eleganceOffice = (await db.offices.filter(o => o.name.toLowerCase().includes('elegance')).first())
-      || (await db.offices.where('isDefault').equals(1).first())
-      || (await db.offices.toCollection().first());
-    const sheetOfficeId = eleganceOffice?.id;
-    const sheetOfficeName = eleganceOffice?.name || 'Elegance Office';
 
     // Sets to prevent duplicate syncing and identify deleted rows
     const matchedExpenseIds = new Set<number>();
@@ -816,10 +1010,12 @@ export async function syncFromLiveGoogleSheet(
       const lastDayOfMonth = new Date(latestYear, latestMonth, 0).getDate();
       const scopeEnd = `${latestDate.substring(0, 7)}-${String(lastDayOfMonth).padStart(2, '0')}`;
 
-      // Delete local expenses that were removed from the Google Sheet
+      // Delete local expenses that were removed from the Google Sheet (excluding water expenses)
       const expensesToRemove = existingExpenses.filter(
         e => e.expenseDate >= scopeStart &&
              e.expenseDate <= scopeEnd &&
+             !(e.expenseTitle && e.expenseTitle.toLowerCase().includes('water')) &&
+             !(e.categoryName && e.categoryName.toLowerCase().includes('water')) &&
              !matchedExpenseIds.has(e.id!)
       );
 

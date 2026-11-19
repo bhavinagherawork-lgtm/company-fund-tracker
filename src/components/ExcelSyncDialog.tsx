@@ -159,32 +159,39 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
 
       if (targetGid === 'ALL_TABS') {
         const tabs = [
-          { name: 'November', gid: '1948486123' },
-          { name: 'October', gid: '95780562' },
-          { name: 'September', gid: '1516008819' },
+          { name: 'November (Active Tab)', gid: '1948486123' },
+          { name: 'October', gid: '1334161957' },
+          { name: 'September', gid: '729191387' },
+          { name: 'August', gid: '1198075370' },
+          { name: 'July', gid: '795082972' },
+          { name: 'Water Jugs Tracker', gid: '1279840244' },
         ];
         let totalExp = 0;
         let totalInc = 0;
         let totalExpDel = 0;
         let totalIncDel = 0;
         for (const t of tabs) {
-          const res = await syncFromLiveGoogleSheet(sheetId.trim(), t.gid);
-          totalExp += res.expensesAdded;
-          totalInc += res.incomesAdded;
-          totalExpDel += res.expensesDeleted || 0;
-          totalIncDel += res.incomesDeleted || 0;
+          try {
+            const res = await syncFromLiveGoogleSheet(sheetId.trim(), t.gid);
+            totalExp += res.expensesAdded;
+            totalInc += res.incomesAdded;
+            totalExpDel += res.expensesDeleted || 0;
+            totalIncDel += res.incomesDeleted || 0;
+          } catch (tabErr) {
+            console.warn(`Tab ${t.name} sync warning:`, tabErr);
+          }
         }
-        let msg = `Synced all 3 tabs!`;
+        let msg = `Synced all sheets (Nov, Oct, Sep, Aug, Jul + Water Tracker)!`;
         const totAdded = totalExp + totalInc;
         const totDel = totalExpDel + totalIncDel;
         if (totAdded > 0 && totDel > 0) {
-          msg = `Synced all 3 tabs: ${totAdded} added, and ${totDel} deleted from website (matching removed entries in sheet)!`;
+          msg = `Synced all sheets: ${totAdded} added, and ${totDel} deleted from website (matching removed entries in sheet)!`;
         } else if (totDel > 0) {
-          msg = `Synced all 3 tabs: ${totDel} removed entries deleted from website to match sheets!`;
+          msg = `Synced all sheets: ${totDel} removed entries deleted from website to match sheets!`;
         } else if (totAdded > 0) {
-          msg = `Synced all 3 tabs: ${totalExp} new expenses and ${totalInc} new fund entries imported!`;
+          msg = `Synced all sheets: ${totalExp} expenses (incl. drinking water) and ${totalInc} fund entries imported!`;
         } else {
-          msg = `All records across all 3 sheet tabs are already in sync (0 duplicates added)!`;
+          msg = `All records across all month sheets & Water Tracker are already in sync (0 duplicates)!`;
         }
         setNotification({
           type: 'success',
@@ -335,7 +342,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             Excel & Google Sheets 2-Way Live Sync
           </Typography>
         </Box>
-        <IconButton onClick={onClose} size="small">
+        <IconButton aria-label="close" onClick={onClose} size="small">
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -578,18 +585,21 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                   value={targetGid}
                   onChange={(e) => setTargetGid(e.target.value)}
                 >
-                  <MenuItem value="1948486123">November 2026 (Active Tab)</MenuItem>
-                  <MenuItem value="95780562">October 2026 Tab</MenuItem>
-                  <MenuItem value="1516008819">September 2026 Tab</MenuItem>
-                  <MenuItem value="ALL_TABS">All 3 Tabs (Nov + Oct + Sep)</MenuItem>
+                  <MenuItem value="1948486123">November 2026 - Elegance-Nasto (Active Tab)</MenuItem>
+                  <MenuItem value="1334161957">October 2026 - Oct-Expense</MenuItem>
+                  <MenuItem value="729191387">September 2026 - Sept-Expense</MenuItem>
+                  <MenuItem value="1198075370">August 2026 - Aug-Expense</MenuItem>
+                  <MenuItem value="795082972">July 2026 - July-Expense</MenuItem>
+                  <MenuItem value="1279840244">Water Jugs Tracker (gid: 1279840244)</MenuItem>
+                  <MenuItem value="ALL_TABS">All Tabs (Nov-Jul + Water Tracker)</MenuItem>
                 </TextField>
               </Grid>
             </Grid>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
               <Typography variant="caption" sx={{ color: '#166534', fontWeight: 600 }}>
-                • Automatically checks for new entries & prevents duplicates
-                <br />• Updates opening balance (₹978) and reflects in UI instantly
+                • Direct reference to Water Tracker tab (gid: 1279840244) & all month sheets
+                <br />• Auto-maps daily water jugs @ ₹30/jug to Elegance Office with zero duplicates
               </Typography>
 
               <Button

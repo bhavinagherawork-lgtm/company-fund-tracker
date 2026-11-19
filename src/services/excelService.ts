@@ -646,6 +646,23 @@ export async function downloadMonthWiseTemplate(): Promise<void> {
   wsTemplate['!cols'] = colWidths;
   XLSX.utils.book_append_sheet(wb, wsTemplate, 'Month_Template');
 
+  // Water Tracker Tab matching Google Sheet gid: 1279840244
+  const waterHeaders = ['Date', 'Day', 'Count (Jugs)', 'Price/Jug (INR)', 'Total (INR)', 'Status'];
+  const waterRows: (string | number)[][] = [
+    waterHeaders,
+    ['2026-06-01', 'Monday', 1, 30, 30, 'Completed'],
+    ['2026-06-02', 'Tuesday', 1, 30, 30, 'Completed'],
+    ['2026-06-03', 'Wednesday', 1, 30, 30, 'Completed'],
+    ['2026-06-04', 'Thursday', 1, 30, 30, 'Completed'],
+    ['2026-06-05', 'Friday', 1, 30, 30, 'Completed'],
+    ['2026-06-06', 'Saturday', 1, 30, 30, 'Completed'],
+    ['2026-06-07', 'Sunday', 0, 30, 0, 'Completed'],
+    ['TOTALS (Sample)', '', 26, 30, 780, 'Paid'],
+  ];
+  const wsWater = XLSX.utils.aoa_to_sheet(waterRows);
+  wsWater['!cols'] = [{ wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 16 }, { wch: 16 }, { wch: 14 }];
+  XLSX.utils.book_append_sheet(wb, wsWater, 'Water_Tracker');
+
   const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
   wsSummary['!cols'] = [
     { wch: 22 },
@@ -661,7 +678,7 @@ export async function downloadMonthWiseTemplate(): Promise<void> {
   wb.SheetNames = ['Summary', ...sortedMonthKeys.map((m) => {
     const [y, mm] = m.split('-');
     return `${MONTH_NAMES_LIST[parseInt(mm, 10) - 1] || 'Mon'}-${y}`;
-  }), 'Month_Template'];
+  }), 'Water_Tracker', 'Month_Template'];
 
   XLSX.writeFile(wb, 'Company_Expense_Master_Template_MonthWise.xlsx');
 }

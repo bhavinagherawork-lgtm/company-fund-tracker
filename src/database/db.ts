@@ -74,13 +74,15 @@ export async function initializeDatabase(): Promise<void> {
         await resetDatabaseToExcelSeed();
       } else {
         // Automatic duplicate safeguard: purge any duplicate rows if present
+        const validMonths = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
         const expenses = await db.expenseRecords.toArray();
         const seenExp = new Set<string>();
         const dupExpIds: number[] = [];
         for (const exp of expenses) {
           if (!exp.id) continue;
-          // Purge flipped-date artifact outside Sep-Nov 2026
-          if (!exp.expenseDate.startsWith('2026-09') && !exp.expenseDate.startsWith('2026-10') && !exp.expenseDate.startsWith('2026-11')) {
+          // Purge flipped-date artifact outside valid company period (Jun-Nov 2026)
+          const isValidMonth = validMonths.some(vm => exp.expenseDate.startsWith(vm));
+          if (!isValidMonth) {
             dupExpIds.push(exp.id);
             continue;
           }
@@ -101,7 +103,8 @@ export async function initializeDatabase(): Promise<void> {
         const dupIncIds: number[] = [];
         for (const inc of incomes) {
           if (!inc.id) continue;
-          if (!inc.transactionDate.startsWith('2026-09') && !inc.transactionDate.startsWith('2026-10') && !inc.transactionDate.startsWith('2026-11')) {
+          const isValidMonth = validMonths.some(vm => inc.transactionDate.startsWith(vm));
+          if (!isValidMonth) {
             dupIncIds.push(inc.id);
             continue;
           }
@@ -116,6 +119,19 @@ export async function initializeDatabase(): Promise<void> {
           await db.incomeRecords.bulkDelete(dupIncIds);
           console.log(`Auto-purged ${dupIncIds.length} duplicate incomes on startup.`);
         }
+      }
+
+      // Ensure Drinking Water Supply category exists
+      const waterCat = await db.expenseCategories.filter(c => c.code === 'WATER' || c.name.toLowerCase().includes('water')).first();
+      if (!waterCat) {
+        await db.expenseCategories.add({
+          id: 7,
+          name: "Drinking Water Supply",
+          code: "WATER",
+          color: "#0284c7",
+          isDefault: true,
+          description: "Daily 20L drinking water jugs and dispensers"
+        });
       }
 
       // Mandatory User check: Always ensure at least one user entry exists in User table

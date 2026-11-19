@@ -48,6 +48,14 @@ export const initialCategories: ExpenseCategory[] = [
     "color": "#06b6d4",
     "isDefault": true,
     "description": "Post document, speed post, courier delivery fees"
+  },
+  {
+    "id": 7,
+    "name": "Drinking Water Supply",
+    "code": "WATER",
+    "color": "#0284c7",
+    "isDefault": true,
+    "description": "Daily 20L drinking water jugs and dispensers"
   }
 ];
 

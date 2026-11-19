@@ -99,6 +99,43 @@ function doGet(e) {
       const values = sheet.getDataRange().getValues();
       if (!values || values.length <= 1) return;
 
+      // Dedicated handler for Water Tracker tab (gid: 1279840244)
+      if (name.toLowerCase().includes('water')) {
+        const pricePerJug = 30;
+        for (let r = 1; r < values.length; r++) {
+          const row = values[r];
+          if (!row[0] || String(row[0]).toLowerCase().includes('total')) continue;
+          let dateStr = row[0];
+          if (dateStr instanceof Date) {
+            const y = dateStr.getFullYear();
+            const m = String(dateStr.getMonth() + 1).padStart(2, '0');
+            const d = String(dateStr.getDate()).padStart(2, '0');
+            dateStr = `${y}-${m}-${d}`;
+          }
+          const count = Number(row[2]) || 0;
+          if (count > 0) {
+            allRecords.push({
+              date: String(dateStr),
+              day: String(row[1] || ''),
+              officeName: 'Elegance Office',
+              type: 'Expense',
+              categoryOrSource: 'Drinking Water Supply',
+              title: 'Drinking Water (' + count + (count === 1 ? ' Jug' : ' Jugs') + ')',
+              description: 'Daily drinking water supply for Elegance Office (' + String(row[1] || 'Daily') + ')',
+              vendorOrPayer: 'Drinking Water Supply',
+              paymentMode: 'Cash',
+              inflow: 0,
+              outflow: count * pricePerJug,
+              runningBalance: 0,
+              status: 'Completed',
+              notes: 'Water jug delivery',
+              sheetName: name
+            });
+          }
+        }
+        return;
+      }
+
       // First row is headers
       for (let r = 1; r < values.length; r++) {
         const row = values[r];
