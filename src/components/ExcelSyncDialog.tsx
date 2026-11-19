@@ -591,6 +591,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                   <MenuItem value="1198075370">August 2026 - Aug-Expense</MenuItem>
                   <MenuItem value="795082972">July 2026 - July-Expense</MenuItem>
                   <MenuItem value="1279840244">Water Jugs Tracker (gid: 1279840244)</MenuItem>
+                  <MenuItem value="1763470004">Month_Template - Website Master Format (gid: 1763470004)</MenuItem>
                   <MenuItem value="ALL_TABS">All Tabs (Nov-Jul + Water Tracker)</MenuItem>
                 </TextField>
               </Grid>
