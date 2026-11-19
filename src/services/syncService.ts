@@ -883,3 +883,148 @@ export function setAutoSaveEnabled(enabled: boolean) {
   currentSyncState.autoSaveEnabled = enabled;
   notifyListeners();
 }
+
+/**
+ * Syncs all records across all month sheets from a deployed Google Apps Script Web App
+ */
+export async function syncFromGoogleAppsScript(webAppUrl: string): Promise<{ recordsSynced: number; message: string }> {
+  try {
+    currentSyncState.googleSheetSyncing = true;
+    notifyListeners();
+
+    const cleanUrl = webAppUrl.trim();
+    if (!cleanUrl.startsWith('http')) {
+      throw new Error('Please enter a valid Google Apps Script Web App URL.');
+    }
+
+    const res = await fetch(cleanUrl);
+    if (!res.ok) {
+      throw new Error(`Google Apps Script returned status ${res.status}`);
+    }
+
+    const data = await res.json();
+    if (data.status !== 'success' || !Array.isArray(data.records)) {
+      throw new Error(data.message || 'Invalid data returned from Google Apps Script Web App.');
+    }
+
+    const existingExpenses = await db.expenseRecords.toArray();
+    const existingIncomes = await db.incomeRecords.toArray();
+    const existingCategories = await db.expenseCategories.toArray();
+    const defaultCategory = existingCategories[0] || { id: 1, name: 'Snacks & Refreshments (Nasto)' };
+
+    const eleganceOffice = (await db.offices.filter(o => o.name.toLowerCase().includes('elegance')).first())
+      || (await db.offices.where('isDefault').equals(1).first())
+      || (await db.offices.toCollection().first());
+    const sheetOfficeId = eleganceOffice?.id;
+    const sheetOfficeName = eleganceOffice?.name || 'Elegance Office';
+
+    let syncedCount = 0;
+
+    for (const r of data.records) {
+      const isoDate = normalizeDateToISO(r.date);
+      if (!isoDate) continue;
+
+      const isIncome = r.type === 'Fund Inflow' || Number(r.inflow) > 0;
+      const amount = isIncome ? Number(r.inflow) || 0 : Number(r.outflow) || 0;
+      if (amount <= 0) continue;
+
+      if (isIncome) {
+        const source = r.vendorOrPayer || r.categoryOrSource || 'Company Deposit';
+        const match = existingIncomes.find(
+          inc => inc.transactionDate === isoDate && Math.abs(inc.amount - amount) < 0.01
+        );
+        if (match) {
+          await db.incomeRecords.update(match.id!, {
+            receivedFrom: source,
+            description: r.description || match.description,
+            officeId: sheetOfficeId,
+            officeName: sheetOfficeName,
+          });
+        } else {
+          await db.incomeRecords.add({
+            transactionDate: isoDate,
+            receivedFrom: source,
+            amount,
+            paymentMode: r.paymentMode || 'Cash',
+            description: r.description || `Deposit from ${source}`,
+            referenceNumber: r.notes || '',
+            isVoid: r.status === 'Void',
+            officeId: sheetOfficeId,
+            officeName: sheetOfficeName,
+            createdAt: new Date().toISOString(),
+          });
+        }
+      } else {
+        const title = r.title || r.description || 'Office Expense';
+        const match = existingExpenses.find(
+          exp => exp.expenseDate === isoDate && Math.abs(exp.amount - amount) < 0.01
+        );
+        const cat = existingCategories.find(c => c.name.toLowerCase() === (r.categoryOrSource || '').toLowerCase()) || defaultCategory;
+        if (match) {
+          await db.expenseRecords.update(match.id!, {
+            expenseTitle: title,
+            description: r.description || match.description,
+            vendor: r.vendorOrPayer || match.vendor,
+            categoryId: cat.id || match.categoryId,
+            categoryName: cat.name || match.categoryName,
+            officeId: sheetOfficeId,
+            officeName: sheetOfficeName,
+          });
+        } else {
+          await db.expenseRecords.add({
+            expenseDate: isoDate,
+            categoryId: cat.id || 1,
+            categoryName: cat.name,
+            expenseTitle: title,
+            description: r.description || title,
+            amount,
+            paymentMode: r.paymentMode || 'Cash',
+            vendor: r.vendorOrPayer || 'Local Vendor',
+            status: r.status === 'Void' ? 'Void' : 'Completed',
+            officeId: sheetOfficeId,
+            officeName: sheetOfficeName,
+            createdAt: new Date().toISOString(),
+          });
+        }
+      }
+      syncedCount++;
+    }
+
+    currentSyncState.lastSyncedAt = new Date();
+    currentSyncState.lastError = null;
+    return {
+      recordsSynced: syncedCount,
+      message: `Successfully synchronized ${syncedCount} records across all month sheets!`,
+    };
+  } catch (err: any) {
+    currentSyncState.lastError = err?.message || 'Failed to sync with Google Apps Script';
+    throw err;
+  } finally {
+    currentSyncState.googleSheetSyncing = false;
+    notifyListeners();
+  }
+}
+
+/**
+ * Posts a newly created or modified transaction directly to the Google Apps Script Web App
+ */
+export async function pushRecordToGoogleAppsScript(webAppUrl: string, record: any): Promise<void> {
+  const cleanUrl = webAppUrl.trim();
+  if (!cleanUrl.startsWith('http')) return;
+
+  try {
+    await fetch(cleanUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        action: 'addRecord',
+        record,
+      }),
+    });
+  } catch (err) {
+    console.warn('Could not post to Google Apps Script Webhook:', err);
+  }
+}

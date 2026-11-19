@@ -416,3 +416,252 @@ export async function getExcelArrayBuffer(): Promise<ArrayBuffer> {
   const raw = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   return raw;
 }
+
+const MONTH_NAMES_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const DAY_NAMES_LIST = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+/**
+ * Generates and downloads the Month-Wise Master Template Workbook (.xlsx)
+ * with Summary sheet, tabs for each month (Nov-2026, Oct-2026, Sep-2026, etc.), and Month_Template
+ */
+export async function downloadMonthWiseTemplate(): Promise<void> {
+  const allExpenses = await db.expenseRecords.toArray();
+  const allIncomes = await db.incomeRecords.toArray();
+  const setting = await db.settings.get('openingBalance');
+  const baseOpening = setting ? Number(setting.value) || 0 : 2670;
+
+  interface TxItem {
+    date: string;
+    day: string;
+    office: string;
+    type: 'Expense' | 'Fund Inflow';
+    category: string;
+    title: string;
+    description: string;
+    vendorOrPayer: string;
+    paymentMode: string;
+    inflow: number;
+    outflow: number;
+    runningBalance?: number;
+    status: string;
+    notes: string;
+  }
+
+  const allTx: TxItem[] = [];
+
+  for (const inc of allIncomes) {
+    const d = new Date(inc.transactionDate + 'T00:00:00');
+    allTx.push({
+      date: inc.transactionDate,
+      day: DAY_NAMES_LIST[d.getDay()] || '',
+      office: inc.officeName || 'Elegance Office',
+      type: 'Fund Inflow',
+      category: 'Company Fund / Deposit',
+      title: `Petty Cash Deposit from ${inc.receivedFrom}`,
+      description: inc.description || `Cash receipt from ${inc.receivedFrom}`,
+      vendorOrPayer: inc.receivedFrom,
+      paymentMode: inc.paymentMode || 'Cash',
+      inflow: inc.amount,
+      outflow: 0,
+      status: inc.isVoid ? 'Void' : 'Completed',
+      notes: inc.referenceNumber || '',
+    });
+  }
+
+  for (const exp of allExpenses) {
+    const d = new Date(exp.expenseDate + 'T00:00:00');
+    allTx.push({
+      date: exp.expenseDate,
+      day: DAY_NAMES_LIST[d.getDay()] || '',
+      office: exp.officeName || 'Elegance Office',
+      type: 'Expense',
+      category: exp.categoryName || 'General',
+      title: exp.expenseTitle,
+      description: exp.description || 'Operational office expense',
+      vendorOrPayer: exp.vendor || 'Local Vendor',
+      paymentMode: exp.paymentMode || 'Cash',
+      inflow: 0,
+      outflow: exp.amount,
+      status: exp.status || 'Completed',
+      notes: exp.billNumber || exp.description || '',
+    });
+  }
+
+  allTx.sort((a, b) => a.date.localeCompare(b.date));
+
+  let runningPaise = toPaise(baseOpening);
+  allTx.forEach((tx) => {
+    if (tx.status !== 'Void') {
+      if (tx.inflow > 0) runningPaise += toPaise(tx.inflow);
+      if (tx.outflow > 0) runningPaise -= toPaise(tx.outflow);
+    }
+    tx.runningBalance = fromPaise(runningPaise);
+  });
+
+  const monthGroups = new Map<string, TxItem[]>();
+  allTx.forEach((tx) => {
+    const m = tx.date.substring(0, 7);
+    const existing = monthGroups.get(m) || [];
+    existing.push(tx);
+    monthGroups.set(m, existing);
+  });
+
+  const wb = XLSX.utils.book_new();
+
+  const headers = [
+    'Date',
+    'Day',
+    'Office / Branch',
+    'Type',
+    'Category / Source',
+    'Item / Expense Title',
+    'Description / Particulars',
+    'Vendor / Payer',
+    'Payment Mode',
+    'Inflow (+) (INR)',
+    'Outflow (-) (INR)',
+    'Running Balance (INR)',
+    'Status',
+    'Reference / Notes',
+  ];
+
+  const colWidths = [
+    { wch: 13 },
+    { wch: 12 },
+    { wch: 18 },
+    { wch: 14 },
+    { wch: 28 },
+    { wch: 34 },
+    { wch: 32 },
+    { wch: 20 },
+    { wch: 14 },
+    { wch: 16 },
+    { wch: 16 },
+    { wch: 22 },
+    { wch: 12 },
+    { wch: 24 },
+  ];
+
+  const summaryRows: (string | number)[][] = [
+    ['EXPENSEFLOW: OPERATIONS & AUDITED FUNDS MANAGER'],
+    ['Central Multi-Month Master Sheet (Google Sheets & Excel Template)'],
+    [`Generated On: ${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`],
+    [],
+    ['========================================================================'],
+    ['MONTH-WISE FINANCIAL PERFORMANCE SUMMARY'],
+    ['========================================================================'],
+    ['Month Period', 'Transactions', 'Total Inflows (INR)', 'Total Outflows (INR)', 'Net Cash Flow (INR)', 'Month End Balance (INR)'],
+  ];
+
+  const sortedMonthKeys = Array.from(monthGroups.keys()).sort();
+
+  for (const m of sortedMonthKeys) {
+    const txList = monthGroups.get(m)!;
+    const [yStr, mStr] = m.split('-');
+    const mIdx = parseInt(mStr, 10) - 1;
+    const sheetName = `${MONTH_NAMES_LIST[mIdx] || 'Mon'}-${yStr}`;
+
+    let monthInflowPaise = 0;
+    let monthOutflowPaise = 0;
+    txList.forEach((t) => {
+      if (t.status !== 'Void') {
+        monthInflowPaise += toPaise(t.inflow);
+        monthOutflowPaise += toPaise(t.outflow);
+      }
+    });
+
+    const monthClosing = txList[txList.length - 1].runningBalance || 0;
+    summaryRows.push([
+      sheetName,
+      txList.length,
+      fromPaise(monthInflowPaise),
+      fromPaise(monthOutflowPaise),
+      fromPaise(monthInflowPaise - monthOutflowPaise),
+      monthClosing,
+    ]);
+
+    const sheetRows: (string | number)[][] = [headers];
+    for (const t of txList) {
+      sheetRows.push([
+        t.date,
+        t.day,
+        t.office,
+        t.type,
+        t.category,
+        t.title,
+        t.description,
+        t.vendorOrPayer,
+        t.paymentMode,
+        t.inflow > 0 ? t.inflow : '',
+        t.outflow > 0 ? t.outflow : '',
+        t.runningBalance || 0,
+        t.status,
+        t.notes,
+      ]);
+    }
+
+    sheetRows.push([
+      'TOTALS',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      fromPaise(monthInflowPaise),
+      fromPaise(monthOutflowPaise),
+      monthClosing,
+      '',
+      `Total Records: ${txList.length}`,
+    ]);
+
+    const ws = XLSX.utils.aoa_to_sheet(sheetRows);
+    ws['!cols'] = colWidths;
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  }
+
+  const allInflowPaise = allTx.reduce((sum, t) => sum + (t.status !== 'Void' ? toPaise(t.inflow) : 0), 0);
+  const allOutflowPaise = allTx.reduce((sum, t) => sum + (t.status !== 'Void' ? toPaise(t.outflow) : 0), 0);
+  const finalBalance = allTx.length > 0 ? (allTx[allTx.length - 1].runningBalance || 0) : baseOpening;
+
+  summaryRows.push([
+    'ALL-TIME TOTAL',
+    allTx.length,
+    fromPaise(allInflowPaise),
+    fromPaise(allOutflowPaise),
+    fromPaise(allInflowPaise - allOutflowPaise),
+    finalBalance,
+  ]);
+
+  const templateRows: (string | number)[][] = [
+    headers,
+    ['2026-12-01', 'Tuesday', 'Elegance Office', 'Fund Inflow', 'Company Fund / Deposit', 'Initial Month Deposit', 'Monthly Petty Cash', 'Rupesh Sir', 'Cash', 20000, '', 20000, 'Completed', 'REC-001'],
+    ['2026-12-01', 'Tuesday', 'Elegance Office', 'Expense', 'Snacks & Refreshments (Nasto)', 'Tea & Snacks', 'Morning office tea', 'TeaPost', 'Cash', '', 120, 19880, 'Completed', 'EXP-001'],
+    ['TOTALS', '', '', '', '', '', '', '', '', 20000, 120, 19880, '', 'Template Sample'],
+  ];
+
+  const wsTemplate = XLSX.utils.aoa_to_sheet(templateRows);
+  wsTemplate['!cols'] = colWidths;
+  XLSX.utils.book_append_sheet(wb, wsTemplate, 'Month_Template');
+
+  const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
+  wsSummary['!cols'] = [
+    { wch: 22 },
+    { wch: 16 },
+    { wch: 22 },
+    { wch: 22 },
+    { wch: 22 },
+    { wch: 24 },
+  ];
+
+  wb.SheetNames.unshift('Summary');
+  wb.Sheets['Summary'] = wsSummary;
+  wb.SheetNames = ['Summary', ...sortedMonthKeys.map((m) => {
+    const [y, mm] = m.split('-');
+    return `${MONTH_NAMES_LIST[parseInt(mm, 10) - 1] || 'Mon'}-${y}`;
+  }), 'Month_Template'];
+
+  XLSX.writeFile(wb, 'Company_Expense_Master_Template_MonthWise.xlsx');
+}

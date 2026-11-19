@@ -35,12 +35,13 @@ import {
   triggerAutoSaveToExcel,
   syncFromConnectedExcel,
   syncFromLiveGoogleSheet,
+  syncFromGoogleAppsScript,
   cleanupDuplicateRecords,
   setAutoSaveEnabled,
   isFileSystemAccessSupported,
   type SyncStatusState,
 } from '../services/syncService';
-import { downloadExcelReport } from '../services/excelService';
+import { downloadExcelReport, downloadMonthWiseTemplate } from '../services/excelService';
 import { resetDatabaseToExcelSeed } from '../database/db';
 
 interface ExcelSyncDialogProps {
@@ -62,6 +63,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
 
   const [sheetId, setSheetId] = useState('1CRD_s-JT8KqWrezalxtNoqLteKf7hxlsE5sYeY9CuaU');
   const [targetGid, setTargetGid] = useState('1948486123');
+  const [webAppUrl, setWebAppUrl] = useState(() => localStorage.getItem('expenseflow_apps_script_url') || '');
 
   const [notification, setNotification] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null);
   const [busy, setBusy] = useState(false);
@@ -290,6 +292,40 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
     }
   };
 
+  const handleDownloadMonthWiseTemplate = async () => {
+    try {
+      setBusy(true);
+      await downloadMonthWiseTemplate();
+      setNotification({
+        type: 'success',
+        message: 'Month-Wise Master Template (.xlsx) downloaded! Upload to Google Drive to use as your new multi-PC Google Sheet.',
+      });
+    } catch (err: any) {
+      setNotification({ type: 'error', message: err.message || 'Template download failed.' });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleSyncAppsScript = async () => {
+    if (!webAppUrl.trim()) {
+      setNotification({ type: 'error', message: 'Please enter your Google Apps Script Web App URL first.' });
+      return;
+    }
+    try {
+      setBusy(true);
+      setNotification(null);
+      localStorage.setItem('expenseflow_apps_script_url', webAppUrl.trim());
+      const res = await syncFromGoogleAppsScript(webAppUrl.trim());
+      setNotification({ type: 'success', message: res.message });
+      onDataChanged();
+    } catch (err: any) {
+      setNotification({ type: 'error', message: err.message || 'Google Apps Script sync failed.' });
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -310,6 +346,75 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             {notification.message}
           </Alert>
         )}
+
+        {/* Section 0: Month-Wise Google Sheet & Multi-PC Cloud Sync */}
+        <Box sx={{ mb: 3, p: 2, bgcolor: '#f0fdf4', borderRadius: '8px', border: '1px solid #86efac' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <TableChartIcon sx={{ color: '#05b169', fontSize: 22 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#065f46' }}>
+                Multi-PC Shared Google Sheet (Month-Wise Structure)
+              </Typography>
+            </Box>
+            <Chip
+              label="Solves Cross-PC Data Sync"
+              size="small"
+              sx={{ bgcolor: '#dcfce7', color: '#15803d', fontWeight: 700, fontSize: '0.68rem', border: '1px solid #bbf7d0' }}
+            />
+          </Box>
+
+          <Typography variant="body2" sx={{ color: '#166534', mb: 1.5, fontSize: '0.8125rem', lineHeight: 1.5 }}>
+            To share and synchronize data across multiple computers in real time, use this <strong>Month-Wise Google Sheet template</strong>. Each month (<code>Nov-2026</code>, <code>Oct-2026</code>, <code>Sep-2026</code>) gets its own tab with all website columns, running balance, and totals!
+          </Typography>
+
+          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>
+            <Button
+              variant="contained"
+              startIcon={<FileDownloadIcon />}
+              onClick={handleDownloadMonthWiseTemplate}
+              disabled={busy}
+              sx={{ bgcolor: '#05b169', fontWeight: 800, py: 0.8, px: 2, '&:hover': { bgcolor: '#048e54' } }}
+            >
+              Download Month-Wise Google Sheet Template (.xlsx)
+            </Button>
+          </Box>
+
+          {/* Apps Script 2-Way Live Webhook */}
+          <Box sx={{ p: 1.5, bgcolor: '#ffffff', borderRadius: '6px', border: '1px solid #bbf7d0' }}>
+            <Typography variant="caption" sx={{ fontWeight: 800, color: '#065f46', textTransform: 'uppercase', display: 'block', mb: 0.8 }}>
+              Real-Time 2-Way Sync via Google Apps Script Web App:
+            </Typography>
+
+            <Grid container spacing={1} sx={{ alignItems: 'center' }}>
+              <Grid size={{ xs: 12, sm: 8.5 }}>
+                <TextField
+                  label="Google Apps Script Web App URL"
+                  size="small"
+                  fullWidth
+                  placeholder="https://script.google.com/macros/s/.../exec"
+                  value={webAppUrl}
+                  onChange={(e) => setWebAppUrl(e.target.value)}
+                  helperText="Deploy google_apps_script.js in your sheet to enable automatic cross-PC sync"
+                  slotProps={{ formHelperText: { sx: { fontSize: '0.65rem' } } }}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 3.5 }}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  startIcon={syncState.googleSheetSyncing ? <CircularProgress size={16} color="inherit" /> : <SyncIcon />}
+                  onClick={handleSyncAppsScript}
+                  disabled={busy || syncState.googleSheetSyncing}
+                  sx={{ height: 40, bgcolor: '#0052ff', fontWeight: 700 }}
+                >
+                  {syncState.googleSheetSyncing ? 'Syncing...' : 'Sync All Months'}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
 
         {/* Section 1: Live Excel File Link */}
         <Box sx={{ mb: 3 }}>
