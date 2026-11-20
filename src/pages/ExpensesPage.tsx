@@ -448,7 +448,7 @@ export const ExpensesPage: React.FC = () => {
               '&:hover': { bgcolor: '#27272a' }
             }}
           >
-            + Record Expense
+            Record Expense
           </Button>
         </Box>
       </Box>
@@ -710,7 +710,7 @@ export const ExpensesPage: React.FC = () => {
           ) : filteredDayWiseList.length === 0 ? (
             <Card sx={{ p: 4, textAlign: 'center', borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
               <Typography variant="body2" color="text.secondary">
-                No expenses match the selected date / week filter. Try resetting filters or clicking "+ Record Expense".
+                No expenses match the selected date / week filter. Try resetting filters or clicking "Record Expense".
               </Typography>
             </Card>
           ) : (

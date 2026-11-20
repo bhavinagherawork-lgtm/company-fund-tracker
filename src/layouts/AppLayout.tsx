@@ -589,7 +589,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   }}
                   sx={{ fontSize: '0.8rem', py: 0.8, borderRadius: '8px', color: '#18181b', fontWeight: 600 }}
                 >
-                  + Manage Offices / Branches...
+                  Manage Offices / Branches...
                 </MenuItem>
               </Menu>
 
@@ -664,7 +664,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 />
               )}
 
-              {/* + Income Button (Vibrant Status Accent Pill) */}
+              {/* Income Button (Vibrant Status Accent Pill) */}
               <Button
                 variant="contained"
                 size="small"
@@ -683,10 +683,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   '&:hover': { bgcolor: '#16a34a' },
                 }}
               >
-                + Income
+                Income
               </Button>
 
-              {/* + Expense Button (Obsidian Primary CTA Pill) */}
+              {/* Expense Button (Obsidian Primary CTA Pill) */}
               <Button
                 variant="contained"
                 size="small"
@@ -705,7 +705,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   '&:hover': { bgcolor: '#27272a' },
                 }}
               >
-                + Expense
+                Expense
               </Button>
 
               {/* User Profile & Logout Menu */}
@@ -871,7 +871,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             }}
             sx={{ bgcolor: '#22c55e', color: '#ffffff', fontWeight: 600, borderRadius: '9999px' }}
           >
-            + Add Income
+            Add Income
           </Button>
           <Button
             variant="contained"
@@ -884,7 +884,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             }}
             sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 600, borderRadius: '9999px' }}
           >
-            + Add Expense
+            Add Expense
           </Button>
           <Button
             variant="outlined"

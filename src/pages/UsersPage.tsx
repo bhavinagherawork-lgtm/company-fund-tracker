@@ -266,7 +266,7 @@ export const UsersPage: React.FC = () => {
             '&:hover': { bgcolor: '#27272a' },
           }}
         >
-          + Add New User
+          Add New User
         </Button>
       </Box>
 

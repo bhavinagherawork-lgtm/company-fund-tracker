@@ -192,7 +192,7 @@ export const CategoriesPage: React.FC = () => {
               '&:hover': { bgcolor: '#27272a' }
             }}
           >
-            + Add Category
+            Add Category
           </Button>
         </Box>
       </Box>

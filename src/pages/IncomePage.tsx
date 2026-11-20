@@ -287,7 +287,7 @@ export const IncomePage: React.FC = () => {
               '&:hover': { bgcolor: '#16a34a' }
             }}
           >
-            + Add Income
+            Add Income
           </Button>
         </Box>
       </Box>

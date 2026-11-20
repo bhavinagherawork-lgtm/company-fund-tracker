@@ -205,7 +205,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               '&:hover': { bgcolor: '#16a34a' }
             }}
           >
-            + Add Income
+            Add Income
           </Button>
 
           <Button
@@ -224,7 +224,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               '&:hover': { bgcolor: '#27272a' }
             }}
           >
-            + Add Expense
+            Add Expense
           </Button>
         </Box>
       </Box>

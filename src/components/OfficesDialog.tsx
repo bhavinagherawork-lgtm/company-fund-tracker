@@ -192,7 +192,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
           <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #0052ff', bgcolor: '#fafafa' }}>
             <CardContent sx={{ p: '14px !important' }}>
               <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b', fontSize: '0.85rem', mb: 1.5 }}>
-                {editingOffice ? `Edit Office: ${editingOffice.name}` : '+ Add New Office / Branch'}
+                {editingOffice ? `Edit Office: ${editingOffice.name}` : 'Add New Office / Branch'}
               </Typography>
 
               <form onSubmit={handleSave}>
@@ -269,7 +269,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
               onClick={handleOpenAdd}
               sx={{ bgcolor: '#18181b', height: 28, fontSize: '0.72rem', fontWeight: 700, '&:hover': { bgcolor: '#27272a' } }}
             >
-              + Add Office
+              Add Office
             </Button>
           </Box>
         )}
