@@ -241,7 +241,7 @@ export const UsersPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#0f172a", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             User Management & Access Control
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -258,12 +258,12 @@ export const UsersPage: React.FC = () => {
             fontWeight: 700,
             px: 1.5,
             borderRadius: '9999px',
-            bgcolor: '#18181b',
+            bgcolor: '#2563eb',
             color: '#ffffff',
             height: 30,
             fontSize: '0.75rem',
             textTransform: 'none',
-            '&:hover': { bgcolor: '#27272a' },
+            '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' },
           }}
         >
           Add New User
@@ -273,7 +273,7 @@ export const UsersPage: React.FC = () => {
       {/* Mandatory User Requirement Notice Banner */}
       <Alert
         severity="info"
-        icon={<ShieldIcon sx={{ fontSize: 18, color: '#18181b' }} />}
+        icon={<ShieldIcon sx={{ fontSize: 18, color: '#2563eb' }} />}
         sx={{
           mb: 1.8,
           borderRadius: '16px',
@@ -307,15 +307,15 @@ export const UsersPage: React.FC = () => {
                   <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Users
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {totalUsersCount} Accounts
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Enrolled system profiles
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#f4f4f5', borderRadius: '9999px' }}>
-                  <PeopleIcon sx={{ color: '#18181b', fontSize: 18 }} />
+                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px', border: '1px solid #bfdbfe' }}>
+                  <PeopleIcon sx={{ color: '#2563eb', fontSize: 18 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -353,15 +353,15 @@ export const UsersPage: React.FC = () => {
                   <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Administrators
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#18181b', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#2563eb', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {adminCount} Admins
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Full operational authority
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#f4f4f5', borderRadius: '9999px' }}>
-                  <AdminPanelSettingsIcon sx={{ color: '#18181b', fontSize: 18 }} />
+                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px' }}>
+                  <AdminPanelSettingsIcon sx={{ color: '#2563eb', fontSize: 18 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -478,7 +478,7 @@ export const UsersPage: React.FC = () => {
       {/* Users Table */}
       <TableContainer component={Paper} sx={{ borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: 'none' }}>
         <Table size="small">
-          <TableHead sx={{ bgcolor: '#fafafa' }}>
+          <TableHead sx={{ bgcolor: '#f8fafc' }}>
             <TableRow>
               <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>USER PROFILE</TableCell>
               <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>EMAIL ADDRESS</TableCell>
@@ -518,7 +518,7 @@ export const UsersPage: React.FC = () => {
                             height: 32,
                             fontSize: '0.75rem',
                             fontWeight: 800,
-                            bgcolor: u.role === 'Admin' ? '#18181b' : '#71717a',
+                            bgcolor: u.role === 'Admin' ? '#2563eb' : '#64748b',
                             color: '#ffffff',
                           }}
                         >
@@ -526,7 +526,7 @@ export const UsersPage: React.FC = () => {
                         </Avatar>
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
-                            <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.82rem' }}>
+                            <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.82rem' }}>
                               {u.fullName}
                             </Typography>
                             {isCurrent && (
@@ -545,7 +545,7 @@ export const UsersPage: React.FC = () => {
                     </TableCell>
 
                     {/* Email */}
-                    <TableCell sx={{ py: 0.8, color: '#09090b', fontSize: '0.8rem' }}>
+                    <TableCell sx={{ py: 0.8, color: '#0f172a', fontSize: '0.8rem' }}>
                       {u.email || <span style={{ color: '#a1a1aa' }}>—</span>}
                     </TableCell>
 
@@ -589,7 +589,7 @@ export const UsersPage: React.FC = () => {
                     <TableCell align="center" sx={{ py: 0.8 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.4 }}>
                         <Tooltip title="Edit User Profile">
-                          <IconButton size="small" onClick={() => handleOpenEdit(u)} sx={{ p: 0.4, color: '#18181b' }}>
+                          <IconButton size="small" onClick={() => handleOpenEdit(u)} sx={{ p: 0.4, color: '#2563eb' }}>
                             <EditIcon sx={{ fontSize: 16 }} />
                           </IconButton>
                         </Tooltip>
@@ -726,7 +726,7 @@ export const UsersPage: React.FC = () => {
               variant="contained"
               disabled={saving}
               size="small"
-              sx={{ bgcolor: '#18181b', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#27272a' } }}
+              sx={{ bgcolor: '#2563eb', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#1d4ed8' } }}
             >
               {saving ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
             </Button>

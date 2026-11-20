@@ -62,13 +62,13 @@ export const LoginPage: React.FC = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        bgcolor: '#fafafa',
+        bgcolor: '#f8fafc',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         p: 2,
-        backgroundImage: 'radial-gradient(#e4e4e7 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
         backgroundSize: '24px 24px',
       }}
     >
@@ -77,15 +77,15 @@ export const LoginPage: React.FC = () => {
         sx={{
           width: '100%',
           maxWidth: 420,
-          borderRadius: '16px', // --radius-soft-card
-          border: '1px solid #e4e4e7',
+          borderRadius: '16px',
+          border: '1px solid #e2e8f0',
           boxShadow: '0 8px 24px -4px rgba(0, 0, 0, 0.08)',
           bgcolor: '#ffffff',
           overflow: 'hidden',
         }}
       >
         {/* Brand Accent Top Stripe */}
-        <Box sx={{ height: 4, bgcolor: '#18181b' }} />
+        <Box sx={{ height: 4, bgcolor: '#2563eb' }} />
 
         <CardContent sx={{ p: '28px 26px !important' }}>
           {/* Logo & System Title */}
@@ -95,23 +95,21 @@ export const LoginPage: React.FC = () => {
                 width: 44,
                 height: 44,
                 borderRadius: '12px',
-                bgcolor: '#18181b',
+                bgcolor: '#2563eb',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: 1.2,
-                boxShadow: '0 4px 14px rgba(24, 24, 27, 0.25)',
-                border: '1px solid #27272a',
+                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.25)',
               }}
             >
-              <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
+              <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 22 }} />
             </Box>
             <Typography
               variant="h5"
               sx={{
                 fontWeight: 700,
-                color: '#09090b',
-                fontFamily: '"Space Grotesk", sans-serif',
+                color: '#0f172a',
                 letterSpacing: '-0.02em',
                 fontSize: '1.3rem',
               }}
@@ -123,9 +121,9 @@ export const LoginPage: React.FC = () => {
               size="small"
               sx={{
                 mt: 0.6,
-                bgcolor: '#fafafa',
-                color: '#71717a',
-                border: '1px solid #e4e4e7',
+                bgcolor: '#eff6ff',
+                color: '#1d4ed8',
+                border: '1px solid #bfdbfe',
                 fontSize: '0.66rem',
                 fontWeight: 600,
                 height: 22,
@@ -140,15 +138,14 @@ export const LoginPage: React.FC = () => {
               variant="subtitle1"
               sx={{
                 fontWeight: 700,
-                color: '#09090b',
+                color: '#0f172a',
                 fontSize: '0.94rem',
-                fontFamily: '"Space Grotesk", sans-serif',
                 lineHeight: 1.35,
               }}
             >
               Stop untracked petty cash leaks & audit multi-office finances in real-time.
             </Typography>
-            <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.76rem', mt: 0.5, lineHeight: 1.4 }}>
+            <Typography variant="body2" sx={{ color: '#64748b', fontSize: '0.76rem', mt: 0.5, lineHeight: 1.4 }}>
               Instant balance verification, zero unaccounted cash discrepancies, and 1-click Google Sheet / Excel sync.
             </Typography>
           </Box>
@@ -240,16 +237,16 @@ export const LoginPage: React.FC = () => {
               sx={{
                 mt: 0.5,
                 height: 42,
-                bgcolor: '#18181b',
+                bgcolor: '#2563eb',
                 color: '#ffffff',
                 fontWeight: 600,
                 fontSize: '0.84rem',
                 borderRadius: '9999px',
                 textTransform: 'none',
-                boxShadow: '0 4px 14px rgba(24, 24, 27, 0.2)',
+                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.25)',
                 '&:hover': {
-                  bgcolor: '#27272a',
-                  transform: 'translateY(-1px)',
+                  bgcolor: '#1d4ed8',
+                  boxShadow: '0 6px 18px rgba(37, 99, 235, 0.35)',
                 },
               }}
             >
@@ -257,8 +254,8 @@ export const LoginPage: React.FC = () => {
             </Button>
           </Box>
 
-          <Divider sx={{ my: 2.5, borderColor: '#e4e4e7' }}>
-            <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.04em' }}>
+          <Divider sx={{ my: 2.5, borderColor: '#e2e8f0' }}>
+            <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.04em' }}>
               QUICK ACCESS CREDENTIALS
             </Typography>
           </Divider>
@@ -271,31 +268,30 @@ export const LoginPage: React.FC = () => {
                 p: '10px 14px',
                 borderRadius: '9999px',
                 bgcolor: '#ffffff',
-                border: '1px solid #e4e4e7',
+                border: '1px solid #e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
                 '&:hover': {
-                  borderColor: '#18181b',
-                  bgcolor: '#fafafa',
-                  transform: 'translateX(2px)',
+                  borderColor: '#2563eb',
+                  bgcolor: '#f8fafc',
                 },
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                <KeyIcon sx={{ fontSize: 16, color: '#eab308' }} />
+                <KeyIcon sx={{ fontSize: 16, color: '#2563eb' }} />
                 <Box>
-                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', display: 'block', fontSize: '0.76rem' }}>
+                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#0f172a', display: 'block', fontSize: '0.76rem' }}>
                     admin / admin123
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.68rem' }}>
                     Default Administrator
                   </Typography>
                 </Box>
               </Box>
-              <Chip label="Admin" size="small" sx={{ bgcolor: '#18181b', color: '#eab308', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px' }} />
+              <Chip label="Admin" size="small" sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #bfdbfe' }} />
             </Box>
 
             <Box
@@ -304,26 +300,25 @@ export const LoginPage: React.FC = () => {
                 p: '10px 14px',
                 borderRadius: '9999px',
                 bgcolor: '#ffffff',
-                border: '1px solid #e4e4e7',
+                border: '1px solid #e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
                 '&:hover': {
-                  borderColor: '#18181b',
-                  bgcolor: '#fafafa',
-                  transform: 'translateX(2px)',
+                  borderColor: '#2563eb',
+                  bgcolor: '#f8fafc',
                 },
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                <KeyIcon sx={{ fontSize: 16, color: '#eab308' }} />
+                <KeyIcon sx={{ fontSize: 16, color: '#d97706' }} />
                 <Box>
-                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', display: 'block', fontSize: '0.76rem' }}>
+                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#0f172a', display: 'block', fontSize: '0.76rem' }}>
                     manager / manager123
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.68rem' }}>
                     Branch Office Manager
                   </Typography>
                 </Box>
@@ -337,31 +332,30 @@ export const LoginPage: React.FC = () => {
                 p: '10px 14px',
                 borderRadius: '9999px',
                 bgcolor: '#ffffff',
-                border: '1px solid #e4e4e7',
+                border: '1px solid #e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
                 '&:hover': {
-                  borderColor: '#18181b',
-                  bgcolor: '#fafafa',
-                  transform: 'translateX(2px)',
+                  borderColor: '#2563eb',
+                  bgcolor: '#f8fafc',
                 },
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                <KeyIcon sx={{ fontSize: 16, color: '#22c55e' }} />
+                <KeyIcon sx={{ fontSize: 16, color: '#10b981' }} />
                 <Box>
-                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', display: 'block', fontSize: '0.76rem' }}>
+                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#0f172a', display: 'block', fontSize: '0.76rem' }}>
                     accountant / account123
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.68rem' }}>
                     Finance Staff
                   </Typography>
                 </Box>
               </Box>
-              <Chip label="Accountant" size="small" sx={{ bgcolor: '#f4f4f5', color: '#09090b', fontWeight: 600, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #e4e4e7' }} />
+              <Chip label="Accountant" size="small" sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 600, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #bbf7d0' }} />
             </Box>
           </Box>
 
@@ -371,23 +365,23 @@ export const LoginPage: React.FC = () => {
               mt: 2.5,
               p: '10px 14px',
               borderRadius: '12px',
-              bgcolor: '#fafafa',
-              border: '1px solid #e4e4e7',
+              bgcolor: '#f8fafc',
+              border: '1px solid #e2e8f0',
               display: 'flex',
               alignItems: 'center',
               gap: 1,
             }}
           >
-            <SecurityIcon sx={{ fontSize: 18, color: '#22c55e', flexShrink: 0 }} />
-            <Typography variant="caption" sx={{ color: '#09090b', fontSize: '0.72rem', fontWeight: 500 }}>
+            <SecurityIcon sx={{ fontSize: 18, color: '#10b981', flexShrink: 0 }} />
+            <Typography variant="caption" sx={{ color: '#0f172a', fontSize: '0.72rem', fontWeight: 500 }}>
               System Enforced: At least 1 mandatory user entry is active in the User Table.
             </Typography>
           </Box>
         </CardContent>
       </Card>
 
-      <Typography variant="caption" sx={{ mt: 2.5, color: '#71717a', fontSize: '0.74rem' }}>
-        ExpenseFlow Secure Architecture • Reui Visual Standard
+      <Typography variant="caption" sx={{ mt: 2.5, color: '#64748b', fontSize: '0.74rem' }}>
+        ExpenseFlow Secure Architecture • Modern SaaS Standard
       </Typography>
     </Box>
   );

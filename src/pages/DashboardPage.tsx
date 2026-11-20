@@ -126,16 +126,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
     );
   }
 
-  // Reui Palette Colors for Category Donut Chart (Purple/Violet purged per WebsiteRules.md)
+  // Friendly, Harmonious Palette for Category Donut Chart
   const REUI_CHART_COLORS = [
-    '#18181b', // Obsidian
-    '#eab308', // Gold
-    '#22c55e', // Emerald
-    '#3b82f6', // Sapphire
-    '#0ea5e9', // Sky Blue
-    '#f97316', // Orange
+    '#2563eb', // Royal Blue
+    '#10b981', // Fresh Emerald
+    '#f59e0b', // Amber
     '#06b6d4', // Cyan
-    '#71717a', // Slate
+    '#ec4899', // Pink
+    '#6366f1', // Indigo
+    '#14b8a6', // Teal
+    '#64748b', // Slate
   ];
 
   return (
@@ -144,7 +144,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2.2, flexWrap: 'wrap', gap: 1.5 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
           <Box>
-            <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
+            <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
               Financial Dashboard
             </Typography>
             <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.82rem', mt: 0.2 }}>
@@ -153,18 +153,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           </Box>
           {selectedOfficeId !== 'ALL' && (
             <Chip
-              icon={<CorporateFareIcon sx={{ fontSize: '13px !important', color: '#18181b !important' }} />}
+              icon={<CorporateFareIcon sx={{ fontSize: '13px !important', color: '#2563eb !important' }} />}
               label={`Active Office: ${selectedOffice?.name || 'Office'}`}
               size="small"
-              sx={{ bgcolor: '#ffffff', color: '#09090b', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.74rem', height: 26, borderRadius: '9999px' }}
+              sx={{ bgcolor: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0', fontWeight: 600, fontSize: '0.74rem', height: 26, borderRadius: '9999px' }}
             />
           )}
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
           <Tooltip title="Refresh metrics">
-            <IconButton onClick={loadData} size="small" sx={{ border: '1px solid #e4e4e7', borderRadius: '9999px', p: 0.8, bgcolor: '#ffffff', '&:hover': { bgcolor: '#f4f4f5', borderColor: '#18181b' } }}>
-              <RefreshIcon sx={{ color: '#18181b', fontSize: 18 }} />
+            <IconButton onClick={loadData} size="small" sx={{ border: '1px solid #e2e8f0', borderRadius: '9999px', p: 0.8, bgcolor: '#ffffff', '&:hover': { bgcolor: '#f1f5f9', borderColor: '#2563eb' } }}>
+              <RefreshIcon sx={{ color: '#2563eb', fontSize: 18 }} />
             </IconButton>
           </Tooltip>
 
@@ -183,13 +183,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             sx={{
               fontWeight: 600,
               borderRadius: '9999px',
-              borderColor: '#e4e4e7',
-              color: '#09090b',
+              borderColor: '#e2e8f0',
+              color: '#0f172a',
               height: 34,
               px: 1.6,
               fontSize: '0.78rem',
               display: { xs: 'none', sm: 'inline-flex' },
-              '&:hover': { bgcolor: '#ffffff', borderColor: '#18181b' },
+              '&:hover': { bgcolor: '#f8fafc', borderColor: '#2563eb' },
             }}
           >
             Export 2-Sheet Excel
@@ -203,12 +203,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             sx={{
               fontWeight: 600,
               borderRadius: '9999px',
-              bgcolor: '#22c55e',
+              bgcolor: '#10b981',
               color: '#ffffff',
               height: 34,
               px: 1.8,
               fontSize: '0.78rem',
-              '&:hover': { bgcolor: '#16a34a' }
+              '&:hover': { bgcolor: '#059669', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.25)' }
             }}
           >
             Add Income
@@ -222,12 +222,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             sx={{
               fontWeight: 600,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 34,
               px: 1.8,
               fontSize: '0.78rem',
-              '&:hover': { bgcolor: '#27272a' }
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }
             }}
           >
             Add Expense
@@ -235,37 +235,38 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
         </Box>
       </Box>
 
-      {/* KPI Metric Cards (Reui Soft Card 16px Radius) */}
+      {/* KPI Metric Cards */}
       <Grid container spacing={2}>
-        {/* 1. Flagship Hero Card: Available Balance (Obsidian Container) */}
+        {/* 1. Flagship Hero Card: Available Balance (Modern Royal Blue Gradient) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card
             sx={{
               height: '100%',
-              bgcolor: '#18181b',
-              border: '1px solid #27272a',
-              borderRadius: '16px',
-              boxShadow: '0 8px 24px -4px rgba(24, 24, 27, 0.25)',
+              background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)',
+              border: '1px solid #1d4ed8',
+              borderRadius: '14px',
+              boxShadow: '0 4px 14px -2px rgba(37, 99, 235, 0.3)',
               position: 'relative',
               overflow: 'hidden',
+              color: '#ffffff',
             }}
           >
             <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#eab308', letterSpacing: '0.06em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#bfdbfe', letterSpacing: '0.04em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     Available Balance
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#ffffff', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {formatINR(summary.availableBalance)}
                   </Typography>
                 </Box>
-                <Box sx={{ backgroundColor: 'rgba(234, 179, 8, 0.15)', borderRadius: '12px', p: 1, border: '1px solid rgba(234, 179, 8, 0.3)' }}>
-                  <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
+                <Box sx={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: '10px', p: 1 }}>
+                  <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#a1a1aa', display: 'block', mt: 1, fontSize: '0.74rem' }}>
-                Opening Balance: <span style={{ fontFamily: '"Space Mono", monospace', color: '#ffffff' }}>{formatINR(summary.openingBalance)}</span>
+              <Typography variant="caption" sx={{ color: '#dbeafe', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+                Opening Balance: <span style={{ fontFamily: '"Space Mono", monospace', color: '#ffffff', fontWeight: 600 }}>{formatINR(summary.openingBalance)}</span>
               </Typography>
             </CardContent>
           </Card>
@@ -273,22 +274,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
 
         {/* 2. Total Inflow / Funds Received */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ height: '100%', borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+          <Card sx={{ height: '100%', borderRadius: '14px', bgcolor: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)' }}>
             <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', letterSpacing: '0.06em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', letterSpacing: '0.04em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     Total Inflow
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#10b981', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {formatINR(summary.totalIncome)}
                   </Typography>
                 </Box>
-                <Box sx={{ backgroundColor: 'rgba(34, 197, 94, 0.1)', borderRadius: '12px', p: 1, border: '1px solid rgba(34, 197, 94, 0.2)' }}>
-                  <TrendingUpIcon sx={{ color: '#22c55e', fontSize: 22 }} />
+                <Box sx={{ backgroundColor: '#f0fdf4', borderRadius: '10px', p: 1, border: '1px solid #dcfce7' }}>
+                  <TrendingUpIcon sx={{ color: '#10b981', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mt: 1, fontSize: '0.74rem' }}>
                 Cash provided by management
               </Typography>
             </CardContent>
@@ -297,22 +298,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
 
         {/* 3. Total Expense Outflow */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ height: '100%', borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+          <Card sx={{ height: '100%', borderRadius: '14px', bgcolor: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)' }}>
             <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', letterSpacing: '0.06em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', letterSpacing: '0.04em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     Total Expenses
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#ef4444', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {formatINR(summary.totalExpense)}
                   </Typography>
                 </Box>
-                <Box sx={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', p: 1, border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                <Box sx={{ backgroundColor: '#fef2f2', borderRadius: '10px', p: 1, border: '1px solid #fee2e2' }}>
                   <TrendingDownIcon sx={{ color: '#ef4444', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mt: 1, fontSize: '0.74rem' }}>
                 Operational deductions
               </Typography>
             </CardContent>
@@ -321,22 +322,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
 
         {/* 4. Current Month Expense */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ height: '100%', borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+          <Card sx={{ height: '100%', borderRadius: '14px', bgcolor: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)' }}>
             <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', letterSpacing: '0.06em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', letterSpacing: '0.04em', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     This Month Outflow
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#09090b', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.6, color: '#0f172a', fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {formatINR(summary.currentMonthExpense)}
                   </Typography>
                 </Box>
-                <Box sx={{ backgroundColor: 'rgba(24, 24, 27, 0.06)', borderRadius: '12px', p: 1, border: '1px solid #e4e4e7' }}>
-                  <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 22 }} />
+                <Box sx={{ backgroundColor: '#eff6ff', borderRadius: '10px', p: 1, border: '1px solid #dbeafe' }}>
+                  <CalendarMonthIcon sx={{ color: '#2563eb', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mt: 1, fontSize: '0.74rem' }}>
                 Current month active spending
               </Typography>
             </CardContent>
@@ -351,7 +352,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <Card sx={{ height: 280, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
             <CardContent sx={{ height: '100%', p: '18px 20px !important', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 1.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#09090b' }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#0f172a' }}>
                   Inflow vs Outflow by Month
                 </Typography>
                 <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.72rem', fontWeight: 500 }}>
@@ -391,7 +392,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <Card sx={{ height: 280, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
             <CardContent sx={{ height: '100%', p: '18px 20px !important', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 1 }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#09090b' }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#0f172a' }}>
                   Category Breakdown
                 </Typography>
               </Box>
@@ -440,14 +441,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <Card sx={{ height: 230, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
             <CardContent sx={{ height: '100%', p: '18px 20px !important', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#09090b' }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#0f172a' }}>
                   Active Week Flow (Mon – Sun)
                 </Typography>
                 <Button
                   size="small"
                   endIcon={<ArrowForwardIcon sx={{ fontSize: 14 }} />}
                   onClick={() => onNavigate('Reports')}
-                  sx={{ color: '#18181b', fontWeight: 600, fontSize: '0.75rem', py: 0.3, px: 1.2, borderRadius: '9999px', '&:hover': { bgcolor: '#f4f4f5' } }}
+                  sx={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', py: 0.3, px: 1.2, borderRadius: '9999px', '&:hover': { bgcolor: '#eff6ff' } }}
                 >
                   View Reports
                 </Button>
@@ -458,14 +459,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                   <AreaChart data={weeklyData} margin={{ top: 5, right: 15, left: -10, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorWeek" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#18181b" stopOpacity={0.25} />
-                        <stop offset="95%" stopColor="#18181b" stopOpacity={0.0} />
+                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.2} />
+                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0.0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f4f4f5" />
-                    <XAxis dataKey="day" stroke="#71717a" fontSize={11} tickLine={false} fontFamily="Inter, sans-serif" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis dataKey="day" stroke="#64748b" fontSize={11} tickLine={false} fontFamily="Inter, sans-serif" />
                     <YAxis
-                      stroke="#71717a"
+                      stroke="#64748b"
                       fontSize={11}
                       tickLine={false}
                       axisLine={false}
@@ -474,9 +475,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                     />
                     <RechartsTooltip
                       formatter={(val: any) => [formatINR(Number(val)), 'Spent']}
-                      contentStyle={{ borderRadius: '12px', border: '1px solid #e4e4e7', fontSize: '12px', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.1)', fontFamily: "'Space Mono', monospace" }}
+                      contentStyle={{ borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '12px', boxShadow: '0 4px 12px -2px rgba(0,0,0,0.08)', fontFamily: "'Space Mono', monospace" }}
                     />
-                    <Area type="monotone" dataKey="amount" stroke="#18181b" strokeWidth={2.2} fill="url(#colorWeek)" />
+                    <Area type="monotone" dataKey="amount" stroke="#2563eb" strokeWidth={2.2} fill="url(#colorWeek)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </Box>
@@ -500,10 +501,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <Card
             sx={{
               mt: 2,
-              borderRadius: '16px',
-              border: '1px solid #e4e4e7',
+              borderRadius: '14px',
+              border: '1px solid #e2e8f0',
               bgcolor: '#ffffff',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
             }}
           >
             <CardContent sx={{ p: '18px 22px !important' }}>
@@ -514,13 +515,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                       width: 32,
                       height: 32,
                       borderRadius: '8px',
-                      bgcolor: '#18181b',
+                      bgcolor: '#eff6ff',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
                   >
-                    <CalculateIcon sx={{ color: '#eab308', fontSize: 18 }} />
+                    <CalculateIcon sx={{ color: '#2563eb', fontSize: 18 }} />
                   </Box>
                   <Box>
                     <Typography
@@ -528,13 +529,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                       sx={{
                         fontWeight: 700,
                         fontSize: '0.92rem',
-                        fontFamily: '"Space Grotesk", sans-serif',
-                        color: '#09090b',
+                        color: '#0f172a',
                       }}
                     >
                       Interactive Cash Runway & Burn Estimator
                     </Typography>
-                    <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.72rem' }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.72rem' }}>
                       Simulate operating burn rate to project runway months & daily operational ceilings
                     </Typography>
                   </Box>
@@ -558,14 +558,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <Grid size={{ xs: 12, md: 5 }}>
                   <Box sx={{ px: 0.5 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                      <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, fontSize: '0.74rem' }}>
+                      <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 600, fontSize: '0.74rem' }}>
                         Simulated Monthly Operating Burn:
                       </Typography>
                       <Typography
                         variant="caption"
                         sx={{
                           fontWeight: 700,
-                          color: '#09090b',
+                          color: '#0f172a',
                           fontFamily: '"Space Mono", monospace',
                           fontSize: '0.84rem',
                         }}
@@ -580,20 +580,20 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                       step={2500}
                       onChange={(_, val) => setSimulatedBurn(val as number)}
                       sx={{
-                        color: '#18181b',
+                        color: '#2563eb',
                         height: 6,
                         '& .MuiSlider-thumb': {
                           width: 16,
                           height: 16,
                           bgcolor: '#ffffff',
-                          border: '2.5px solid #18181b',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                          border: '2.5px solid #2563eb',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
                           '&:hover, &.Mui-focusVisible': {
-                            boxShadow: '0 0 0 6px rgba(24, 24, 27, 0.16)',
+                            boxShadow: '0 0 0 6px rgba(37, 99, 235, 0.16)',
                           },
                         },
                         '& .MuiSlider-rail': {
-                          bgcolor: '#e4e4e7',
+                          bgcolor: '#e2e8f0',
                         },
                       }}
                     />
@@ -615,7 +615,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                         sx={{
                           p: 1.2,
                           borderRadius: '12px',
-                          bgcolor: '#fafafa',
+                          bgcolor: '#f8fafc',
                           border: '1px solid #e4e4e7',
                           textAlign: 'center',
                         }}
@@ -643,7 +643,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                         sx={{
                           p: 1.2,
                           borderRadius: '12px',
-                          bgcolor: '#fafafa',
+                          bgcolor: '#f8fafc',
                           border: '1px solid #e4e4e7',
                           textAlign: 'center',
                         }}
@@ -655,7 +655,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                           variant="h6"
                           sx={{
                             fontWeight: 700,
-                            color: '#09090b',
+                            color: '#0f172a',
                             fontFamily: '"Space Mono", monospace',
                             fontSize: '1.05rem',
                             mt: 0.3,
@@ -671,7 +671,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                         sx={{
                           p: 1.2,
                           borderRadius: '12px',
-                          bgcolor: '#fafafa',
+                          bgcolor: '#f8fafc',
                           border: '1px solid #e4e4e7',
                           textAlign: 'center',
                         }}
@@ -705,8 +705,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       <Card sx={{ mt: 2, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
         <Box sx={{ px: 2.2, py: 1.6, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e4e4e7' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-            <ReceiptLongIcon sx={{ color: '#18181b', fontSize: 20 }} />
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#09090b' }}>
+            <ReceiptLongIcon sx={{ color: '#2563eb', fontSize: 20 }} />
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem', fontFamily: '"Space Grotesk", sans-serif', color: '#0f172a' }}>
               Recent Expenditures
             </Typography>
           </Box>
@@ -715,7 +715,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             size="small"
             endIcon={<ArrowForwardIcon sx={{ fontSize: 14 }} />}
             onClick={() => onNavigate('Expenses')}
-            sx={{ fontSize: '0.76rem', py: 0.4, px: 1.4, borderRadius: '9999px', borderColor: '#e4e4e7', color: '#09090b', '&:hover': { borderColor: '#18181b', bgcolor: '#fafafa' } }}
+            sx={{ fontSize: '0.76rem', py: 0.4, px: 1.4, borderRadius: '9999px', borderColor: '#e2e8f0', color: '#0f172a', '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' } }}
           >
             All Expenses
           </Button>
@@ -736,18 +736,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             <TableBody>
               {recentExpenses.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#71717a' }}>
+                  <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#64748b' }}>
                     No expenses recorded yet.
                   </TableCell>
                 </TableRow>
               ) : (
                 recentExpenses.map((exp) => (
-                  <TableRow key={exp.id} hover sx={{ '&:hover': { bgcolor: '#fafafa' } }}>
-                    <TableCell sx={{ fontWeight: 600, color: '#09090b', py: 1, fontSize: '0.8rem', fontFamily: 'Inter, sans-serif' }}>
+                  <TableRow key={exp.id} hover sx={{ '&:hover': { bgcolor: '#f8fafc' } }}>
+                    <TableCell sx={{ fontWeight: 600, color: '#0f172a', py: 1, fontSize: '0.8rem', fontFamily: 'Inter, sans-serif' }}>
                       {formatDate(exp.expenseDate)}
                     </TableCell>
                     <TableCell sx={{ py: 1 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 600, color: '#09090b', fontSize: '0.84rem' }}>
+                      <Typography variant="body2" sx={{ fontWeight: 600, color: '#0f172a', fontSize: '0.84rem' }}>
                         {exp.expenseTitle}
                       </Typography>
                     </TableCell>
@@ -756,13 +756,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                         <Chip
                           label={exp.categoryName || 'General'}
                           size="small"
-                          sx={{ bgcolor: '#f4f4f5', color: '#18181b', fontWeight: 600, fontSize: '0.7rem', height: 22, borderRadius: '9999px', border: '1px solid #e4e4e7' }}
+                          sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 600, fontSize: '0.7rem', height: 22, borderRadius: '9999px', border: '1px solid #bfdbfe' }}
                         />
                         <Chip
                           icon={<CorporateFareIcon sx={{ fontSize: '11px !important', color: '#71717a !important' }} />}
                           label={exp.officeName || 'Head Office'}
                           size="small"
-                          sx={{ bgcolor: '#fafafa', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, borderRadius: '9999px' }}
+                          sx={{ bgcolor: '#f8fafc', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, borderRadius: '9999px' }}
                         />
                       </Box>
                     </TableCell>

@@ -26,10 +26,10 @@ const AppContent: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          bgcolor: '#ffffff',
+          bgcolor: '#f8fafc',
         }}
       >
-        <CircularProgress size={32} sx={{ color: '#18181b' }} />
+        <CircularProgress size={32} sx={{ color: '#2563eb' }} />
       </Box>
     );
   }
@@ -55,20 +55,20 @@ const AppContent: React.FC = () => {
           width: 52,
           height: 52,
           borderRadius: '16px',
-          bgcolor: '#fafafa',
-          border: '1px solid #e4e4e7',
+          bgcolor: '#eff6ff',
+          border: '1px solid #bfdbfe',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           mb: 2,
         }}
       >
-        <ShieldIcon sx={{ fontSize: 26, color: '#eab308' }} />
+        <ShieldIcon sx={{ fontSize: 26, color: '#2563eb' }} />
       </Box>
-      <Typography variant="h6" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Grotesk", sans-serif' }}>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Grotesk", sans-serif' }}>
         Access Restricted
       </Typography>
-      <Typography variant="body2" sx={{ color: '#71717a', maxWidth: 420, mt: 0.8, fontSize: '0.84rem' }}>
+      <Typography variant="body2" sx={{ color: '#64748b', maxWidth: 420, mt: 0.8, fontSize: '0.84rem' }}>
         Your assigned role (<strong>{currentUser?.role || 'Viewer'}</strong>) does not have sufficient permission to access {feature}. Please contact an Administrator if you require elevated privileges.
       </Typography>
       <Button
@@ -78,11 +78,11 @@ const AppContent: React.FC = () => {
         sx={{
           mt: 2.5,
           borderRadius: '9999px',
-          bgcolor: '#18181b',
+          bgcolor: '#2563eb',
           color: '#ffffff',
           fontWeight: 600,
           px: 2.4,
-          '&:hover': { bgcolor: '#27272a' },
+          '&:hover': { bgcolor: '#1d4ed8' },
         }}
       >
         Return to Dashboard

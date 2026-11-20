@@ -41,7 +41,7 @@ export const CategoriesPage: React.FC = () => {
 
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
-  const [color, setColor] = useState('#18181b');
+  const [color, setColor] = useState('#2563eb');
   const [description, setDescription] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
@@ -77,7 +77,7 @@ export const CategoriesPage: React.FC = () => {
     setEditingCategory(null);
     setName('');
     setCode('');
-    setColor('#18181b');
+    setColor('#2563eb');
     setDescription('');
     setError(null);
     setOpenModal(true);
@@ -87,7 +87,7 @@ export const CategoriesPage: React.FC = () => {
     setEditingCategory(cat);
     setName(cat.name);
     setCode(cat.code || '');
-    setColor(cat.color || '#18181b');
+    setColor(cat.color || '#2563eb');
     setDescription(cat.description || '');
     setError(null);
     setOpenModal(true);
@@ -158,7 +158,7 @@ export const CategoriesPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#0f172a", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             Expense Categories
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -184,12 +184,12 @@ export const CategoriesPage: React.FC = () => {
             sx={{
               fontWeight: 700,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#27272a' }
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }
             }}
           >
             Add Category
@@ -222,7 +222,7 @@ export const CategoriesPage: React.FC = () => {
                           flexShrink: 0,
                         }}
                       />
-                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.85rem' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.85rem' }}>
                         {cat.name}
                       </Typography>
                     </Box>
@@ -252,7 +252,7 @@ export const CategoriesPage: React.FC = () => {
                       label={`${count} ${count === 1 ? 'expense' : 'expenses'}`}
                       size="small"
                       sx={{
-                        bgcolor: count > 0 ? '#f0fdf4' : '#fafafa',
+                        bgcolor: count > 0 ? '#f0fdf4' : '#f8fafc',
                         color: count > 0 ? '#166534' : '#a1a1aa',
                         fontWeight: 700,
                         fontSize: '0.68rem',
@@ -408,7 +408,7 @@ export const CategoriesPage: React.FC = () => {
             <Button onClick={() => setOpenModal(false)} color="inherit">
               Cancel
             </Button>
-            <Button type="submit" variant="contained" color="primary" sx={{ px: 3, fontWeight: 700, bgcolor: '#18181b' }}>
+            <Button type="submit" variant="contained" color="primary" sx={{ px: 3, fontWeight: 700, bgcolor: '#2563eb', '&:hover': { bgcolor: '#1d4ed8' } }}>
               {editingCategory ? 'Save Changes' : 'Add Category'}
             </Button>
           </DialogActions>

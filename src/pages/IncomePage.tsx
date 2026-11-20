@@ -240,7 +240,7 @@ export const IncomePage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2.2, flexWrap: 'wrap', gap: 1.5 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
             Income & Fund Inflows
           </Typography>
           <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.82rem', mt: 0.2 }}>
@@ -257,12 +257,12 @@ export const IncomePage: React.FC = () => {
             sx={{
               fontWeight: 600,
               borderRadius: '9999px',
-              borderColor: '#e4e4e7',
-              color: '#09090b',
+              borderColor: '#e2e8f0',
+              color: '#0f172a',
               height: 34,
               px: 1.6,
               fontSize: '0.78rem',
-              '&:hover': { borderColor: '#18181b', bgcolor: '#ffffff' },
+              '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' },
             }}
           >
             Export 2-Sheet Excel
@@ -280,11 +280,11 @@ export const IncomePage: React.FC = () => {
               fontWeight: 600,
               px: 1.8,
               borderRadius: '9999px',
-              bgcolor: '#22c55e',
+              bgcolor: '#10b981',
               color: '#ffffff',
               height: 34,
               fontSize: '0.78rem',
-              '&:hover': { bgcolor: '#16a34a' }
+              '&:hover': { bgcolor: '#059669', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.25)' }
             }}
           >
             Add Income
@@ -331,12 +331,12 @@ export const IncomePage: React.FC = () => {
                   <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Recorded Inflows
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {filteredIncomes.length} Entries
                   </Typography>
                 </Box>
-                <Box sx={{ p: 1, bgcolor: 'rgba(24, 24, 27, 0.06)', borderRadius: '12px', border: '1px solid #e4e4e7' }}>
-                  <CheckCircleIcon sx={{ color: '#18181b', fontSize: 22 }} />
+                <Box sx={{ p: 1, bgcolor: '#eff6ff', borderRadius: '12px', border: '1px solid #bfdbfe' }}>
+                  <CheckCircleIcon sx={{ color: '#2563eb', fontSize: 22 }} />
                 </Box>
               </Box>
               <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
@@ -354,7 +354,7 @@ export const IncomePage: React.FC = () => {
                   <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Primary Source
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', mt: 0.6, fontSize: '1.2rem', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.6, fontSize: '1.2rem', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Executive Transfer
                   </Typography>
                 </Box>
@@ -407,7 +407,7 @@ export const IncomePage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <DateRangeIcon sx={{ color: '#18181b', fontSize: 17 }} />
+                        <DateRangeIcon sx={{ color: '#2563eb', fontSize: 17 }} />
                       </InputAdornment>
                     ),
                   },
@@ -503,7 +503,7 @@ export const IncomePage: React.FC = () => {
                 color="inherit"
                 size="small"
                 onClick={handleResetFilters}
-                sx={{ height: 34, fontSize: '0.78rem', fontWeight: 600, borderColor: '#e4e4e7', minWidth: 70, borderRadius: '9999px', '&:hover': { borderColor: '#18181b', bgcolor: '#fafafa' } }}
+                sx={{ height: 34, fontSize: '0.78rem', fontWeight: 600, borderColor: '#e2e8f0', color: '#0f172a', minWidth: 70, borderRadius: '9999px', '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' } }}
               >
                 Reset
               </Button>
@@ -540,27 +540,27 @@ export const IncomePage: React.FC = () => {
                 filteredIncomes
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item) => (
-                    <TableRow key={item.id} hover sx={{ '&:hover': { bgcolor: '#fafafa' } }}>
+                    <TableRow key={item.id} hover sx={{ '&:hover': { bgcolor: '#f8fafc' } }}>
                       <TableCell sx={{ py: 0.9, fontSize: '0.78rem', color: '#71717a', fontFamily: '"Space Mono", monospace' }}>
                         #{String(item.id).padStart(3, '0')}
                       </TableCell>
                       <TableCell sx={{ py: 0.9, fontSize: '0.8rem', fontWeight: 600 }}>{formatDate(item.transactionDate)}</TableCell>
                       <TableCell sx={{ py: 0.9 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#09090b', fontSize: '0.84rem' }}>
+                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0f172a', fontSize: '0.84rem' }}>
                           {item.receivedFrom}
                         </Typography>
                         <Chip
                           icon={<CorporateFareIcon sx={{ fontSize: '11px !important', color: '#71717a !important' }} />}
                           label={item.officeName || 'Head Office'}
                           size="small"
-                          sx={{ bgcolor: '#fafafa', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, mt: 0.3, borderRadius: '9999px' }}
+                          sx={{ bgcolor: '#f8fafc', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, mt: 0.3, borderRadius: '9999px' }}
                         />
                       </TableCell>
                       <TableCell sx={{ py: 0.9 }}>
                         <Chip
                           label={item.paymentMode}
                           size="small"
-                          sx={{ bgcolor: '#f4f4f5', color: '#18181b', fontWeight: 600, fontSize: '0.72rem', height: 22, borderRadius: '9999px', border: '1px solid #e4e4e7' }}
+                          sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 600, fontSize: '0.72rem', height: 22, borderRadius: '9999px', border: '1px solid #bfdbfe' }}
                         />
                       </TableCell>
                       <TableCell sx={{ py: 0.9 }}>
@@ -608,7 +608,7 @@ export const IncomePage: React.FC = () => {
                               }}
                               sx={{ p: 0.5, borderRadius: '9999px', '&:hover': { bgcolor: '#f4f4f5' } }}
                             >
-                              <EditIcon sx={{ fontSize: 17, color: '#18181b' }} />
+                              <EditIcon sx={{ fontSize: 17, color: '#2563eb' }} />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title={item.isVoid ? "Unvoid / Restore" : "Void"}>
@@ -666,7 +666,7 @@ export const IncomePage: React.FC = () => {
       {/* View Detail Modal (24px Radius Reui Overlay) */}
       <Dialog open={Boolean(viewDetailModal)} onClose={() => setViewDetailModal(null)} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ m: 0, p: 2.2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e4e4e7' }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1.05rem', color: '#09090b' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1.05rem', color: '#0f172a' }}>
             Income Transaction Details
           </Typography>
           <IconButton onClick={() => setViewDetailModal(null)} size="small" sx={{ borderRadius: '9999px' }}>
@@ -682,7 +682,7 @@ export const IncomePage: React.FC = () => {
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>RECEIVED FROM</Typography>
-                <Typography variant="body1" sx={{ fontWeight: 600, color: '#09090b', mt: 0.2 }}>{viewDetailModal.receivedFrom}</Typography>
+                <Typography variant="body1" sx={{ fontWeight: 600, color: '#0f172a', mt: 0.2 }}>{viewDetailModal.receivedFrom}</Typography>
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>AMOUNT</Typography>
@@ -692,11 +692,11 @@ export const IncomePage: React.FC = () => {
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>TRANSACTION DATE</Typography>
-                <Typography variant="body2" sx={{ color: '#09090b', fontWeight: 500, mt: 0.2 }}>{formatDate(viewDetailModal.transactionDate)}</Typography>
+                <Typography variant="body2" sx={{ color: '#0f172a', fontWeight: 500, mt: 0.2 }}>{formatDate(viewDetailModal.transactionDate)}</Typography>
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>PAYMENT MODE</Typography>
-                <Typography variant="body2" sx={{ color: '#09090b', fontWeight: 500, mt: 0.2 }}>{viewDetailModal.paymentMode}</Typography>
+                <Typography variant="body2" sx={{ color: '#0f172a', fontWeight: 500, mt: 0.2 }}>{viewDetailModal.paymentMode}</Typography>
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>REFERENCE NUMBER</Typography>
@@ -704,7 +704,7 @@ export const IncomePage: React.FC = () => {
               </Box>
               <Box>
                 <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>REMARKS</Typography>
-                <Typography variant="body2" sx={{ color: '#09090b', mt: 0.2 }}>{viewDetailModal.description || 'No remarks provided.'}</Typography>
+                <Typography variant="body2" sx={{ color: '#0f172a', mt: 0.2 }}>{viewDetailModal.description || 'No remarks provided.'}</Typography>
               </Box>
             </Box>
           )}
@@ -741,7 +741,7 @@ export const IncomePage: React.FC = () => {
               Edit
             </Button>
           </Box>
-          <Button onClick={() => setViewDetailModal(null)} variant="contained" sx={{ bgcolor: '#18181b', borderRadius: '9999px' }}>
+          <Button onClick={() => setViewDetailModal(null)} variant="contained" sx={{ bgcolor: '#2563eb', borderRadius: '9999px', '&:hover': { bgcolor: '#1d4ed8' } }}>
             Close
           </Button>
         </DialogActions>

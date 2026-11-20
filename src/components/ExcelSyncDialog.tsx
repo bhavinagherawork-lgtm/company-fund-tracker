@@ -337,7 +337,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
     <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <TableChartIcon sx={{ color: '#18181b' }} />
+          <TableChartIcon sx={{ color: '#2563eb' }} />
           <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif' }}>
             Excel & Google Sheets 2-Way Live Sync
           </Typography>
@@ -412,7 +412,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                   startIcon={syncState.googleSheetSyncing ? <CircularProgress size={16} color="inherit" /> : <SyncIcon />}
                   onClick={handleSyncAppsScript}
                   disabled={busy || syncState.googleSheetSyncing}
-                  sx={{ height: 40, bgcolor: '#18181b', fontWeight: 700 }}
+                  sx={{ height: 40, bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
                 >
                   {syncState.googleSheetSyncing ? 'Syncing...' : 'Sync All Months'}
                 </Button>
@@ -427,8 +427,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LinkIcon sx={{ color: '#18181b', fontSize: 20 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
+              <LinkIcon sx={{ color: '#2563eb', fontSize: 20 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0f172a' }}>
                 1. Local Excel File Direct Sync (Two-Way)
               </Typography>
             </Box>
@@ -447,12 +447,12 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             Vice-versa: you can load/refresh updates from the Excel file directly into the website!
           </Typography>
 
-          <Box sx={{ p: 2, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+          <Box sx={{ p: 2, bgcolor: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
             {syncState.hasFileHandle ? (
               <Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1, mb: 1.5 }}>
                   <Box>
-                    <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>
                       Linked Workbook: <strong>{syncState.fileName}</strong>
                     </Typography>
                     <Typography variant="caption" sx={{ color: '#5b616e' }}>
@@ -481,7 +481,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<CloudUploadIcon />}
                     onClick={handleSaveNow}
                     disabled={busy || syncState.isSyncing}
-                    sx={{ bgcolor: '#18181b', fontWeight: 700 }}
+                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
                   >
                     Save UI to Excel Now
                   </Button>
@@ -508,7 +508,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
               </Box>
             ) : (
               <Box>
-                <Typography variant="body2" sx={{ color: '#71717a', mb: 1.5 }}>
+                <Typography variant="body2" sx={{ color: '#64748b', mb: 1.5 }}>
                   No local Excel file is currently connected. Click below to create or select your Excel workbook.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
@@ -517,7 +517,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<LinkIcon />}
                     onClick={handleConnectNew}
                     disabled={busy || !isSupported}
-                    sx={{ bgcolor: '#18181b', fontWeight: 700 }}
+                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
                   >
                     Connect New / Existing Excel File
                   </Button>
@@ -548,7 +548,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <SyncIcon sx={{ color: '#22c55e', fontSize: 20 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0f172a' }}>
                 2. Google Sheets Live Integration (Vice-Versa)
               </Typography>
             </Box>
@@ -662,33 +662,33 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         {/* Section 4: Two-Sheet Excel Export Format */}
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-            <FileDownloadIcon sx={{ color: '#18181b', fontSize: 20 }} />
-            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
+            <FileDownloadIcon sx={{ color: '#2563eb', fontSize: 20 }} />
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0f172a' }}>
               4. Two-Sheet Excel Architecture (OverAll & Details)
             </Typography>
           </Box>
 
-          <Typography variant="body2" sx={{ color: '#5b616e', mb: 1.5, fontSize: '0.8125rem' }}>
+          <Typography variant="body2" sx={{ color: '#64748b', mb: 1.5, fontSize: '0.8125rem' }}>
             Every exported workbook strictly includes <strong>TWO SHEETS</strong> in one Excel file:
           </Typography>
 
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 1.5, mb: 2 }}>
-            <Box sx={{ p: 1.5, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b' }}>
+            <Box sx={{ p: 1.5, bgcolor: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0f172a' }}>
                 Sheet 1: OverAll
               </Typography>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5 }}>
+              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mt: 0.5 }}>
                 • Executive Financial Summary (Opening, Inflows, Outflows, Balance)
                 <br />• Category-Wise Expense Totals & % Breakdown
                 <br />• Fund Source Contributor Totals
               </Typography>
             </Box>
 
-            <Box sx={{ p: 1.5, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b' }}>
+            <Box sx={{ p: 1.5, bgcolor: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0f172a' }}>
                 Sheet 2: Details
               </Typography>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5 }}>
+              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mt: 0.5 }}>
                 • <strong>Day-Wise Opening Balance Column</strong>
                 <br />• Full Date, Day, Category, Vendor/Description, Inflow (+), Outflow (-)
                 <br />• Running Balance & Payment Mode per entry
@@ -702,7 +702,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             onClick={handleDownloadMaster}
             disabled={busy}
             fullWidth
-            sx={{ fontWeight: 700, borderColor: '#18181b', color: '#18181b', py: 1 }}
+            sx={{ fontWeight: 700, borderColor: '#2563eb', color: '#2563eb', py: 1, '&:hover': { bgcolor: '#eff6ff', borderColor: '#1d4ed8' } }}
           >
             Download Complete Master 2-Sheet Excel (.xlsx)
           </Button>
@@ -710,7 +710,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
-        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#18181b' }}>
+        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#2563eb', color: '#ffffff', '&:hover': { bgcolor: '#1d4ed8' } }}>
           Done
         </Button>
       </DialogActions>

@@ -384,7 +384,7 @@ export const ExpensesPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#0f172a", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             Day-Wise Expenses
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -405,7 +405,7 @@ export const ExpensesPage: React.FC = () => {
             size="small"
             startIcon={<UploadFileIcon sx={{ fontSize: 16 }} />}
             onClick={() => fileInputRef.current?.click()}
-            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#18181b', color: '#18181b', height: 30, px: 1.2, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e2e8f0', color: '#0f172a', height: 30, px: 1.2, fontSize: '0.75rem', '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' } }}
           >
             Import CSV
           </Button>
@@ -441,11 +441,11 @@ export const ExpensesPage: React.FC = () => {
               fontWeight: 700,
               px: 1.5,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 30,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#27272a' }
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }
             }}
           >
             Record Expense
@@ -489,15 +489,15 @@ export const ExpensesPage: React.FC = () => {
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Active Expense Days
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#18181b', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0f172a', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {totalFilteredActiveDays} Days
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
-                  <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 20 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#eff6ff', borderRadius: '16px', border: '1px solid #bfdbfe' }}>
+                  <CalendarMonthIcon sx={{ color: '#2563eb', fontSize: 20 }} />
                 </Box>
               </Box>
               <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
@@ -519,7 +519,7 @@ export const ExpensesPage: React.FC = () => {
                     {filteredExpenses.length} Records
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
+                <Box sx={{ p: 0.7, bgcolor: '#f8fafc', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
                   <ReceiptLongIcon sx={{ color: '#22c55e', fontSize: 20 }} />
                 </Box>
               </Box>
@@ -568,7 +568,7 @@ export const ExpensesPage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <DateRangeIcon sx={{ color: '#18181b', fontSize: 17 }} />
+                        <DateRangeIcon sx={{ color: '#2563eb', fontSize: 17 }} />
                       </InputAdornment>
                     ),
                   },
@@ -733,8 +733,8 @@ export const ExpensesPage: React.FC = () => {
                     label={`${filteredDayWiseList.length} Active Days`}
                     size="small"
                     sx={{
-                      bgcolor: 'rgba(24, 24, 27, 0.06)',
-                      color: '#18181b',
+                      bgcolor: '#eff6ff',
+                      color: '#1d4ed8',
                       fontWeight: 700,
                       fontSize: '0.72rem',
                       height: 26,
@@ -790,9 +790,9 @@ export const ExpensesPage: React.FC = () => {
                         color: '#71717a',
                         borderColor: '#d4d4d8',
                         '&.Mui-selected': {
-                          bgcolor: '#18181b',
+                          bgcolor: '#2563eb',
                           color: '#ffffff !important',
-                          '&:hover': { bgcolor: '#27272a' },
+                          '&:hover': { bgcolor: '#1d4ed8' },
                         },
                       },
                     }}
@@ -818,9 +818,9 @@ export const ExpensesPage: React.FC = () => {
                       fontWeight: 700,
                       textTransform: 'none',
                       borderColor: '#d4d4d8',
-                      color: '#09090b',
+                      color: '#0f172a',
                       bgcolor: '#ffffff',
-                      '&:hover': { bgcolor: '#fafafa', borderColor: '#a1a1aa' },
+                      '&:hover': { bgcolor: '#f8fafc', borderColor: '#a1a1aa' },
                     }}
                   >
                     {allCollapsed ? 'Expand All' : 'Collapse All'}
@@ -872,7 +872,7 @@ export const ExpensesPage: React.FC = () => {
                             justifyContent: 'space-between',
                             p: '9px 14px',
                             cursor: 'pointer',
-                            bgcolor: isExpanded ? '#fafafa' : '#ffffff',
+                            bgcolor: isExpanded ? '#f8fafc' : '#ffffff',
                             borderBottom: isExpanded ? '1px solid #e2e8f0' : 'none',
                             transition: 'background-color 0.15s ease',
                             userSelect: 'none',
@@ -903,7 +903,7 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{
                                   fontSize: '0.58rem',
                                   fontWeight: 800,
-                                  color: '#18181b',
+                                  color: '#2563eb',
                                   letterSpacing: '0.4px',
                                   lineHeight: 1,
                                 }}
@@ -914,7 +914,7 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{
                                   fontSize: '0.95rem',
                                   fontWeight: 800,
-                                  color: '#09090b',
+                                  color: '#0f172a',
                                   lineHeight: 1.1,
                                   fontFamily: "Space Mono, monospace",
                                 }}
@@ -929,7 +929,7 @@ export const ExpensesPage: React.FC = () => {
                                 variant="subtitle2"
                                 sx={{
                                   fontWeight: 700,
-                                  color: '#09090b',
+                                  color: '#0f172a',
                                   fontSize: '0.85rem',
                                   lineHeight: 1.2,
                                 }}
@@ -989,7 +989,7 @@ export const ExpensesPage: React.FC = () => {
                           <Box sx={{ bgcolor: '#ffffff' }}>
                             {dayGroup.expenses.map((exp, idx) => {
                               const cat = exp.categoryId ? categoryMap.get(exp.categoryId) : undefined;
-                              const catColor = cat?.color || '#18181b';
+                              const catColor = cat?.color || '#2563eb';
                               const isVoided = exp.status === 'Void';
 
                               return (
@@ -1003,11 +1003,11 @@ export const ExpensesPage: React.FC = () => {
                                     flexWrap: 'wrap',
                                     gap: 1.5,
                                     borderBottom: idx === dayGroup.expenses.length - 1 ? 'none' : '1px solid #f1f5f9',
-                                    bgcolor: isVoided ? '#fafafa' : '#ffffff',
+                                    bgcolor: isVoided ? '#f8fafc' : '#ffffff',
                                     opacity: isVoided ? 0.65 : 1,
                                     transition: 'background-color 0.15s ease',
                                     '&:hover': {
-                                      bgcolor: isVoided ? '#f4f4f5' : '#fafafa',
+                                      bgcolor: isVoided ? '#f4f4f5' : '#f8fafc',
                                     },
                                   }}
                                 >
@@ -1030,7 +1030,7 @@ export const ExpensesPage: React.FC = () => {
                                           variant="body2"
                                           sx={{
                                             fontWeight: 700,
-                                            color: isVoided ? '#a1a1aa' : '#09090b',
+                                            color: isVoided ? '#a1a1aa' : '#0f172a',
                                             fontSize: '0.82rem',
                                             textDecoration: isVoided ? 'line-through' : 'none',
                                           }}
@@ -1112,7 +1112,7 @@ export const ExpensesPage: React.FC = () => {
                                             size="small"
                                             sx={{
                                               bgcolor: '#f4f4f5',
-                                              color: '#09090b',
+                                              color: '#0f172a',
                                               fontWeight: 600,
                                               fontSize: '0.65rem',
                                               height: 19,
@@ -1160,7 +1160,7 @@ export const ExpensesPage: React.FC = () => {
                                           sx={{
                                             p: 0.5,
                                             bgcolor: '#eff6ff',
-                                            color: '#18181b',
+                                            color: '#2563eb',
                                             border: '1px solid #bfdbfe',
                                             borderRadius: '9999px',
                                             '&:hover': { bgcolor: '#dbeafe' },
@@ -1193,7 +1193,7 @@ export const ExpensesPage: React.FC = () => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 0.2,
-                                        bgcolor: '#fafafa',
+                                        bgcolor: '#f8fafc',
                                         border: '1px solid #e2e8f0',
                                         borderRadius: '9999px',
                                         p: 0.2,
@@ -1213,7 +1213,7 @@ export const ExpensesPage: React.FC = () => {
                                           }}
                                           sx={{ p: 0.4 }}
                                         >
-                                          <EditIcon sx={{ fontSize: 15, color: '#18181b' }} />
+                                          <EditIcon sx={{ fontSize: 15, color: '#2563eb' }} />
                                         </IconButton>
                                       </Tooltip>
                                       <Tooltip title={isVoided ? 'Unvoid / Restore Expense' : 'Void Expense'}>
@@ -1252,7 +1252,7 @@ export const ExpensesPage: React.FC = () => {
                 <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff', overflow: 'hidden' }}>
                   <TableContainer>
                     <Table size="small">
-                      <TableHead sx={{ bgcolor: '#fafafa' }}>
+                      <TableHead sx={{ bgcolor: '#f8fafc' }}>
                         <TableRow>
                           <TableCell sx={{ py: 0.8, fontSize: '0.72rem', fontWeight: 700 }}>PARTICULARS & NOTES</TableCell>
                           <TableCell sx={{ py: 0.8, fontSize: '0.72rem', fontWeight: 700 }}>CATEGORY</TableCell>
@@ -1274,7 +1274,7 @@ export const ExpensesPage: React.FC = () => {
                               <TableRow
                                 onClick={() => toggleDay(dayGroup.date)}
                                 sx={{
-                                  bgcolor: isExpanded ? '#f4f4f5' : '#fafafa',
+                                  bgcolor: isExpanded ? '#f4f4f5' : '#f8fafc',
                                   cursor: 'pointer',
                                   '&:hover': { bgcolor: '#e4e4e7' },
                                   userSelect: 'none',
@@ -1294,14 +1294,14 @@ export const ExpensesPage: React.FC = () => {
                                     >
                                       <ExpandMoreIcon sx={{ fontSize: 16 }} />
                                     </IconButton>
-                                    <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 16 }} />
-                                    <Typography variant="body2" sx={{ fontWeight: 800, color: '#09090b', fontSize: '0.82rem' }}>
+                                    <CalendarMonthIcon sx={{ color: '#2563eb', fontSize: 16 }} />
+                                    <Typography variant="body2" sx={{ fontWeight: 800, color: '#0f172a', fontSize: '0.82rem' }}>
                                       {formatDate(dayGroup.date)} ({dayGroup.dayOfWeek})
                                     </Typography>
                                     <Chip
                                       label={`${dayGroup.expenseCount} vouchers`}
                                       size="small"
-                                      sx={{ bgcolor: '#e4e4e7', color: '#09090b', fontWeight: 700, fontSize: '0.65rem', height: 18 }}
+                                      sx={{ bgcolor: '#e4e4e7', color: '#0f172a', fontWeight: 700, fontSize: '0.65rem', height: 18 }}
                                     />
                                   </Box>
                                 </TableCell>
@@ -1326,7 +1326,7 @@ export const ExpensesPage: React.FC = () => {
                               {isExpanded &&
                                 dayGroup.expenses.map((exp, expIdx) => {
                                   const cat = exp.categoryId ? categoryMap.get(exp.categoryId) : undefined;
-                                  const catColor = cat?.color || '#18181b';
+                                  const catColor = cat?.color || '#2563eb';
                                   const isVoided = exp.status === 'Void';
 
                                   return (
@@ -1334,7 +1334,7 @@ export const ExpensesPage: React.FC = () => {
                                       key={exp.id || expIdx}
                                       hover
                                       sx={{
-                                        bgcolor: isVoided ? '#fafafa' : '#ffffff',
+                                        bgcolor: isVoided ? '#f8fafc' : '#ffffff',
                                         opacity: isVoided ? 0.6 : 1,
                                         '&:last-child td, &:last-child th': { borderBottom: '1px solid #e2e8f0' },
                                       }}
@@ -1347,7 +1347,7 @@ export const ExpensesPage: React.FC = () => {
                                               variant="body2"
                                               sx={{
                                                 fontWeight: 700,
-                                                color: isVoided ? '#a1a1aa' : '#09090b',
+                                                color: isVoided ? '#a1a1aa' : '#0f172a',
                                                 fontSize: '0.8rem',
                                                 textDecoration: isVoided ? 'line-through' : 'none',
                                               }}
@@ -1397,7 +1397,7 @@ export const ExpensesPage: React.FC = () => {
                                         {exp.vendor ? (
                                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                                             <StorefrontIcon sx={{ fontSize: 13, color: '#71717a' }} />
-                                            <Typography variant="body2" sx={{ fontSize: '0.78rem', color: '#09090b' }}>
+                                            <Typography variant="body2" sx={{ fontSize: '0.78rem', color: '#0f172a' }}>
                                               {exp.vendor}
                                             </Typography>
                                             {exp.billNumber && (
@@ -1433,7 +1433,7 @@ export const ExpensesPage: React.FC = () => {
                                             <IconButton
                                               size="small"
                                               onClick={() => setPreviewReceipt({ title: exp.expenseTitle, dataUrl: exp.receiptDataUrl! })}
-                                              sx={{ p: 0.3, color: '#18181b' }}
+                                              sx={{ p: 0.3, color: '#2563eb' }}
                                             >
                                               <AttachFileIcon sx={{ fontSize: 15 }} />
                                             </IconButton>
@@ -1461,7 +1461,7 @@ export const ExpensesPage: React.FC = () => {
                                               }}
                                               sx={{ p: 0.3 }}
                                             >
-                                              <EditIcon sx={{ fontSize: 14, color: '#18181b' }} />
+                                              <EditIcon sx={{ fontSize: 14, color: '#2563eb' }} />
                                             </IconButton>
                                           </Tooltip>
                                           <Tooltip title={isVoided ? 'Unvoid / Restore Expense' : 'Void Expense'}>
@@ -1534,7 +1534,7 @@ export const ExpensesPage: React.FC = () => {
         <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0' }}>
           <TableContainer>
             <Table size="small">
-              <TableHead sx={{ bgcolor: '#fafafa' }}>
+              <TableHead sx={{ bgcolor: '#f8fafc' }}>
                 <TableRow>
                   <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>DATE</TableCell>
                   <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>EXPENSE TITLE & NOTES</TableCell>
@@ -1561,7 +1561,7 @@ export const ExpensesPage: React.FC = () => {
                       <TableRow key={item.id} hover>
                         <TableCell sx={{ py: 0.6, fontSize: '0.78rem' }}>{formatDate(item.expenseDate)}</TableCell>
                         <TableCell sx={{ py: 0.6 }}>
-                          <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.8rem' }}>
+                          <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.8rem' }}>
                             {item.expenseTitle}
                           </Typography>
                           {item.description && (
@@ -1575,7 +1575,7 @@ export const ExpensesPage: React.FC = () => {
                             <Chip
                               label={item.categoryName || 'General'}
                               size="small"
-                              sx={{ bgcolor: '#fafafa', color: '#18181b', fontWeight: 600, fontSize: '0.68rem', height: 20 }}
+                              sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 600, fontSize: '0.68rem', height: 20 }}
                             />
                             <Chip
                               icon={<CorporateFareIcon sx={{ fontSize: '10px !important', color: '#1e40af !important' }} />}
@@ -1806,7 +1806,7 @@ export const ExpensesPage: React.FC = () => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers sx={{ textAlign: 'center', p: 3, bgcolor: '#fafafa' }}>
+        <DialogContent dividers sx={{ textAlign: 'center', p: 3, bgcolor: '#f8fafc' }}>
           {previewReceipt?.dataUrl && (
             <img
               src={previewReceipt.dataUrl}
