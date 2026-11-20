@@ -441,11 +441,11 @@ export const ExpensesPage: React.FC = () => {
               fontWeight: 700,
               px: 1.5,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 30,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#27272a', boxShadow: '0 4px 12px rgba(24, 24, 27, 0.2)' }
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }
             }}
           >
             Record Expense
@@ -787,12 +787,12 @@ export const ExpensesPage: React.FC = () => {
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         textTransform: 'none',
-                        color: '#71717a',
-                        borderColor: '#d4d4d8',
+                        color: '#4d4d4d',
+                        borderColor: '#e6e6e6',
                         '&.Mui-selected': {
-                          bgcolor: '#18181b',
+                          bgcolor: '#2563eb',
                           color: '#ffffff !important',
-                          '&:hover': { bgcolor: '#27272a' },
+                          '&:hover': { bgcolor: '#1d4ed8' },
                         },
                       },
                     }}

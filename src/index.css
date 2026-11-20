@@ -1,17 +1,27 @@
 :root {
-  --obsidian-gold-primary: #18181b; /* Primary CTA / Brand */
-  --primary-brand: #18181b; /* Alias for component compatibility */
-  --primary-hover: #27272a; /* Hover State */
-  --accent-highlight: #eab308; /* ReUI Gold / Focus / Active State */
-  --canvas-base: #fafafa; /* Document Background */
-  --surface-container: #ffffff; /* Card / Panel Surface */
-  --structural-border: #e4e4e7; /* Dividers / Line Stroke */
-  --high-contrast-text: #09090b; /* Headlines */
-  --body-text: #09090b; /* Primary Body */
-  --muted-typography: #71717a; /* Body Copy / Labels */
-  --status-accent: #22c55e; /* Validation / Inflows Active */
-  --danger-accent: #ef4444; /* Error / Outflows */
-  --warning-accent: #eab308; /* ReUI Gold Warning */
+  /* User-Defined Palette */
+  --color-primary: #2563eb; /* Primary Accent / Brand CTA */
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #eff6ff;
+  --color-secondary: #4d4d4d; /* Charcoal / Labels / Secondary */
+  --color-secondary-hover: #333333;
+  --color-tertiary: #e6e6e6; /* Dividers / Structural Borders */
+  --color-neutral: #ffffff; /* Neutral Canvas */
+  --color-surface: #ffffff; /* Surface Container */
+
+  /* Token Mappings */
+  --primary-brand: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-highlight: #2563eb;
+  --canvas-base: #ffffff;
+  --surface-container: #ffffff;
+  --structural-border: #e6e6e6;
+  --high-contrast-text: #1a1a1a;
+  --body-text: #262626;
+  --muted-typography: #4d4d4d;
+  --status-accent: #16a34a;
+  --danger-accent: #dc2626;
+  --warning-accent: #d97706;
 
   --radius-pill-button: 9999px;
   --radius-pill: 9999px;
@@ -20,10 +30,10 @@
   --radius-modal-overlay: 24px;
   --radius-modal: 24px;
 
-  --shadow-subtle-float: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-elevated-card: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+  --shadow-subtle-float: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-elevated-card: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 14px -2px rgba(37, 99, 235, 0.12);
 
   --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -105,14 +115,14 @@ code, pre, .font-mono, .currency-mono {
 
 /* Core Component CSS from DESIGN.md */
 .btn-primary {
-  background: var(--obsidian-gold-primary);
+  background: var(--color-primary);
   color: #ffffff;
   font-weight: 600;
   border-radius: var(--radius-pill-button);
   padding: 10px 20px;
   font-family: var(--font-body);
   transition: all var(--duration-fast) var(--ease-standard);
-  border: 1px solid var(--obsidian-gold-primary);
+  border: 1px solid var(--color-primary);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -120,10 +130,10 @@ code, pre, .font-mono, .currency-mono {
   gap: 8px;
 }
 .btn-primary:hover {
-  background: #27272a;
-  border-color: #27272a;
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(24, 24, 27, 0.2);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .card-surface {
@@ -150,8 +160,8 @@ code, pre, .font-mono, .currency-mono {
   transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
 }
 .input-control:focus {
-  border-color: var(--obsidian-gold-primary);
-  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 /* Rule 4: Motion with a Job - Respect User System Level Reduced Motion */

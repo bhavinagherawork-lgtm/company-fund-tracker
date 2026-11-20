@@ -163,14 +163,14 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
 
   return (
     <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1, borderBottom: '1px solid #e2e8f0' }}>
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1, borderBottom: '1px solid #e6e6e6' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <CorporateFareIcon sx={{ color: '#2563eb', fontSize: 20 }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', color: '#0f172a' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', color: '#1a1a1a' }}>
             Office & Branch Management
           </Typography>
         </Box>
-        <IconButton size="small" onClick={onClose} sx={{ color: '#71717a' }}>
+        <IconButton size="small" onClick={onClose} sx={{ color: '#4d4d4d' }}>
           <CloseIcon sx={{ fontSize: 18 }} />
         </IconButton>
       </DialogTitle>
@@ -249,7 +249,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                     variant="contained"
                     size="small"
                     disabled={loading}
-                    sx={{ bgcolor: '#18181b', color: '#ffffff', fontSize: '0.75rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}
+                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontSize: '0.75rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#1d4ed8' } }}
                   >
                     {loading ? <CircularProgress size={14} color="inherit" /> : editingOffice ? 'Update Office' : 'Save Office'}
                   </Button>
@@ -259,7 +259,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
           </Card>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8 }}>
-            <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.75rem', fontWeight: 600 }}>
+            <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.75rem', fontWeight: 600 }}>
               The system organizes transactions, reports, and balances by office.
             </Typography>
             <Button
@@ -267,7 +267,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
               variant="contained"
               startIcon={<AddIcon sx={{ fontSize: 15 }} />}
               onClick={handleOpenAdd}
-              sx={{ bgcolor: '#18181b', color: '#ffffff', height: 28, fontSize: '0.72rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}
+              sx={{ bgcolor: '#2563eb', color: '#ffffff', height: 28, fontSize: '0.72rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#1d4ed8' } }}
             >
               Add Office
             </Button>
@@ -287,7 +287,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                 key={off.id}
                 sx={{
                   borderRadius: '16px',
-                  border: off.isDefault ? '1.5px solid #2563eb' : '1px solid #e2e8f0',
+                  border: off.isDefault ? '1.5px solid #2563eb' : '1px solid #e6e6e6',
                   bgcolor: off.isDefault ? '#f8fafc' : '#ffffff',
                   boxShadow: 'none',
                 }}
@@ -383,8 +383,8 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
         </Box>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, py: 1.5, borderTop: '1px solid #e2e8f0' }}>
-        <Button onClick={onClose} size="small" sx={{ fontWeight: 600 }}>
+      <DialogActions sx={{ px: 3, py: 1.5, borderTop: '1px solid #e6e6e6' }}>
+        <Button onClick={onClose} size="small" sx={{ fontWeight: 600, color: '#4d4d4d' }}>
           Close
         </Button>
       </DialogActions>

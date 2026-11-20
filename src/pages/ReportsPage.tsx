@@ -162,14 +162,14 @@ export const ReportsPage: React.FC = () => {
             </Typography>
             {selectedOfficeId !== 'ALL' && (
               <Chip
-                icon={<CorporateFareIcon sx={{ fontSize: '12px !important', color: '#eab308 !important' }} />}
+                icon={<CorporateFareIcon sx={{ fontSize: '12px !important', color: '#2563eb !important' }} />}
                 label={`Office Scope: ${selectedOffice?.name || 'Office'}`}
                 size="small"
-                sx={{ bgcolor: '#18181b', color: '#ffffff', border: '1px solid #18181b', fontWeight: 600, fontSize: '0.7rem', height: 22 }}
+                sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', border: '1px solid #bfdbfe', fontWeight: 600, fontSize: '0.7rem', height: 22 }}
               />
             )}
           </Box>
-          <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
+          <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.72rem' }}>
             Structured Monday–Sunday weekly cycles and monthly statements (Exports 2 Sheets: OverAll & Details)
           </Typography>
         </Box>
@@ -183,12 +183,12 @@ export const ReportsPage: React.FC = () => {
             sx={{
               fontWeight: 700,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 32,
               px: 1.8,
               fontSize: '0.78rem',
-              '&:hover': { bgcolor: '#27272a' },
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' },
             }}
           >
             Export 2-Sheet Excel (.xlsx)
@@ -202,12 +202,12 @@ export const ReportsPage: React.FC = () => {
             sx={{
               fontWeight: 700,
               borderRadius: '9999px',
-              borderColor: '#22c55e',
-              color: '#22c55e',
+              borderColor: '#16a34a',
+              color: '#16a34a',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { borderColor: '#22c55e', bgcolor: '#f0fdf4' },
+              '&:hover': { borderColor: '#16a34a', bgcolor: '#f0fdf4' },
             }}
           >
             Export Master Excel
@@ -218,7 +218,7 @@ export const ReportsPage: React.FC = () => {
             size="small"
             startIcon={<DownloadIcon sx={{ fontSize: 15 }} />}
             onClick={handleExportCSV}
-            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e4e4e7', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e6e6e6', color: '#4d4d4d', height: 30, px: 1, fontSize: '0.75rem' }}
           >
             CSV
           </Button>
@@ -228,7 +228,7 @@ export const ReportsPage: React.FC = () => {
             size="small"
             startIcon={<PrintIcon sx={{ fontSize: 15 }} />}
             onClick={() => window.print()}
-            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e4e4e7', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e6e6e6', color: '#4d4d4d', height: 30, px: 1, fontSize: '0.75rem' }}
           >
             Print
           </Button>
@@ -242,18 +242,18 @@ export const ReportsPage: React.FC = () => {
       )}
 
       {/* 2-Sheet Architecture Info Pill */}
-      <Card sx={{ p: 1.2, mb: 1.8, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
+      <Card sx={{ p: 1.2, mb: 1.8, bgcolor: '#ffffff', borderRadius: '16px', border: '1px solid #e6e6e6' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <TableChartIcon sx={{ color: '#eab308', fontSize: 18 }} />
-            <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.8rem' }}>
+            <TableChartIcon sx={{ color: '#2563eb', fontSize: 18 }} />
+            <Typography variant="body2" sx={{ fontWeight: 700, color: '#1a1a1a', fontSize: '0.8rem' }}>
               Two-Sheet Excel Architecture:
             </Typography>
-            <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.75rem' }}>
+            <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.75rem' }}>
               Every export generates <strong>Sheet 1: OverAll</strong> (Executive Summary & Category Breakdown) and <strong>Sheet 2: Details</strong> (Itemized rows with <strong>Day-Wise Opening Balance</strong> column).
             </Typography>
           </Box>
-          <Chip label="2 Sheets / 1 File" size="small" sx={{ bgcolor: '#18181b', color: '#ffffff', border: '1px solid #18181b', fontWeight: 700, fontSize: '0.68rem', height: 22 }} />
+          <Chip label="2 Sheets / 1 File" size="small" sx={{ bgcolor: '#2563eb', color: '#ffffff', border: '1px solid #2563eb', fontWeight: 700, fontSize: '0.68rem', height: 22 }} />
         </Box>
       </Card>
 
@@ -384,7 +384,7 @@ export const ReportsPage: React.FC = () => {
                           formatter={(v: any) => [formatINR(Number(v)), 'Spent']}
                           contentStyle={{ borderRadius: '9999px', border: '1px solid #e2e8f0', fontSize: '12px' }}
                         />
-                        <Bar dataKey="amount" fill="#18181b" radius={[6, 6, 0, 0]} maxBarSize={32} />
+                        <Bar dataKey="amount" fill="#2563eb" radius={[6, 6, 0, 0]} maxBarSize={32} />
                       </BarChart>
                     </ResponsiveContainer>
                   </Box>
@@ -464,7 +464,7 @@ export const ReportsPage: React.FC = () => {
                   size="small"
                   startIcon={<TableChartIcon sx={{ fontSize: 15 }} />}
                   onClick={handleExportMonthlyExcel}
-                  sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 700, height: 32, fontSize: '0.75rem', borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}
+                  sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, height: 32, fontSize: '0.75rem', borderRadius: '9999px', '&:hover': { bgcolor: '#1d4ed8' } }}
                 >
                   Export {monthlyReport.monthLabel} Excel
                 </Button>

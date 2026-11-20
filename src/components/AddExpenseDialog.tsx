@@ -384,9 +384,9 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
               fontWeight: 700,
               borderRadius: '9999px',
               textTransform: 'none',
-              bgcolor: isEditing ? '#18181b' : '#ef4444',
+              bgcolor: isEditing ? '#2563eb' : '#ef4444',
               color: '#ffffff',
-              '&:hover': { bgcolor: isEditing ? '#27272a' : '#dc2626' },
+              '&:hover': { bgcolor: isEditing ? '#1d4ed8' : '#dc2626' },
             }}
           >
             {loading ? 'Saving...' : isEditing ? 'Save Changes' : 'Record Expense'}

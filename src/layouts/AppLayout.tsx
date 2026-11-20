@@ -154,12 +154,12 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               py: 0.85,
               px: !isDrawer && sidebarCollapsed ? 1.5 : 1.8,
               justifyContent: !isDrawer && sidebarCollapsed ? 'center' : 'flex-start',
-              bgcolor: isSelected ? '#18181b !important' : 'transparent',
-              color: isSelected ? '#ffffff !important' : '#71717a',
-              boxShadow: isSelected ? '0 2px 8px rgba(0, 0, 0, 0.18)' : 'none',
+              bgcolor: isSelected ? '#2563eb !important' : 'transparent',
+              color: isSelected ? '#ffffff !important' : '#4d4d4d',
+              boxShadow: isSelected ? '0 2px 8px rgba(37, 99, 235, 0.25)' : 'none',
               transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
               '&.Mui-selected': {
-                bgcolor: '#18181b !important',
+                bgcolor: '#2563eb !important',
                 color: '#ffffff !important',
                 '& .MuiTypography-root': {
                   color: '#ffffff !important',
@@ -170,20 +170,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   fontWeight: 600,
                 },
                 '& .MuiListItemIcon-root': {
-                  color: '#eab308 !important',
+                  color: '#ffffff !important',
                 },
               },
               '&:hover': {
-                bgcolor: isSelected ? '#27272a !important' : '#f4f4f5',
-                color: isSelected ? '#ffffff !important' : '#09090b',
+                bgcolor: isSelected ? '#1d4ed8 !important' : '#f3f4f6',
+                color: isSelected ? '#ffffff !important' : '#1a1a1a',
                 '& .MuiTypography-root': {
-                  color: isSelected ? '#ffffff !important' : '#09090b',
+                  color: isSelected ? '#ffffff !important' : '#1a1a1a',
                 },
                 '& .MuiListItemText-primary': {
-                  color: isSelected ? '#ffffff !important' : '#09090b',
+                  color: isSelected ? '#ffffff !important' : '#1a1a1a',
                 },
                 '& .MuiListItemIcon-root': {
-                  color: isSelected ? '#eab308 !important' : '#09090b',
+                  color: isSelected ? '#ffffff !important' : '#2563eb',
                 },
               },
             }}
@@ -191,7 +191,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             <ListItemIcon
               sx={{
                 minWidth: !isDrawer && sidebarCollapsed ? 0 : 34,
-                color: isSelected ? '#eab308 !important' : '#71717a',
+                color: isSelected ? '#ffffff !important' : '#4d4d4d',
                 justifyContent: 'center',
                 transition: 'color 180ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
@@ -206,7 +206,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     fontSize: '0.84rem',
                     fontWeight: isSelected ? 600 : 500,
                     letterSpacing: '-0.01em',
-                    color: isSelected ? '#ffffff !important' : '#71717a',
+                    color: isSelected ? '#ffffff !important' : '#4d4d4d',
                   },
                 }}
               />
@@ -230,7 +230,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
   );
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#fafafa', display: 'flex' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#ffffff', display: 'flex' }}>
       {/* ================= DESKTOP SIDEBAR ================= */}
       {!isMobile && (
         <Box
@@ -242,7 +242,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             position: 'sticky',
             top: 0,
             bgcolor: '#ffffff',
-            borderRight: '1px solid #e4e4e7',
+            borderRight: '1px solid #e6e6e6',
             display: 'flex',
             flexDirection: 'column',
             zIndex: 1100,
@@ -256,7 +256,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               height: 60,
               minHeight: 60,
               px: sidebarCollapsed ? 1.5 : 2.2,
-              borderBottom: '1px solid #e4e4e7',
+              borderBottom: '1px solid #e6e6e6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: sidebarCollapsed ? 'center' : 'space-between',
@@ -278,14 +278,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   height: 34,
                   minWidth: 34,
                   borderRadius: '10px',
-                  bgcolor: '#18181b', // ReUI Obsidian Container
+                  bgcolor: '#2563eb', // User Primary Blue
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 2px 8px rgba(24, 24, 27, 0.18)',
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
                 }}
               >
-                <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 20 }} />
+                <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 20 }} />
               </Box>
               {!sidebarCollapsed && (
                 <Box sx={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
@@ -294,7 +294,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     sx={{
                       fontWeight: 700,
                       lineHeight: 1.15,
-                      color: '#09090b',
+                      color: '#1a1a1a',
                       fontSize: '0.98rem',
                       fontFamily: '"Space Grotesk", sans-serif',
                       letterSpacing: '-0.02em',
@@ -305,7 +305,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   <Typography
                     variant="caption"
                     sx={{
-                      color: '#71717a',
+                      color: '#4d4d4d',
                       fontSize: '0.66rem',
                       display: 'block',
                       fontWeight: 600,
@@ -327,7 +327,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           <Box
             sx={{
               p: 1.4,
-              borderTop: '1px solid #e4e4e7',
+              borderTop: '1px solid #e6e6e6',
               bgcolor: '#ffffff',
               display: 'flex',
               flexDirection: 'column',
@@ -340,20 +340,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   px: 1.2,
                   py: 0.7,
                   borderRadius: '9999px',
-                  bgcolor: '#fafafa',
-                  border: '1px solid #e4e4e7',
+                  bgcolor: '#ffffff',
+                  border: '1px solid #e6e6e6',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 0.8,
                 }}
               >
-                <CorporateFareIcon sx={{ fontSize: 15, color: '#eab308' }} />
+                <CorporateFareIcon sx={{ fontSize: 15, color: '#2563eb' }} />
                 <Typography
                   variant="caption"
                   sx={{
                     fontSize: '0.72rem',
                     fontWeight: 600,
-                    color: '#09090b',
+                    color: '#1a1a1a',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -370,7 +370,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 fullWidth
                 onClick={toggleSidebarCollapse}
                 sx={{
-                  color: '#71717a',
+                  color: '#4d4d4d',
                   fontSize: '0.76rem',
                   fontWeight: 600,
                   textTransform: 'none',
@@ -378,7 +378,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   borderRadius: '9999px',
                   justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
                   minWidth: 0,
-                  '&:hover': { bgcolor: '#f4f4f5', color: '#09090b' },
+                  '&:hover': { bgcolor: '#f3f4f6', color: '#1a1a1a' },
                 }}
                 startIcon={
                   sidebarCollapsed ? (
@@ -404,9 +404,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           sx={{
             top: 0,
             zIndex: 1050,
-            bgcolor: 'rgba(255, 255, 255, 0.95)',
-            color: '#09090b',
-            borderBottom: '1px solid #e4e4e7',
+            bgcolor: 'rgba(255, 255, 255, 0.98)',
+            color: '#1a1a1a',
+            borderBottom: '1px solid #e6e6e6',
             backdropFilter: 'blur(12px)',
           }}
         >
@@ -430,7 +430,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   edge="start"
                   size="small"
                   onClick={() => setMobileMenuOpen(true)}
-                  sx={{ color: '#09090b' }}
+                  sx={{ color: '#1a1a1a' }}
                 >
                   <MenuIcon fontSize="small" />
                 </IconButton>
@@ -438,20 +438,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 <IconButton
                   size="small"
                   onClick={toggleSidebarCollapse}
-                  sx={{ color: '#71717a', '&:hover': { color: '#09090b', bgcolor: '#f4f4f5' } }}
+                  sx={{ color: '#4d4d4d', '&:hover': { color: '#1a1a1a', bgcolor: '#f3f4f6' } }}
                   title={sidebarCollapsed ? 'Expand Menu' : 'Collapse Menu'}
                 >
                   {sidebarCollapsed ? <MenuIcon fontSize="small" /> : <MenuOpenIcon fontSize="small" />}
                 </IconButton>
               )}
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0, overflow: 'hidden' }}>
                 <Typography
                   variant="h6"
                   sx={{
                     fontWeight: 700,
                     fontSize: { xs: '0.92rem', sm: '1.05rem' },
-                    color: '#09090b',
+                    color: '#1a1a1a',
                     fontFamily: '"Space Grotesk", sans-serif',
                     letterSpacing: '-0.02em',
                     whiteSpace: 'nowrap',
@@ -459,25 +459,40 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 >
                   {currentTabInfo.title}
                 </Typography>
-
-                {selectedOfficeId !== 'ALL' && (
-                  <Chip
-                    icon={<CorporateFareIcon sx={{ fontSize: '13px !important', color: '#eab308 !important' }} />}
-                    label={selectedOffice?.name || 'Office'}
-                    size="small"
-                    sx={{
-                      height: 24,
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      bgcolor: '#fafafa',
-                      color: '#09090b',
-                      border: '1px solid #e4e4e7',
-                      borderRadius: '9999px',
-                      display: { xs: 'none', sm: 'inline-flex' },
-                    }}
-                  />
-                )}
+                <Typography
+                  variant="caption"
+                  noWrap
+                  sx={{
+                    color: '#4d4d4d',
+                    display: { xs: 'none', xl: 'inline' },
+                    fontSize: '0.74rem',
+                    fontWeight: 500,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  • {currentTabInfo.subtitle}
+                </Typography>
               </Box>
+
+              {selectedOfficeId !== 'ALL' && (
+                <Chip
+                  icon={<CorporateFareIcon sx={{ fontSize: '13px !important', color: '#2563eb !important' }} />}
+                  label={selectedOffice?.name || 'Office'}
+                  size="small"
+                  sx={{
+                    height: 24,
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    bgcolor: '#fafafa',
+                    color: '#1a1a1a',
+                    border: '1px solid #e6e6e6',
+                    borderRadius: '9999px',
+                    display: { xs: 'none', sm: 'inline-flex' },
+                  }}
+                />
+              )}
             </Box>
 
             {/* Right: Operational Controls & Tools (Office Switcher, Sync, Balance, Quick Actions, User) */}
@@ -488,7 +503,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   size="small"
                   variant="outlined"
                   onClick={(e) => setOfficeMenuAnchor(e.currentTarget)}
-                  startIcon={<CorporateFareIcon sx={{ fontSize: 16, color: '#eab308 !important' }} />}
+                  startIcon={<CorporateFareIcon sx={{ fontSize: 16, color: '#2563eb !important' }} />}
                   endIcon={<KeyboardArrowDownIcon sx={{ fontSize: 14 }} />}
                   sx={{
                     height: 34,
@@ -496,13 +511,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     fontSize: '0.78rem',
                     fontWeight: 600,
                     borderRadius: '9999px',
-                    borderColor: '#e4e4e7',
+                    borderColor: '#e6e6e6',
                     bgcolor: '#ffffff',
-                    color: '#09090b',
+                    color: '#1a1a1a',
                     textTransform: 'none',
                     '&:hover': {
-                      borderColor: '#18181b',
-                      bgcolor: '#fafafa',
+                      borderColor: '#2563eb',
+                      bgcolor: '#f8fafc',
                     },
                   }}
                 >
@@ -522,15 +537,15 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                       mt: 1,
                       minWidth: 240,
                       borderRadius: '16px',
-                      border: '1px solid #e2e8f0',
-                      boxShadow: '0 8px 24px -4px rgba(0,0,0,0.1)',
+                      border: '1px solid #e6e6e6',
+                      boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                       p: 0.8,
                     },
                   },
                 }}
               >
                 <Box sx={{ px: 1.5, py: 0.8 }}>
-                  <Typography variant="caption" sx={{ fontWeight: 700, color: '#71717a', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  <Typography variant="caption" sx={{ fontWeight: 700, color: '#4d4d4d', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     System Office Scope
                   </Typography>
                 </Box>
@@ -544,10 +559,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   sx={{ fontSize: '0.82rem', py: 0.8, borderRadius: '8px', display: 'flex', justifyContent: 'space-between' }}
                 >
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                    <CorporateFareIcon sx={{ fontSize: 17, color: '#71717a' }} />
+                    <CorporateFareIcon sx={{ fontSize: 17, color: '#4d4d4d' }} />
                     <span style={{ fontWeight: 600 }}>All Offices (Consolidated)</span>
                   </Box>
-                  {selectedOfficeId === 'ALL' && <CheckIcon sx={{ fontSize: 16, color: '#18181b' }} />}
+                  {selectedOfficeId === 'ALL' && <CheckIcon sx={{ fontSize: 16, color: '#2563eb' }} />}
                 </MenuItem>
 
                 <Divider sx={{ my: 0.8 }} />
@@ -568,8 +583,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                           width: 22,
                           height: 22,
                           borderRadius: '6px',
-                          bgcolor: off.isDefault ? '#18181b' : '#f4f4f5',
-                          color: off.isDefault ? '#eab308' : '#71717a',
+                          bgcolor: off.isDefault ? '#eff6ff' : '#f3f4f6',
+                          color: off.isDefault ? '#2563eb' : '#4d4d4d',
                           fontSize: '0.65rem',
                           fontWeight: 700,
                           display: 'flex',
@@ -581,7 +596,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                       </Box>
                       <span style={{ fontWeight: 500 }}>{off.name}</span>
                     </Box>
-                    {selectedOfficeId === off.id && <CheckIcon sx={{ fontSize: 16, color: '#18181b' }} />}
+                    {selectedOfficeId === off.id && <CheckIcon sx={{ fontSize: 16, color: '#2563eb' }} />}
                   </MenuItem>
                 ))}
 
@@ -592,7 +607,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     setOfficeMenuAnchor(null);
                     setOpenOfficesModal(true);
                   }}
-                  sx={{ fontSize: '0.8rem', py: 0.8, borderRadius: '8px', color: '#18181b', fontWeight: 600 }}
+                  sx={{ fontSize: '0.8rem', py: 0.8, borderRadius: '8px', color: '#2563eb', fontWeight: 600 }}
                 >
                   Manage Offices / Branches...
                 </MenuItem>
@@ -605,9 +620,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   variant="outlined"
                   startIcon={
                     syncState.hasFileHandle ? (
-                      <CheckCircleIcon sx={{ fontSize: 16, color: '#22c55e !important' }} />
+                      <CheckCircleIcon sx={{ fontSize: 16, color: '#16a34a !important' }} />
                     ) : (
-                      <TableChartIcon sx={{ fontSize: 16, color: '#18181b !important' }} />
+                      <TableChartIcon sx={{ fontSize: 16, color: '#2563eb !important' }} />
                     )
                   }
                   onClick={() => setOpenSyncModal(true)}
@@ -617,13 +632,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     fontSize: '0.78rem',
                     fontWeight: 600,
                     borderRadius: '9999px',
-                    borderColor: syncState.hasFileHandle ? '#bbf7d0' : '#e4e4e7',
+                    borderColor: syncState.hasFileHandle ? '#bbf7d0' : '#e6e6e6',
                     bgcolor: syncState.hasFileHandle ? '#f0fdf4' : '#ffffff',
-                    color: syncState.hasFileHandle ? '#15803d' : '#09090b',
+                    color: syncState.hasFileHandle ? '#15803d' : '#1a1a1a',
                     textTransform: 'none',
                     '&:hover': {
-                      borderColor: '#18181b',
-                      bgcolor: '#fafafa',
+                      borderColor: '#2563eb',
+                      bgcolor: '#f8fafc',
                     },
                   }}
                 >
@@ -639,17 +654,17 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               {/* Available Balance Pill (ReUI Style) */}
               {availableBalance !== null && (
                 <Chip
-                  icon={<AccountBalanceWalletIcon sx={{ color: '#22c55e !important', fontSize: '16px !important' }} />}
+                  icon={<AccountBalanceWalletIcon sx={{ color: '#16a34a !important', fontSize: '16px !important' }} />}
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
-                      <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, fontSize: '0.72rem', display: { xs: 'none', lg: 'inline' } }}>
+                      <Typography variant="caption" sx={{ color: '#4d4d4d', fontWeight: 600, fontSize: '0.72rem', display: { xs: 'none', lg: 'inline' } }}>
                         Balance:
                       </Typography>
                       <Typography
                         variant="body2"
                         sx={{
                           fontWeight: 700,
-                          color: availableBalance >= 0 ? '#15803d' : '#ef4444',
+                          color: availableBalance >= 0 ? '#15803d' : '#dc2626',
                           fontFamily: '"Space Mono", monospace',
                           fontSize: '0.82rem',
                           letterSpacing: '-0.02em',
@@ -669,7 +684,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 />
               )}
 
-              {/* Income Button (ReUI Status Accent Green Pill) */}
+              {/* Income Button (Status Accent Green Pill) */}
               <Button
                 variant="contained"
                 size="small"
@@ -678,20 +693,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 sx={{
                   fontWeight: 600,
                   borderRadius: '9999px',
-                  bgcolor: '#22c55e',
+                  bgcolor: '#16a34a',
                   color: '#ffffff',
                   height: 34,
                   px: 1.8,
                   fontSize: '0.78rem',
                   textTransform: 'none',
                   display: { xs: 'none', sm: 'inline-flex' },
-                  '&:hover': { bgcolor: '#16a34a', boxShadow: '0 4px 12px rgba(34, 197, 94, 0.25)' },
+                  '&:hover': { bgcolor: '#15803d', boxShadow: '0 4px 12px rgba(22, 163, 74, 0.25)' },
                 }}
               >
                 Income
               </Button>
 
-              {/* Expense Button (ReUI Obsidian Primary CTA Pill) */}
+              {/* Expense Button (Primary Royal Blue Pill) */}
               <Button
                 variant="contained"
                 size="small"
@@ -700,14 +715,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 sx={{
                   fontWeight: 600,
                   borderRadius: '9999px',
-                  bgcolor: '#18181b',
+                  bgcolor: '#2563eb',
                   color: '#ffffff',
                   height: 34,
                   px: 1.8,
                   fontSize: '0.78rem',
                   textTransform: 'none',
                   display: { xs: 'none', sm: 'inline-flex' },
-                  '&:hover': { bgcolor: '#27272a', boxShadow: '0 4px 12px rgba(24, 24, 27, 0.2)' },
+                  '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' },
                 }}
               >
                 Expense
@@ -726,11 +741,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                       p: '3px 10px 3px 4px',
                       borderRadius: '9999px',
                       bgcolor: '#ffffff',
-                      border: '1px solid #e4e4e7',
+                      border: '1px solid #e6e6e6',
                       transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
                       '&:hover': {
-                        borderColor: '#18181b',
-                        bgcolor: '#fafafa',
+                        borderColor: '#2563eb',
+                        bgcolor: '#f8fafc',
                       },
                     }}
                   >
@@ -740,17 +755,17 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                         height: 28,
                         fontSize: '0.72rem',
                         fontWeight: 700,
-                        bgcolor: '#18181b',
-                        color: '#eab308', // ReUI Gold initial
+                        bgcolor: '#2563eb',
+                        color: '#ffffff',
                       }}
                     >
                       {currentUser.fullName ? currentUser.fullName[0].toUpperCase() : 'U'}
                     </Avatar>
                     <Box sx={{ display: { xs: 'none', md: 'block' }, lineHeight: 1.1 }}>
-                      <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', fontSize: '0.74rem', display: 'block' }}>
+                      <Typography variant="caption" sx={{ fontWeight: 600, color: '#1a1a1a', fontSize: '0.74rem', display: 'block' }}>
                         {currentUser.fullName.split(' ')[0]}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.64rem' }}>
+                      <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.64rem' }}>
                         {currentUser.role}
                       </Typography>
                     </Box>
@@ -766,18 +781,18 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                           mt: 1,
                           width: 230,
                           borderRadius: '16px',
-                          border: '1px solid #e4e4e7',
-                          boxShadow: '0 8px 24px -4px rgba(0,0,0,0.1)',
+                          border: '1px solid #e6e6e6',
+                          boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
                           p: 0.8,
                         },
                       },
                     }}
                   >
                     <Box sx={{ p: '10px 14px' }}>
-                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.86rem', fontFamily: '"Space Grotesk", sans-serif' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#1a1a1a', fontSize: '0.86rem', fontFamily: '"Space Grotesk", sans-serif' }}>
                         {currentUser.fullName}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.72rem', display: 'block', mt: 0.2 }}>
+                      <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.72rem', display: 'block', mt: 0.2 }}>
                         @{currentUser.username} {currentUser.email ? `• ${currentUser.email}` : ''}
                       </Typography>
                       <Chip
@@ -785,9 +800,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                         size="small"
                         sx={{
                           mt: 0.8,
-                          bgcolor: currentUser.role === 'Admin' ? '#18181b' : '#f4f4f5',
-                          color: currentUser.role === 'Admin' ? '#eab308' : '#71717a',
-                          border: currentUser.role === 'Admin' ? '1px solid #27272a' : '1px solid #e4e4e7',
+                          bgcolor: currentUser.role === 'Admin' ? '#eff6ff' : '#f3f4f6',
+                          color: currentUser.role === 'Admin' ? '#1d4ed8' : '#4d4d4d',
+                          border: currentUser.role === 'Admin' ? '1px solid #bfdbfe' : '1px solid #e6e6e6',
                           fontWeight: 700,
                           fontSize: '0.65rem',
                           height: 20,
@@ -803,7 +818,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                       }}
                       sx={{ fontSize: '0.82rem', py: 0.9, borderRadius: '8px', gap: 1.2 }}
                     >
-                      <PeopleIcon sx={{ fontSize: 17, color: '#71717a' }} />
+                      <PeopleIcon sx={{ fontSize: 17, color: '#4d4d4d' }} />
                       <span style={{ fontWeight: 500 }}>Manage Users</span>
                     </MenuItem>
                     <MenuItem
@@ -811,9 +826,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                         setUserMenuAnchor(null);
                         logout();
                       }}
-                      sx={{ fontSize: '0.82rem', py: 0.9, borderRadius: '8px', gap: 1.2, color: '#ef4444' }}
+                      sx={{ fontSize: '0.82rem', py: 0.9, borderRadius: '8px', gap: 1.2, color: '#dc2626' }}
                     >
-                      <LogoutIcon sx={{ fontSize: 17, color: '#ef4444' }} />
+                      <LogoutIcon sx={{ fontSize: 17, color: '#dc2626' }} />
                       <span style={{ fontWeight: 600 }}>Sign Out / Logout</span>
                     </MenuItem>
                   </Menu>
@@ -832,7 +847,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             maxWidth: '1600px',
             mx: 'auto',
             p: { xs: 1.5, sm: 2.5, md: 3.2 },
-            bgcolor: '#fafafa',
+            bgcolor: '#ffffff',
           }}
         >
           {children}
@@ -848,24 +863,24 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           '& .MuiDrawer-paper': {
             width: 270,
             bgcolor: '#ffffff',
-            borderRight: '1px solid #e4e4e7',
+            borderRight: '1px solid #e6e6e6',
             boxSizing: 'border-box',
           },
         }}
       >
-        <Box sx={{ p: 2.2, borderBottom: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', gap: 1.4 }}>
-          <Box sx={{ width: 34, height: 34, borderRadius: '10px', bgcolor: '#18181b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 19 }} />
+        <Box sx={{ p: 2.2, borderBottom: '1px solid #e6e6e6', display: 'flex', alignItems: 'center', gap: 1.4 }}>
+          <Box sx={{ width: 34, height: 34, borderRadius: '10px', bgcolor: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 19 }} />
           </Box>
           <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Grotesk", sans-serif' }}>ExpenseFlow</Typography>
-            <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase' }}>Operations & Funds</Typography>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#1a1a1a', fontFamily: '"Space Grotesk", sans-serif' }}>ExpenseFlow</Typography>
+            <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase' }}>Operations & Funds</Typography>
           </Box>
         </Box>
 
         {renderNavList(true)}
 
-        <Box sx={{ p: 2, mt: 'auto', borderTop: '1px solid #e4e4e7', display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ p: 2, mt: 'auto', borderTop: '1px solid #e6e6e6', display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Button
             variant="contained"
             fullWidth
@@ -875,7 +890,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenIncomeModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ bgcolor: '#22c55e', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#16a34a' } }}
+            sx={{ bgcolor: '#16a34a', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#15803d' } }}
           >
             Add Income
           </Button>
@@ -888,7 +903,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenExpenseModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}
+            sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#1d4ed8' } }}
           >
             Add Expense
           </Button>
@@ -901,7 +916,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenSyncModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ borderColor: '#e4e4e7', color: '#09090b', fontWeight: 600, borderRadius: '9999px' }}
+            sx={{ borderColor: '#e6e6e6', color: '#1a1a1a', fontWeight: 600, borderRadius: '9999px' }}
           >
             Excel & Sheet Sync
           </Button>

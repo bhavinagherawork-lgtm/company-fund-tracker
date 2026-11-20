@@ -184,12 +184,12 @@ export const CategoriesPage: React.FC = () => {
             sx={{
               fontWeight: 700,
               borderRadius: '9999px',
-              bgcolor: '#18181b',
+              bgcolor: '#2563eb',
               color: '#ffffff',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#27272a' }
+              '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }
             }}
           >
             Add Category
@@ -408,7 +408,7 @@ export const CategoriesPage: React.FC = () => {
             <Button onClick={() => setOpenModal(false)} color="inherit" sx={{ borderRadius: '9999px', textTransform: 'none' }}>
               Cancel
             </Button>
-            <Button type="submit" variant="contained" sx={{ px: 3, fontWeight: 700, borderRadius: '9999px', bgcolor: '#18181b', color: '#ffffff', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}>
+            <Button type="submit" variant="contained" sx={{ px: 3, fontWeight: 700, borderRadius: '9999px', bgcolor: '#2563eb', color: '#ffffff', textTransform: 'none', '&:hover': { bgcolor: '#1d4ed8' } }}>
               {editingCategory ? 'Save Changes' : 'Add Category'}
             </Button>
           </DialogActions>
