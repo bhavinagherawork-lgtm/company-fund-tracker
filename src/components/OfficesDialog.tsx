@@ -28,6 +28,7 @@ import { useOffice } from '../context/OfficeContext';
 import { createOffice, updateOffice, deleteOffice } from '../services/officeService';
 import { db } from '../database/db';
 import { formatINR } from '../utils/currency';
+import { officeZodSchema, formatZodErrors } from '../utils/validators';
 import type { Office } from '../types';
 
 interface OfficesDialogProps {
@@ -75,9 +76,12 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
     }
   };
 
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
   useEffect(() => {
     if (open) {
       setError(null);
+      setFieldErrors({});
       setSuccessMsg(null);
       setIsAdding(false);
       setEditingOffice(null);
@@ -93,6 +97,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
     setIsDefault(offices.length === 0);
     setIsAdding(true);
     setError(null);
+    setFieldErrors({});
   };
 
   const handleOpenEdit = (off: Office) => {
@@ -103,18 +108,24 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
     setIsDefault(!!off.isDefault);
     setIsAdding(true);
     setError(null);
+    setFieldErrors({});
   };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
 
-    if (!name.trim()) {
-      setError('Office name is required.');
-      return;
-    }
-    if (!code.trim()) {
-      setError('Office code is required.');
+    const validation = officeZodSchema.safeParse({
+      name: name.trim(),
+      code: code.trim().toUpperCase(),
+      location: location.trim() || undefined,
+    });
+
+    if (!validation.success) {
+      const errMap = formatZodErrors(validation.error);
+      setFieldErrors(errMap);
+      setError(Object.values(errMap)[0] || 'Please complete all required fields.');
       return;
     }
 
@@ -195,7 +206,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                 {editingOffice ? `Edit Office: ${editingOffice.name}` : 'Add New Office / Branch'}
               </Typography>
 
-              <form onSubmit={handleSave}>
+              <form noValidate onSubmit={handleSave}>
                 <Grid container spacing={1.5}>
                   <Grid size={{ xs: 8 }}>
                     <TextField
@@ -204,7 +215,18 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                       fullWidth
                       size="small"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        if (fieldErrors.name) {
+                          setFieldErrors((prev) => {
+                            const copy = { ...prev };
+                            delete copy.name;
+                            return copy;
+                          });
+                        }
+                      }}
+                      error={Boolean(fieldErrors.name)}
+                      helperText={fieldErrors.name}
                       placeholder="e.g. Surat Head Office"
                     />
                   </Grid>
@@ -215,7 +237,18 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                       fullWidth
                       size="small"
                       value={code}
-                      onChange={(e) => setCode(e.target.value.toUpperCase())}
+                      onChange={(e) => {
+                        setCode(e.target.value.toUpperCase());
+                        if (fieldErrors.code) {
+                          setFieldErrors((prev) => {
+                            const copy = { ...prev };
+                            delete copy.code;
+                            return copy;
+                          });
+                        }
+                      }}
+                      error={Boolean(fieldErrors.code)}
+                      helperText={fieldErrors.code}
                       placeholder="e.g. HO"
                     />
                   </Grid>

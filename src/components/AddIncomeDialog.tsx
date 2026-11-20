@@ -18,6 +18,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import EditIcon from '@mui/icons-material/Edit';
 import { addIncome, updateIncome } from '../services/incomeService';
 import { useOffice } from '../context/OfficeContext';
+import { validateIncomeInput } from '../utils/validators';
 import type { PaymentMode, IncomeRecord } from '../types';
 import { getTodayISODate } from '../utils/formatters';
 
@@ -45,10 +46,12 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (open) {
       setError(null);
+      setFieldErrors({});
       if (incomeToEdit) {
         setTransactionDate(incomeToEdit.transactionDate);
         setOfficeId(incomeToEdit.officeId || defaultOffice?.id || 1);
@@ -72,13 +75,22 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
 
-    if (!receivedFrom.trim()) {
-      setError('Please specify who the fund/income was received from.');
-      return;
-    }
-    if (!amount || Number(amount) <= 0) {
-      setError('Please enter a valid positive amount.');
+    const validation = validateIncomeInput({
+      receivedFrom,
+      amount,
+      transactionDate,
+      officeId: officeId ? Number(officeId) : undefined,
+      paymentMode,
+      referenceNumber: referenceNumber || undefined,
+      description: description || undefined,
+    });
+
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      const firstErrMsg = Object.values(validation.errors)[0] || 'Please complete all required fields.';
+      setError(firstErrMsg);
       return;
     }
 
@@ -137,7 +149,7 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
         </IconButton>
       </DialogTitle>
 
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <DialogContent dividers sx={{ p: 2.5 }}>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -154,7 +166,18 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
                 size="small"
                 required
                 value={transactionDate}
-                onChange={(e) => setTransactionDate(e.target.value)}
+                onChange={(e) => {
+                  setTransactionDate(e.target.value);
+                  if (fieldErrors.transactionDate) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.transactionDate;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.transactionDate)}
+                helperText={fieldErrors.transactionDate}
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             </Grid>
@@ -167,7 +190,18 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
                 size="small"
                 required
                 value={officeId}
-                onChange={(e) => setOfficeId(Number(e.target.value))}
+                onChange={(e) => {
+                  setOfficeId(Number(e.target.value));
+                  if (fieldErrors.officeId) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.officeId;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.officeId)}
+                helperText={fieldErrors.officeId}
               >
                 {offices.map((off) => (
                   <MenuItem key={off.id} value={off.id}>
@@ -185,7 +219,18 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
                 size="small"
                 required
                 value={receivedFrom}
-                onChange={(e) => setReceivedFrom(e.target.value)}
+                onChange={(e) => {
+                  setReceivedFrom(e.target.value);
+                  if (fieldErrors.receivedFrom) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.receivedFrom;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.receivedFrom)}
+                helperText={fieldErrors.receivedFrom}
               />
             </Grid>
 
@@ -198,7 +243,19 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
                 size="small"
                 required
                 value={amount}
-                onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setAmount(val === '' ? '' : Number(val));
+                  if (fieldErrors.amount) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.amount;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.amount)}
+                helperText={fieldErrors.amount}
                 slotProps={{
                   htmlInput: { min: 1, step: 'any' },
                 }}
@@ -213,7 +270,18 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
                 size="small"
                 required
                 value={paymentMode}
-                onChange={(e) => setPaymentMode(e.target.value as PaymentMode)}
+                onChange={(e) => {
+                  setPaymentMode(e.target.value as PaymentMode);
+                  if (fieldErrors.paymentMode) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.paymentMode;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.paymentMode)}
+                helperText={fieldErrors.paymentMode}
               >
                 <MenuItem value="Bank Transfer">Bank Transfer (NEFT/RTGS/IMPS)</MenuItem>
                 <MenuItem value="UPI">UPI (GPay / PhonePe / Paytm)</MenuItem>

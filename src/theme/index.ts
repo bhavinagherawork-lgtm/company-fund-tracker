@@ -248,6 +248,49 @@ export const theme = createTheme({
         },
       },
     },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.84rem',
+          color: '#4d4d4d',
+          '&.Mui-focused': {
+            color: '#2563eb',
+          },
+        },
+        asterisk: {
+          color: '#ef4444 !important',
+          fontWeight: 700,
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.84rem',
+          color: '#4d4d4d',
+          '&.Mui-focused': {
+            color: '#2563eb',
+          },
+        },
+        asterisk: {
+          color: '#ef4444 !important',
+          fontWeight: 700,
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.74rem',
+          marginTop: '4px',
+          marginLeft: '4px',
+          '&.Mui-error': {
+            color: '#ef4444',
+            fontWeight: 500,
+          },
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {

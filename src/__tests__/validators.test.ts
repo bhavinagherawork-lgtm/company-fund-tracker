@@ -107,4 +107,46 @@ describe('Data Validation Layer (Rule 6.4)', () => {
       expect(res.errors.password).toBeDefined();
     });
   });
+
+  describe('amountField Zod Schema (Handles NaN and empty without raw Zod crashes)', () => {
+    it('gracefully handles empty string and NaN with human-friendly message', () => {
+      const emptyRes = validateExpenseInput({
+        expenseTitle: 'Test',
+        amount: '' as any,
+        expenseDate: '2026-11-20',
+      });
+      expect(emptyRes.isValid).toBe(false);
+      expect(emptyRes.errors.amount).toBe('Amount is required and must be a valid number.');
+      expect(emptyRes.errors.amount).not.toContain('received NaN');
+
+      const nanRes = validateExpenseInput({
+        expenseTitle: 'Test',
+        amount: NaN,
+        expenseDate: '2026-11-20',
+      });
+      expect(nanRes.isValid).toBe(false);
+      expect(nanRes.errors.amount).toBe('Amount is required and must be a valid number.');
+      expect(nanRes.errors.amount).not.toContain('received NaN');
+    });
+
+    it('rejects zero or negative amounts with positive number requirement', () => {
+      const zeroRes = validateExpenseInput({
+        expenseTitle: 'Test',
+        amount: 0,
+        expenseDate: '2026-11-20',
+      });
+      expect(zeroRes.isValid).toBe(false);
+      expect(zeroRes.errors.amount).toBe('Amount must be a positive number greater than 0.');
+    });
+
+    it('accepts numeric string representations without throwing', () => {
+      const strRes = validateExpenseInput({
+        expenseTitle: 'Test Expense',
+        amount: '1250.50' as any,
+        expenseDate: '2026-11-20',
+        paymentMode: 'UPI',
+      });
+      expect(strRes.isValid).toBe(true);
+    });
+  });
 });

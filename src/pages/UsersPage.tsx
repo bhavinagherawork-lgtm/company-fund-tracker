@@ -39,6 +39,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import ShieldIcon from '@mui/icons-material/Shield';
 import { getUsers, createUser, updateUser, deleteUser } from '../services/userService';
 import { useAuth } from '../context/AuthContext';
+import { validateUserInput } from '../utils/validators';
 import type { User, UserRole, UserStatus } from '../types';
 
 export const UsersPage: React.FC = () => {
@@ -53,6 +54,7 @@ export const UsersPage: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [modalError, setModalError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState<boolean>(false);
 
   // Form fields
@@ -92,6 +94,7 @@ export const UsersPage: React.FC = () => {
     setRole('Viewer');
     setStatus('Active');
     setModalError(null);
+    setFieldErrors({});
     setOpenModal(true);
   };
 
@@ -104,24 +107,29 @@ export const UsersPage: React.FC = () => {
     setRole(user.role);
     setStatus(user.status);
     setModalError(null);
+    setFieldErrors({});
     setOpenModal(true);
   };
 
   const handleSaveUser = async (e: React.FormEvent) => {
     e.preventDefault();
     setModalError(null);
+    setFieldErrors({});
 
-    if (!fullName.trim()) {
-      setModalError('Full name is required.');
-      return;
-    }
-    if (!username.trim()) {
-      setModalError('Username is required.');
-      return;
-    }
+    const validation = validateUserInput({
+      username,
+      fullName,
+      email: email.trim() || undefined,
+      role,
+      status,
+      password: password || undefined,
+      isNewUser: !editingUser,
+    });
 
-    if (!editingUser && !password.trim()) {
-      setModalError('Password is required for new users.');
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      const firstErr = Object.values(validation.errors)[0] || 'Please complete all required fields.';
+      setModalError(firstErr);
       return;
     }
 
@@ -634,7 +642,7 @@ export const UsersPage: React.FC = () => {
           {editingUser ? `Edit User: @${editingUser.username}` : 'Add New User'}
         </DialogTitle>
 
-        <form onSubmit={handleSaveUser}>
+        <form noValidate onSubmit={handleSaveUser}>
           <DialogContent sx={{ pt: 2, display: 'flex', flexDirection: 'column', gap: 1.8 }}>
             {modalError && (
               <Alert severity="error" sx={{ borderRadius: '9999px', fontSize: '0.75rem', py: 0.2 }} onClose={() => setModalError(null)}>
@@ -648,7 +656,18 @@ export const UsersPage: React.FC = () => {
               fullWidth
               size="small"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e) => {
+                setFullName(e.target.value);
+                if (fieldErrors.fullName) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.fullName;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.fullName)}
+              helperText={fieldErrors.fullName}
               placeholder="e.g. John Doe"
             />
 
@@ -658,9 +677,19 @@ export const UsersPage: React.FC = () => {
               fullWidth
               size="small"
               value={username}
-              onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))}
+              onChange={(e) => {
+                setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''));
+                if (fieldErrors.username) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.username;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.username)}
+              helperText={fieldErrors.username || 'Unique username used for login'}
               placeholder="e.g. johndoe"
-              helperText="Unique username used for login"
             />
 
             <TextField
@@ -669,7 +698,18 @@ export const UsersPage: React.FC = () => {
               fullWidth
               size="small"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (fieldErrors.email) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.email;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.email)}
+              helperText={fieldErrors.email}
               placeholder="e.g. john@company.com"
             />
 
@@ -680,7 +720,18 @@ export const UsersPage: React.FC = () => {
               fullWidth
               size="small"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (fieldErrors.password) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.password;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.password)}
+              helperText={fieldErrors.password}
               placeholder="••••••••"
             />
 

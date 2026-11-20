@@ -21,6 +21,7 @@ import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import { getCategories } from '../services/categoryService';
 import { addExpense, updateExpense } from '../services/expenseService';
 import { useOffice } from '../context/OfficeContext';
+import { validateExpenseInput } from '../utils/validators';
 import type { ExpenseCategory, PaymentMode, ExpenseRecord } from '../types';
 import { getTodayISODate } from '../utils/formatters';
 
@@ -55,11 +56,13 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (open) {
       loadCategories();
       setError(null);
+      setFieldErrors({});
       if (expenseToEdit) {
         setExpenseDate(expenseToEdit.expenseDate);
         setCategoryId(expenseToEdit.categoryId);
@@ -114,17 +117,24 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
 
-    if (!expenseTitle.trim()) {
-      setError('Please enter an expense title.');
-      return;
-    }
-    if (!amount || Number(amount) <= 0) {
-      setError('Please enter a valid amount greater than zero.');
-      return;
-    }
-    if (!categoryId) {
-      setError('Please select a category.');
+    const validation = validateExpenseInput({
+      expenseTitle,
+      amount,
+      expenseDate,
+      categoryId: categoryId ? Number(categoryId) : undefined,
+      officeId: officeId ? Number(officeId) : undefined,
+      paymentMode,
+      vendor: vendor || undefined,
+      billNumber: billNumber || undefined,
+      description: description || undefined,
+    });
+
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      const firstErrMsg = Object.values(validation.errors)[0] || 'Please complete all required fields.';
+      setError(firstErrMsg);
       return;
     }
 
@@ -195,7 +205,7 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
         </IconButton>
       </DialogTitle>
 
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <DialogContent dividers sx={{ p: 2.5 }}>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -212,7 +222,18 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={expenseDate}
-                onChange={(e) => setExpenseDate(e.target.value)}
+                onChange={(e) => {
+                  setExpenseDate(e.target.value);
+                  if (fieldErrors.expenseDate) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.expenseDate;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.expenseDate)}
+                helperText={fieldErrors.expenseDate}
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             </Grid>
@@ -225,7 +246,18 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={officeId}
-                onChange={(e) => setOfficeId(Number(e.target.value))}
+                onChange={(e) => {
+                  setOfficeId(Number(e.target.value));
+                  if (fieldErrors.officeId) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.officeId;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.officeId)}
+                helperText={fieldErrors.officeId}
               >
                 {offices.map((off) => (
                   <MenuItem key={off.id} value={off.id}>
@@ -243,7 +275,18 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={categoryId}
-                onChange={(e) => setCategoryId(Number(e.target.value))}
+                onChange={(e) => {
+                  setCategoryId(Number(e.target.value));
+                  if (fieldErrors.categoryId) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.categoryId;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.categoryId)}
+                helperText={fieldErrors.categoryId}
               >
                 {categories.map((cat) => (
                   <MenuItem key={cat.id} value={cat.id}>
@@ -261,7 +304,18 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={expenseTitle}
-                onChange={(e) => setExpenseTitle(e.target.value)}
+                onChange={(e) => {
+                  setExpenseTitle(e.target.value);
+                  if (fieldErrors.expenseTitle) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.expenseTitle;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.expenseTitle)}
+                helperText={fieldErrors.expenseTitle}
               />
             </Grid>
 
@@ -274,7 +328,19 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={amount}
-                onChange={(e) => setAmount(e.target.value === '' ? '' : Number(e.target.value))}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setAmount(val === '' ? '' : Number(val));
+                  if (fieldErrors.amount) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.amount;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.amount)}
+                helperText={fieldErrors.amount}
                 slotProps={{
                   htmlInput: { min: 0.01, step: 'any' },
                 }}
@@ -289,7 +355,18 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                 size="small"
                 required
                 value={paymentMode}
-                onChange={(e) => setPaymentMode(e.target.value as PaymentMode)}
+                onChange={(e) => {
+                  setPaymentMode(e.target.value as PaymentMode);
+                  if (fieldErrors.paymentMode) {
+                    setFieldErrors((prev) => {
+                      const copy = { ...prev };
+                      delete copy.paymentMode;
+                      return copy;
+                    });
+                  }
+                }}
+                error={Boolean(fieldErrors.paymentMode)}
+                helperText={fieldErrors.paymentMode}
               >
                 <MenuItem value="UPI">UPI (GPay / PhonePe / Paytm)</MenuItem>
                 <MenuItem value="Cash">Cash</MenuItem>

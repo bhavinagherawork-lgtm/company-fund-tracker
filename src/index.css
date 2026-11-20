@@ -164,6 +164,15 @@ code, pre, .font-mono, .currency-mono {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
+/* Mandatory fields red asterisk styling (User requirement) */
+.MuiFormLabel-asterisk,
+.MuiInputLabel-asterisk,
+.form-label-required::after {
+  color: #ef4444 !important;
+  font-weight: 700 !important;
+  margin-left: 2px;
+}
+
 /* Rule 4: Motion with a Job - Respect User System Level Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

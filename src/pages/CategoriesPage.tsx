@@ -26,6 +26,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { getCategories, addCategory, updateCategory, deleteCategory } from '../services/categoryService';
 import { resetDatabaseToExcelSeed, db } from '../database/db';
+import { categoryZodSchema, formatZodErrors } from '../utils/validators';
 import type { ExpenseCategory } from '../types';
 
 export const CategoriesPage: React.FC = () => {
@@ -44,6 +45,7 @@ export const CategoriesPage: React.FC = () => {
   const [color, setColor] = useState('#2563eb');
   const [description, setDescription] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
 
   const loadCategories = useCallback(async () => {
@@ -80,6 +82,7 @@ export const CategoriesPage: React.FC = () => {
     setColor('#2563eb');
     setDescription('');
     setError(null);
+    setFieldErrors({});
     setOpenModal(true);
   };
 
@@ -90,15 +93,26 @@ export const CategoriesPage: React.FC = () => {
     setColor(cat.color || '#2563eb');
     setDescription(cat.description || '');
     setError(null);
+    setFieldErrors({});
     setOpenModal(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
 
-    if (!name.trim()) {
-      setError('Please provide a category name.');
+    const parsedCode = (code.trim() || name.substring(0, 4).toUpperCase()).replace(/\s+/g, '-');
+    const result = categoryZodSchema.safeParse({
+      name: name.trim(),
+      code: parsedCode,
+      description: description.trim() || undefined,
+    });
+
+    if (!result.success) {
+      const errMap = formatZodErrors(result.error);
+      setFieldErrors(errMap);
+      setError(Object.values(errMap)[0] || 'Please complete all required fields.');
       return;
     }
 
@@ -106,7 +120,7 @@ export const CategoriesPage: React.FC = () => {
       if (editingCategory && editingCategory.id !== undefined) {
         await updateCategory(editingCategory.id, {
           name: name.trim(),
-          code: (code.trim() || name.substring(0, 4).toUpperCase()).replace(/\s+/g, '-'),
+          code: parsedCode,
           color,
           description: description.trim() || undefined,
         });
@@ -114,7 +128,7 @@ export const CategoriesPage: React.FC = () => {
       } else {
         await addCategory({
           name: name.trim(),
-          code: (code.trim() || name.substring(0, 4).toUpperCase()).replace(/\s+/g, '-'),
+          code: parsedCode,
           color,
           description: description.trim() || undefined,
           isDefault: false,
@@ -351,7 +365,7 @@ export const CategoriesPage: React.FC = () => {
           </IconButton>
         </DialogTitle>
 
-        <form onSubmit={handleSubmit}>
+        <form noValidate onSubmit={handleSubmit}>
           <DialogContent dividers sx={{ p: 2.5 }}>
             {error && (
               <Alert severity="error" sx={{ mb: 2 }}>
@@ -367,7 +381,18 @@ export const CategoriesPage: React.FC = () => {
               required
               sx={{ mb: 2 }}
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (fieldErrors.name) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.name;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.name)}
+              helperText={fieldErrors.name}
             />
 
             <TextField
@@ -375,9 +400,21 @@ export const CategoriesPage: React.FC = () => {
               placeholder="e.g. NASTO / ELE-NASTO"
               fullWidth
               size="small"
+              required
               sx={{ mb: 2 }}
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => {
+                setCode(e.target.value);
+                if (fieldErrors.code) {
+                  setFieldErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy.code;
+                    return copy;
+                  });
+                }
+              }}
+              error={Boolean(fieldErrors.code)}
+              helperText={fieldErrors.code}
             />
 
             <Box sx={{ mb: 2 }}>
