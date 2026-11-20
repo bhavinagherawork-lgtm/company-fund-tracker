@@ -617,7 +617,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 </MenuItem>
               </Menu>
 
-              {/* Excel Sync Status Button */}
+              {/* Excel Sync Status Button - Currently commented out & hidden from screen per user request */}
+              {/*
               <Tooltip title={syncState.hasFileHandle ? `Live Excel Sync Active: ${syncState.fileName}` : 'Connect Excel or Google Sheet for live 2-way sync'}>
                 <Button
                   size="small"
@@ -654,6 +655,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   <Box component="span" sx={{ display: { xs: 'inline', sm: 'none' } }}>Sync</Box>
                 </Button>
               </Tooltip>
+              */}
 
               {/* Available Balance Pill (ReUI Style) */}
               {availableBalance !== null && (
@@ -911,6 +913,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           >
             Add Expense
           </Button>
+          {/* Excel & Sheet Sync - Currently commented out & hidden from screen per user request */}
+          {/*
           <Button
             variant="outlined"
             fullWidth
@@ -924,6 +928,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           >
             Excel & Sheet Sync
           </Button>
+          */}
           {currentUser && (
             <Button
               variant="outlined"
@@ -954,11 +959,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
         onClose={() => setOpenIncomeModal(false)}
         onSuccess={fetchBalance}
       />
+      {/* ExcelSyncDialog - Currently commented out & hidden from screen per user request */}
+      {/*
       <ExcelSyncDialog
         open={openSyncModal}
         onClose={() => setOpenSyncModal(false)}
         onDataChanged={fetchBalance}
       />
+      */}
       <OfficesDialog
         open={openOfficesModal}
         onClose={() => setOpenOfficesModal(false)}
