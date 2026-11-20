@@ -136,7 +136,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
   const currentTabInfo = TAB_TITLES[activeTab] || { title: activeTab, subtitle: 'Operations & Fund Manager' };
   const sidebarWidth = sidebarCollapsed ? 60 : 208;
 
-  // Sidebar List Content (ReUI Component Navigation - Compact)
+  // Sidebar List Content (ReUI Component Navigation - Compact Black Sidebar)
   const renderNavList = (isDrawer = false) => (
     <List sx={{ px: 0.8, py: 0.8, flexGrow: 1 }}>
       {navItems.map((item) => {
@@ -150,15 +150,15 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             }}
             sx={{
               borderRadius: '9999px',
-              mb: 0.25,
-              py: 0.45,
+              mb: 0.35,
+              py: 0.5,
               px: !isDrawer && sidebarCollapsed ? 1.0 : 1.4,
-              minHeight: 32,
+              minHeight: 34,
               justifyContent: !isDrawer && sidebarCollapsed ? 'center' : 'flex-start',
               bgcolor: isSelected ? '#2563eb !important' : 'transparent',
-              color: isSelected ? '#ffffff !important' : '#4d4d4d',
-              boxShadow: isSelected ? '0 2px 8px rgba(37, 99, 235, 0.25)' : 'none',
-              transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+              color: isSelected ? '#ffffff !important' : '#94a3b8',
+              boxShadow: isSelected ? '0 2px 10px rgba(37, 99, 235, 0.35)' : 'none',
+              transition: 'all 150ms ease',
               '&.Mui-selected': {
                 bgcolor: '#2563eb !important',
                 color: '#ffffff !important',
@@ -175,16 +175,16 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 },
               },
               '&:hover': {
-                bgcolor: isSelected ? '#1d4ed8 !important' : '#f3f4f6',
-                color: isSelected ? '#ffffff !important' : '#1a1a1a',
+                bgcolor: isSelected ? '#1d4ed8 !important' : 'rgba(255, 255, 255, 0.08)',
+                color: '#ffffff !important',
                 '& .MuiTypography-root': {
-                  color: isSelected ? '#ffffff !important' : '#1a1a1a',
+                  color: '#ffffff !important',
                 },
                 '& .MuiListItemText-primary': {
-                  color: isSelected ? '#ffffff !important' : '#1a1a1a',
+                  color: '#ffffff !important',
                 },
                 '& .MuiListItemIcon-root': {
-                  color: isSelected ? '#ffffff !important' : '#2563eb',
+                  color: isSelected ? '#ffffff !important' : '#60a5fa !important',
                 },
               },
             }}
@@ -192,9 +192,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             <ListItemIcon
               sx={{
                 minWidth: !isDrawer && sidebarCollapsed ? 0 : 28,
-                color: isSelected ? '#ffffff !important' : '#4d4d4d',
+                color: isSelected ? '#ffffff !important' : '#94a3b8',
                 justifyContent: 'center',
-                transition: 'color 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'color 150ms ease',
                 '& .MuiSvgIcon-root': {
                   fontSize: 18,
                 },
@@ -210,7 +210,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     fontSize: '0.78rem',
                     fontWeight: isSelected ? 600 : 500,
                     letterSpacing: '-0.01em',
-                    color: isSelected ? '#ffffff !important' : '#4d4d4d',
+                    color: isSelected ? '#ffffff !important' : '#cbd5e1',
                   },
                 }}
               />
@@ -245,8 +245,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             height: '100vh',
             position: 'sticky',
             top: 0,
-            bgcolor: '#ffffff',
-            borderRight: '1px solid #e6e6e6',
+            bgcolor: '#09090b', // BLACK SIDEBAR
+            borderRight: '1px solid #1e293b',
             display: 'flex',
             flexDirection: 'column',
             zIndex: 1100,
@@ -260,7 +260,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               height: 46,
               minHeight: 46,
               px: sidebarCollapsed ? 1.0 : 1.6,
-              borderBottom: '1px solid #e6e6e6',
+              borderBottom: '1px solid #1e293b',
               display: 'flex',
               alignItems: 'center',
               justifyContent: sidebarCollapsed ? 'center' : 'space-between',
@@ -286,7 +286,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 2px 6px rgba(37, 99, 235, 0.22)',
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.35)',
                 }}
               >
                 <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 16 }} />
@@ -298,7 +298,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     sx={{
                       fontWeight: 700,
                       lineHeight: 1.1,
-                      color: '#1a1a1a',
+                      color: '#ffffff', // Crisp white on black
                       fontSize: '0.88rem',
                       fontFamily: '"Space Grotesk", sans-serif',
                       letterSpacing: '-0.02em',
@@ -309,7 +309,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   <Typography
                     variant="caption"
                     sx={{
-                      color: '#4d4d4d',
+                      color: '#94a3b8', // Muted light slate on black
                       fontSize: '0.62rem',
                       display: 'block',
                       fontWeight: 600,
@@ -330,9 +330,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           {/* Sidebar Footer / Collapse Toggle */}
           <Box
             sx={{
-              p: 1.4,
-              borderTop: '1px solid #e6e6e6',
-              bgcolor: '#ffffff',
+              p: 1.2,
+              borderTop: '1px solid #1e293b',
+              bgcolor: '#09090b',
               display: 'flex',
               flexDirection: 'column',
               gap: 0.8,
@@ -342,22 +342,22 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               <Box
                 sx={{
                   px: 1.2,
-                  py: 0.7,
+                  py: 0.6,
                   borderRadius: '9999px',
-                  bgcolor: '#ffffff',
-                  border: '1px solid #e6e6e6',
+                  bgcolor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 0.8,
                 }}
               >
-                <CorporateFareIcon sx={{ fontSize: 15, color: '#2563eb' }} />
+                <CorporateFareIcon sx={{ fontSize: 14, color: '#60a5fa' }} />
                 <Typography
                   variant="caption"
                   sx={{
                     fontSize: '0.72rem',
                     fontWeight: 600,
-                    color: '#1a1a1a',
+                    color: '#e2e8f0',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -374,21 +374,21 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 fullWidth
                 onClick={toggleSidebarCollapse}
                 sx={{
-                  color: '#4d4d4d',
-                  fontSize: '0.76rem',
+                  color: '#94a3b8',
+                  fontSize: '0.74rem',
                   fontWeight: 600,
                   textTransform: 'none',
-                  py: 0.7,
+                  py: 0.6,
                   borderRadius: '9999px',
                   justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
                   minWidth: 0,
-                  '&:hover': { bgcolor: '#f3f4f6', color: '#1a1a1a' },
+                  '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.08)', color: '#ffffff' },
                 }}
                 startIcon={
                   sidebarCollapsed ? (
-                    <ChevronRightIcon sx={{ fontSize: 18 }} />
+                    <ChevronRightIcon sx={{ fontSize: 18, color: '#94a3b8' }} />
                   ) : (
-                    <ChevronLeftIcon sx={{ fontSize: 18 }} />
+                    <ChevronLeftIcon sx={{ fontSize: 18, color: '#94a3b8' }} />
                   )
                 }
               >
@@ -865,26 +865,26 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
         onClose={() => setMobileMenuOpen(false)}
         sx={{
           '& .MuiDrawer-paper': {
-            width: 270,
-            bgcolor: '#ffffff',
-            borderRight: '1px solid #e6e6e6',
+            width: 260,
+            bgcolor: '#09090b', // BLACK
+            borderRight: '1px solid #1e293b',
             boxSizing: 'border-box',
           },
         }}
       >
-        <Box sx={{ p: 2.2, borderBottom: '1px solid #e6e6e6', display: 'flex', alignItems: 'center', gap: 1.4 }}>
-          <Box sx={{ width: 34, height: 34, borderRadius: '10px', bgcolor: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 19 }} />
+        <Box sx={{ p: 1.8, borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', gap: 1.2 }}>
+          <Box sx={{ width: 30, height: 30, borderRadius: '8px', bgcolor: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 17 }} />
           </Box>
           <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#1a1a1a', fontFamily: '"Space Grotesk", sans-serif' }}>ExpenseFlow</Typography>
-            <Typography variant="caption" sx={{ color: '#4d4d4d', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase' }}>Operations & Funds</Typography>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#ffffff', fontFamily: '"Space Grotesk", sans-serif', fontSize: '0.9rem' }}>ExpenseFlow</Typography>
+            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.64rem', fontWeight: 600, textTransform: 'uppercase' }}>Operations & Funds</Typography>
           </Box>
         </Box>
 
         {renderNavList(true)}
 
-        <Box sx={{ p: 2, mt: 'auto', borderTop: '1px solid #e6e6e6', display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ p: 1.6, mt: 'auto', borderTop: '1px solid #1e293b', display: 'flex', flexDirection: 'column', gap: 0.8 }}>
           <Button
             variant="contained"
             fullWidth
@@ -894,7 +894,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenIncomeModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ bgcolor: '#16a34a', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#15803d' } }}
+            sx={{ bgcolor: '#16a34a', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', height: 30, fontSize: '0.74rem', '&:hover': { bgcolor: '#15803d' } }}
           >
             Add Income
           </Button>
@@ -907,7 +907,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenExpenseModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', '&:hover': { bgcolor: '#1d4ed8' } }}
+            sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', height: 30, fontSize: '0.74rem', '&:hover': { bgcolor: '#1d4ed8' } }}
           >
             Add Expense
           </Button>
@@ -920,7 +920,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               setOpenSyncModal(true);
               setMobileMenuOpen(false);
             }}
-            sx={{ borderColor: '#e6e6e6', color: '#1a1a1a', fontWeight: 600, borderRadius: '9999px' }}
+            sx={{ borderColor: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', fontWeight: 600, borderRadius: '9999px', height: 30, fontSize: '0.74rem', '&:hover': { borderColor: '#ffffff', bgcolor: 'rgba(255,255,255,0.06)' } }}
           >
             Excel & Sheet Sync
           </Button>
@@ -935,7 +935,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 setMobileMenuOpen(false);
                 logout();
               }}
-              sx={{ fontWeight: 600, mt: 0.5, borderRadius: '9999px' }}
+              sx={{ fontWeight: 600, mt: 0.3, borderRadius: '9999px', height: 30, fontSize: '0.74rem' }}
             >
               Sign Out ({currentUser.username})
             </Button>

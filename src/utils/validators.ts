@@ -10,6 +10,16 @@
 import { z } from 'zod';
 import type { PaymentMode, TransactionStatus, UserRole, UserStatus } from '../types';
 
+// Global error map to eliminate any raw developer-facing Zod errors (e.g. 'expected number, received NaN')
+z.setErrorMap((issue, ctx) => {
+  if (issue.code === 'invalid_type') {
+    if (issue.received === 'NaN' || issue.expected === 'number') {
+      return { message: 'Amount is required and must be a valid number.' };
+    }
+  }
+  return { message: ctx.defaultError };
+});
+
 export const ALLOWED_PAYMENT_MODES: PaymentMode[] = [
   'Cash',
   'Bank Transfer',
@@ -241,7 +251,16 @@ export function formatZodErrors(error: z.ZodError): Record<string, string> {
   for (const issue of error.issues) {
     const key = issue.path[0]?.toString() || '_form';
     if (!result[key]) {
-      result[key] = issue.message;
+      let msg = issue.message;
+      if (
+        msg.includes('expected number') ||
+        msg.includes('received NaN') ||
+        msg.includes('Expected number') ||
+        msg.includes('received nan')
+      ) {
+        msg = 'Amount is required and must be a valid number.';
+      }
+      result[key] = msg;
     }
   }
   return result;
