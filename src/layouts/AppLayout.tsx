@@ -156,10 +156,26 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               color: isSelected ? '#ffffff !important' : '#71717a',
               boxShadow: isSelected ? '0 2px 8px rgba(24, 24, 27, 0.18)' : 'none',
               transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+              '&.Mui-selected': {
+                bgcolor: '#18181b !important',
+                color: '#ffffff !important',
+                '& .MuiTypography-root': {
+                  color: '#ffffff !important',
+                },
+                '& .MuiListItemIcon-root': {
+                  color: '#eab308 !important',
+                },
+              },
               '&:hover': {
                 bgcolor: isSelected ? '#27272a !important' : '#f4f4f5',
-                color: isSelected ? '#ffffff' : '#09090b',
+                color: isSelected ? '#ffffff !important' : '#09090b',
                 transform: 'translateX(2px)',
+                '& .MuiTypography-root': {
+                  color: isSelected ? '#ffffff !important' : '#09090b',
+                },
+                '& .MuiListItemIcon-root': {
+                  color: isSelected ? '#eab308 !important' : '#09090b',
+                },
               },
             }}
           >
@@ -183,6 +199,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                       fontWeight: isSelected ? 700 : 500,
                       fontFamily: isSelected ? '"Space Grotesk", sans-serif' : 'Inter, sans-serif',
                       letterSpacing: '-0.01em',
+                      color: isSelected ? '#ffffff !important' : '#71717a',
                     },
                   },
                 }}
