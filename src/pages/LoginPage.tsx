@@ -85,7 +85,7 @@ export const LoginPage: React.FC = () => {
         }}
       >
         {/* Brand Accent Top Stripe */}
-        <Box sx={{ height: 4, bgcolor: '#2563eb' }} />
+        <Box sx={{ height: 4, bgcolor: '#18181b' }} />
 
         <CardContent sx={{ p: '28px 26px !important' }}>
           {/* Logo & System Title */}
@@ -95,23 +95,24 @@ export const LoginPage: React.FC = () => {
                 width: 44,
                 height: 44,
                 borderRadius: '12px',
-                bgcolor: '#2563eb',
+                bgcolor: '#18181b',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: 1.2,
-                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.25)',
+                boxShadow: '0 4px 14px rgba(24, 24, 27, 0.25)',
               }}
             >
-              <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 22 }} />
+              <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
             </Box>
             <Typography
               variant="h5"
               sx={{
                 fontWeight: 700,
-                color: '#0f172a',
+                color: '#09090b',
                 letterSpacing: '-0.02em',
                 fontSize: '1.3rem',
+                fontFamily: '"Space Grotesk", sans-serif',
               }}
             >
               ExpenseFlow
@@ -121,9 +122,9 @@ export const LoginPage: React.FC = () => {
               size="small"
               sx={{
                 mt: 0.6,
-                bgcolor: '#eff6ff',
-                color: '#1d4ed8',
-                border: '1px solid #bfdbfe',
+                bgcolor: '#fafafa',
+                color: '#09090b',
+                border: '1px solid #e4e4e7',
                 fontSize: '0.66rem',
                 fontWeight: 600,
                 height: 22,
@@ -237,16 +238,16 @@ export const LoginPage: React.FC = () => {
               sx={{
                 mt: 0.5,
                 height: 42,
-                bgcolor: '#2563eb',
+                bgcolor: '#18181b',
                 color: '#ffffff',
                 fontWeight: 600,
                 fontSize: '0.84rem',
                 borderRadius: '9999px',
                 textTransform: 'none',
-                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.25)',
+                boxShadow: '0 4px 14px rgba(24, 24, 27, 0.25)',
                 '&:hover': {
-                  bgcolor: '#1d4ed8',
-                  boxShadow: '0 6px 18px rgba(37, 99, 235, 0.35)',
+                  bgcolor: '#27272a',
+                  boxShadow: '0 6px 18px rgba(24, 24, 27, 0.35)',
                 },
               }}
             >
@@ -275,23 +276,23 @@ export const LoginPage: React.FC = () => {
                 cursor: 'pointer',
                 transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
                 '&:hover': {
-                  borderColor: '#2563eb',
-                  bgcolor: '#f8fafc',
+                  borderColor: '#18181b',
+                  bgcolor: '#fafafa',
                 },
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                <KeyIcon sx={{ fontSize: 16, color: '#2563eb' }} />
+                <KeyIcon sx={{ fontSize: 16, color: '#eab308' }} />
                 <Box>
-                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#0f172a', display: 'block', fontSize: '0.76rem' }}>
+                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', display: 'block', fontSize: '0.76rem' }}>
                     admin / admin123
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.68rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem' }}>
                     Default Administrator
                   </Typography>
                 </Box>
               </Box>
-              <Chip label="Admin" size="small" sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #bfdbfe' }} />
+              <Chip label="Admin" size="small" sx={{ bgcolor: '#18181b', color: '#eab308', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #18181b' }} />
             </Box>
 
             <Box

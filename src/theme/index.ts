@@ -1,64 +1,70 @@
 import { createTheme } from '@mui/material/styles';
 
 /**
- * Clean, Friendly, Modern SaaS Theme Specification
- * Designed for everyday accounting & office management:
- * - Primary Brand / CTA: Royal Blue #2563eb
- * - Contrast & Structure: Deep Slate #0f172a
- * - Canvas Background: Soft Slate-50 #f8fafc (Zero eye strain)
+ * ReUI Design System Specification (from DESIGN.md)
+ * Designed strictly according to https://reui.io design tokens:
+ * - Primary CTA / Brand: Obsidian #18181b
+ * - Focus / Active State: ReUI Gold #eab308
+ * - Canvas Background: #fafafa (Document Base)
  * - Surface Container: Pure White #ffffff
- * - Structural Border: Crisp Slate #e2e8f0
- * - High-Contrast Text: Slate-900 #0f172a (WCAG AAA)
- * - Muted Typography: Slate-500 #64748b
- * - Inflow / Active Status: Fresh Emerald #10b981
- * - Outflow / Danger: Coral/Rose #ef4444
- * 
- * Typographic Hierarchy:
- * - Friendly, human, modern Inter system stack
- * - Currency / numbers: Space Mono / Inter tabular numerals
+ * - Structural Border: #e4e4e7
+ * - High-Contrast Text: #09090b
+ * - Muted Typography: #71717a
+ * - Status Accent (Inflow/Validation): #22c55e
+ * - Danger Accent (Outflow/Expenses): #ef4444
+ *
+ * Geometric Corner Radii:
+ * - Pill Controls: 9999px
+ * - Soft Cards: 16px
+ * - Modals / Dialogs: 24px
+ *
+ * Typography:
+ * - Headings: Space Grotesk, sans-serif
+ * - Body: Inter, sans-serif
+ * - Numbers / Monospace: Space Mono, monospace
  */
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#2563eb', // Royal Blue
-      light: '#3b82f6',
-      dark: '#1d4ed8',
+      main: '#18181b', // Obsidian Primary CTA / Brand
+      light: '#27272a',
+      dark: '#09090b',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#0f172a', // Deep Slate
-      light: '#334155',
-      dark: '#020617',
-      contrastText: '#ffffff',
+      main: '#eab308', // ReUI Gold / Focus / Active State
+      light: '#facc15',
+      dark: '#ca8a04',
+      contrastText: '#09090b',
     },
     success: {
-      main: '#10b981', // Fresh Emerald
-      light: '#34d399',
-      dark: '#059669',
+      main: '#22c55e', // Status Accent / Inflows
+      light: '#4ade80',
+      dark: '#16a34a',
       contrastText: '#ffffff',
     },
     error: {
-      main: '#ef4444', // Clean Coral Red
+      main: '#ef4444', // Danger / Outflows
       light: '#f87171',
       dark: '#dc2626',
       contrastText: '#ffffff',
     },
     warning: {
-      main: '#f59e0b', // Amber
-      light: '#fbbf24',
-      dark: '#d97706',
-      contrastText: '#ffffff',
+      main: '#eab308', // ReUI Warning
+      light: '#facc15',
+      dark: '#ca8a04',
+      contrastText: '#09090b',
     },
     background: {
-      default: '#f8fafc', // Soft eye-friendly canvas
-      paper: '#ffffff', // Clean white card surface
+      default: '#fafafa', // Canvas Base
+      paper: '#ffffff', // Surface Container
     },
     text: {
-      primary: '#0f172a', // High-contrast readable slate
-      secondary: '#64748b', // Soft muted labels
+      primary: '#09090b', // High Contrast Text
+      secondary: '#71717a', // Muted Typography
     },
-    divider: '#e2e8f0', // Crisp structural border
+    divider: '#e4e4e7', // Structural Border
   },
   typography: {
     fontFamily: [
@@ -70,63 +76,70 @@ export const theme = createTheme({
       'sans-serif',
     ].join(','),
     h1: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontWeight: 700,
       letterSpacing: '-0.025em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     h2: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontWeight: 700,
       letterSpacing: '-0.02em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     h3: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontWeight: 700,
       letterSpacing: '-0.02em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     h4: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontSize: '1.4rem',
       fontWeight: 700,
       letterSpacing: '-0.015em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     h5: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontSize: '1.18rem',
       fontWeight: 700,
       letterSpacing: '-0.015em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     h6: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontSize: '0.98rem',
       fontWeight: 600,
       letterSpacing: '-0.01em',
-      color: '#0f172a',
+      color: '#09090b',
     },
     subtitle1: {
+      fontFamily: '"Space Grotesk", sans-serif',
       fontSize: '0.92rem',
       fontWeight: 600,
-      color: '#0f172a',
+      color: '#09090b',
       letterSpacing: '-0.01em',
     },
     subtitle2: {
       fontSize: '0.84rem',
       fontWeight: 600,
-      color: '#64748b',
+      color: '#71717a',
     },
     body1: {
       fontSize: '14.5px',
       lineHeight: 1.5,
-      color: '#1e293b',
+      color: '#09090b',
     },
     body2: {
       fontSize: '13px',
       lineHeight: 1.45,
-      color: '#64748b',
+      color: '#71717a',
     },
     caption: {
       fontSize: '12px',
       lineHeight: 1.4,
-      color: '#64748b',
+      color: '#71717a',
     },
     button: {
       textTransform: 'none',
@@ -136,7 +149,7 @@ export const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 16, // --radius-soft-card: 16px
   },
   components: {
     MuiButton: {
@@ -146,44 +159,43 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          borderRadius: 9999, // Friendly rounded pill
+          borderRadius: 9999, // --radius-pill-button: 9999px
           boxShadow: 'none',
           padding: '6px 16px',
           fontWeight: 600,
           fontSize: '0.8125rem',
-          transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+          transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
         },
         containedPrimary: {
-          backgroundColor: '#2563eb',
+          backgroundColor: '#18181b',
           color: '#ffffff',
           '&:hover': {
-            backgroundColor: '#1d4ed8',
-            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)',
+            backgroundColor: '#27272a',
+            boxShadow: '0 4px 12px rgba(24, 24, 27, 0.2)',
           },
         },
         containedSecondary: {
-          backgroundColor: '#0f172a',
-          color: '#ffffff',
+          backgroundColor: '#eab308',
+          color: '#09090b',
           '&:hover': {
-            backgroundColor: '#1e293b',
-            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.2)',
+            backgroundColor: '#ca8a04',
           },
         },
         containedSuccess: {
-          backgroundColor: '#10b981',
+          backgroundColor: '#22c55e',
           color: '#ffffff',
           '&:hover': {
-            backgroundColor: '#059669',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.25)',
+            backgroundColor: '#16a34a',
+            boxShadow: '0 4px 12px rgba(34, 197, 94, 0.25)',
           },
         },
         outlined: {
-          borderColor: '#cbd5e1',
-          color: '#1e293b',
+          borderColor: '#e4e4e7',
+          color: '#09090b',
           backgroundColor: '#ffffff',
           '&:hover': {
-            borderColor: '#94a3b8',
-            backgroundColor: '#f8fafc',
+            borderColor: '#18181b',
+            backgroundColor: '#fafafa',
           },
         },
       },
@@ -191,13 +203,13 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 14,
-          border: '1px solid #e2e8f0',
+          borderRadius: 16, // --radius-soft-card: 16px
+          border: '1px solid #e4e4e7',
           backgroundColor: '#ffffff',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04)',
-          transition: 'box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms cubic-bezier(0.16, 1, 0.3, 1)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+          transition: 'box-shadow 270ms cubic-bezier(0.16, 1, 0.3, 1), border-color 270ms cubic-bezier(0.16, 1, 0.3, 1)',
           '&:hover': {
-            boxShadow: '0 4px 14px -2px rgba(0, 0, 0, 0.07)',
+            boxShadow: '0 8px 24px -4px rgba(0, 0, 0, 0.08)',
           },
         },
       },
@@ -215,19 +227,19 @@ export const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 14,
+          borderRadius: 16,
         },
         elevation1: {
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
         },
       },
     },
     MuiDialog: {
       styleOverrides: {
         paper: {
-          borderRadius: 20,
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+          borderRadius: 24, // --radius-modal-overlay: 24px
+          border: '1px solid #e4e4e7',
+          boxShadow: '0 8px 24px -4px rgba(0, 0, 0, 0.1)',
         },
       },
     },
@@ -235,7 +247,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 9999,
-          height: 25,
+          height: 24,
           fontSize: '0.74rem',
           fontWeight: 600,
         },
@@ -244,53 +256,53 @@ export const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 10,
+          borderRadius: 9999,
           fontSize: '0.84rem',
           backgroundColor: '#ffffff',
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#cbd5e1',
-            transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            borderColor: '#e4e4e7',
+            transition: 'border-color 180ms cubic-bezier(0.16, 1, 0.3, 1)',
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#94a3b8',
+            borderColor: '#a1a1aa',
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#2563eb',
+            borderColor: '#18181b',
             borderWidth: 1.5,
           },
         },
         input: {
-          padding: '9px 14px',
+          padding: '9px 16px',
         },
       },
     },
     MuiTableCell: {
       styleOverrides: {
         head: {
-          backgroundColor: '#f8fafc',
+          backgroundColor: '#fafafa',
           fontWeight: 700,
-          color: '#475569',
+          color: '#71717a',
           fontSize: '0.72rem',
           textTransform: 'uppercase',
           letterSpacing: '0.04em',
           padding: '10px 14px',
-          borderBottom: '1px solid #e2e8f0',
+          borderBottom: '1px solid #e4e4e7',
           fontFamily: 'Inter, sans-serif',
         },
         root: {
           padding: '10px 14px',
           fontSize: '0.84rem',
-          borderBottom: '1px solid #e2e8f0',
-          color: '#1e293b',
+          borderBottom: '1px solid #e4e4e7',
+          color: '#09090b',
         },
       },
     },
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: '#2563eb',
-          height: 3,
-          borderRadius: 3,
+          backgroundColor: '#18181b',
+          height: 2.5,
+          borderRadius: 2,
         },
       },
     },
@@ -300,9 +312,9 @@ export const theme = createTheme({
           textTransform: 'none',
           fontWeight: 600,
           fontSize: '0.84rem',
-          color: '#64748b',
+          color: '#71717a',
           '&.Mui-selected': {
-            color: '#2563eb',
+            color: '#18181b',
             fontWeight: 700,
           },
         },
@@ -311,32 +323,38 @@ export const theme = createTheme({
     MuiListItemButton: {
       styleOverrides: {
         root: {
-          borderRadius: 10,
-          transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+          borderRadius: 9999,
+          color: '#71717a',
+          transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+          '& .MuiListItemIcon-root': {
+            color: '#71717a',
+            transition: 'color 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+          },
           '&.Mui-selected': {
-            backgroundColor: '#eff6ff',
-            color: '#1d4ed8',
-            border: '1px solid #bfdbfe',
+            backgroundColor: '#18181b !important',
+            color: '#ffffff !important',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.18)',
             '& .MuiTypography-root': {
-              color: '#1d4ed8',
+              color: '#ffffff !important',
               fontWeight: 600,
             },
             '& .MuiListItemText-primary': {
-              color: '#1d4ed8',
+              color: '#ffffff !important',
               fontWeight: 600,
             },
             '& .MuiListItemIcon-root': {
-              color: '#2563eb',
+              color: '#eab308 !important', // ReUI Gold Highlight for active icon!
             },
             '&:hover': {
-              backgroundColor: '#dbeafe',
+              backgroundColor: '#27272a !important',
+              color: '#ffffff !important',
             },
           },
           '&:hover': {
-            backgroundColor: '#f1f5f9',
-            color: '#0f172a',
+            backgroundColor: '#f4f4f5',
+            color: '#09090b',
             '& .MuiListItemIcon-root': {
-              color: '#0f172a',
+              color: '#09090b',
             },
           },
         },

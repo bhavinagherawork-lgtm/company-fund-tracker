@@ -219,7 +219,7 @@ export const UsersPage: React.FC = () => {
   const getRoleColor = (userRole: UserRole) => {
     switch (userRole) {
       case 'Admin':
-        return { bg: '#dbeafe', color: '#1e40af', border: '#bfdbfe' };
+        return { bg: '#18181b', color: '#eab308', border: '#18181b' };
       case 'Manager':
         return { bg: '#fefce8', color: '#a16207', border: '#fef08a' };
       case 'Accountant':
@@ -258,12 +258,12 @@ export const UsersPage: React.FC = () => {
             fontWeight: 700,
             px: 1.5,
             borderRadius: '9999px',
-            bgcolor: '#2563eb',
+            bgcolor: '#18181b',
             color: '#ffffff',
             height: 30,
             fontSize: '0.75rem',
             textTransform: 'none',
-            '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' },
+            '&:hover': { bgcolor: '#27272a' },
           }}
         >
           Add New User
@@ -273,15 +273,15 @@ export const UsersPage: React.FC = () => {
       {/* Mandatory User Requirement Notice Banner */}
       <Alert
         severity="info"
-        icon={<ShieldIcon sx={{ fontSize: 18, color: '#2563eb' }} />}
+        icon={<ShieldIcon sx={{ fontSize: 18, color: '#eab308' }} />}
         sx={{
           mb: 1.8,
           borderRadius: '16px',
           py: 0.5,
           fontSize: '0.76rem',
-          bgcolor: '#eff6ff',
-          color: '#1e3a8a',
-          border: '1px solid #bfdbfe',
+          bgcolor: '#fafafa',
+          color: '#09090b',
+          border: '1px solid #e4e4e7',
         }}
       >
         <strong>Mandatory User Policy:</strong> At least one User entry is strictly mandatory in the User table. The system enforces continuous data integrity and blocks deleting the final active user.
@@ -718,7 +718,7 @@ export const UsersPage: React.FC = () => {
           </DialogContent>
 
           <DialogActions sx={{ px: 3, pb: 2, borderTop: '1px solid #e2e8f0', gap: 1 }}>
-            <Button onClick={() => setOpenModal(false)} disabled={saving} size="small" sx={{ fontWeight: 600 }}>
+            <Button onClick={() => setOpenModal(false)} disabled={saving} size="small" sx={{ fontWeight: 600, borderRadius: '9999px', textTransform: 'none' }}>
               Cancel
             </Button>
             <Button
@@ -726,7 +726,7 @@ export const UsersPage: React.FC = () => {
               variant="contained"
               disabled={saving}
               size="small"
-              sx={{ bgcolor: '#2563eb', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#1d4ed8' } }}
+              sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 700, px: 2, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}
             >
               {saving ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
             </Button>

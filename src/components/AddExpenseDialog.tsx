@@ -373,7 +373,7 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
         </DialogContent>
 
         <DialogActions sx={{ p: 2 }}>
-          <Button onClick={onClose} color="inherit" disabled={loading}>
+          <Button onClick={onClose} color="inherit" disabled={loading} sx={{ borderRadius: '9999px', textTransform: 'none' }}>
             Cancel
           </Button>
           <Button
@@ -382,9 +382,11 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
             disabled={loading}
             sx={{
               fontWeight: 700,
-              bgcolor: isEditing ? '#2563eb' : '#ef4444',
+              borderRadius: '9999px',
+              textTransform: 'none',
+              bgcolor: isEditing ? '#18181b' : '#ef4444',
               color: '#ffffff',
-              '&:hover': { bgcolor: isEditing ? '#1d4ed8' : '#dc2626' },
+              '&:hover': { bgcolor: isEditing ? '#27272a' : '#dc2626' },
             }}
           >
             {loading ? 'Saving...' : isEditing ? 'Save Changes' : 'Record Expense'}

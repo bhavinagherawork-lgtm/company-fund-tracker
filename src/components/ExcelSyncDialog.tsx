@@ -337,7 +337,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
     <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <TableChartIcon sx={{ color: '#2563eb' }} />
+          <TableChartIcon sx={{ color: '#eab308' }} />
           <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif' }}>
             Excel & Google Sheets 2-Way Live Sync
           </Typography>
@@ -412,7 +412,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                   startIcon={syncState.googleSheetSyncing ? <CircularProgress size={16} color="inherit" /> : <SyncIcon />}
                   onClick={handleSyncAppsScript}
                   disabled={busy || syncState.googleSheetSyncing}
-                  sx={{ height: 40, bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
+                  sx={{ height: 40, bgcolor: '#18181b', color: '#ffffff', fontWeight: 700, borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}
                 >
                   {syncState.googleSheetSyncing ? 'Syncing...' : 'Sync All Months'}
                 </Button>
@@ -427,8 +427,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LinkIcon sx={{ color: '#2563eb', fontSize: 20 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0f172a' }}>
+              <LinkIcon sx={{ color: '#eab308', fontSize: 20 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
                 1. Local Excel File Direct Sync (Two-Way)
               </Typography>
             </Box>
@@ -481,7 +481,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<CloudUploadIcon />}
                     onClick={handleSaveNow}
                     disabled={busy || syncState.isSyncing}
-                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
+                    sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 700, borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}
                   >
                     Save UI to Excel Now
                   </Button>
@@ -491,7 +491,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<SyncIcon />}
                     onClick={handleReadFromExcel}
                     disabled={busy || syncState.isSyncing}
-                    sx={{ fontWeight: 700 }}
+                    sx={{ fontWeight: 700, borderRadius: '9999px' }}
                   >
                     Read & Sync from Excel (Vice-Versa)
                   </Button>
@@ -500,7 +500,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     color="inherit"
                     onClick={handleConnectNew}
                     disabled={busy}
-                    sx={{ fontSize: '0.75rem' }}
+                    sx={{ fontSize: '0.75rem', borderRadius: '9999px' }}
                   >
                     Change File...
                   </Button>
@@ -517,7 +517,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<LinkIcon />}
                     onClick={handleConnectNew}
                     disabled={busy || !isSupported}
-                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
+                    sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 700, borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}
                   >
                     Connect New / Existing Excel File
                   </Button>
@@ -662,8 +662,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         {/* Section 4: Two-Sheet Excel Export Format */}
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-            <FileDownloadIcon sx={{ color: '#2563eb', fontSize: 20 }} />
-            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0f172a' }}>
+            <FileDownloadIcon sx={{ color: '#eab308', fontSize: 20 }} />
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
               4. Two-Sheet Excel Architecture (OverAll & Details)
             </Typography>
           </Box>
@@ -702,7 +702,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             onClick={handleDownloadMaster}
             disabled={busy}
             fullWidth
-            sx={{ fontWeight: 700, borderColor: '#2563eb', color: '#2563eb', py: 1, '&:hover': { bgcolor: '#eff6ff', borderColor: '#1d4ed8' } }}
+            sx={{ fontWeight: 700, borderColor: '#18181b', color: '#18181b', borderRadius: '9999px', py: 1, '&:hover': { bgcolor: '#fafafa', borderColor: '#18181b' } }}
           >
             Download Complete Master 2-Sheet Excel (.xlsx)
           </Button>
@@ -710,7 +710,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
-        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#2563eb', color: '#ffffff', '&:hover': { bgcolor: '#1d4ed8' } }}>
+        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#18181b', color: '#ffffff', borderRadius: '9999px', '&:hover': { bgcolor: '#27272a' } }}>
           Done
         </Button>
       </DialogActions>

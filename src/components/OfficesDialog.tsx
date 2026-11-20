@@ -240,7 +240,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                       setEditingOffice(null);
                     }}
                     disabled={loading}
-                    sx={{ fontSize: '0.75rem', fontWeight: 600 }}
+                    sx={{ fontSize: '0.75rem', fontWeight: 600, borderRadius: '9999px', textTransform: 'none' }}
                   >
                     Cancel
                   </Button>
@@ -249,7 +249,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                     variant="contained"
                     size="small"
                     disabled={loading}
-                    sx={{ bgcolor: '#2563eb', color: '#ffffff', fontSize: '0.75rem', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
+                    sx={{ bgcolor: '#18181b', color: '#ffffff', fontSize: '0.75rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}
                   >
                     {loading ? <CircularProgress size={14} color="inherit" /> : editingOffice ? 'Update Office' : 'Save Office'}
                   </Button>
@@ -267,7 +267,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
               variant="contained"
               startIcon={<AddIcon sx={{ fontSize: 15 }} />}
               onClick={handleOpenAdd}
-              sx={{ bgcolor: '#2563eb', color: '#ffffff', height: 28, fontSize: '0.72rem', fontWeight: 700, '&:hover': { bgcolor: '#1d4ed8' } }}
+              sx={{ bgcolor: '#18181b', color: '#ffffff', height: 28, fontSize: '0.72rem', fontWeight: 700, borderRadius: '9999px', textTransform: 'none', '&:hover': { bgcolor: '#27272a' } }}
             >
               Add Office
             </Button>

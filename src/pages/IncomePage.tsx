@@ -280,11 +280,11 @@ export const IncomePage: React.FC = () => {
               fontWeight: 600,
               px: 1.8,
               borderRadius: '9999px',
-              bgcolor: '#10b981',
+              bgcolor: '#22c55e',
               color: '#ffffff',
               height: 34,
               fontSize: '0.78rem',
-              '&:hover': { bgcolor: '#059669', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.25)' }
+              '&:hover': { bgcolor: '#16a34a', boxShadow: '0 4px 12px rgba(34, 197, 94, 0.25)' }
             }}
           >
             Add Income
