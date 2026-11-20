@@ -134,11 +134,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
   ].filter((item) => hasPermission(currentUser?.role, item.permission));
 
   const currentTabInfo = TAB_TITLES[activeTab] || { title: activeTab, subtitle: 'Operations & Fund Manager' };
-  const sidebarWidth = sidebarCollapsed ? 72 : 240;
+  const sidebarWidth = sidebarCollapsed ? 60 : 208;
 
-  // Sidebar List Content (ReUI Component Navigation)
+  // Sidebar List Content (ReUI Component Navigation - Compact)
   const renderNavList = (isDrawer = false) => (
-    <List sx={{ px: 1.2, py: 1.5, flexGrow: 1 }}>
+    <List sx={{ px: 0.8, py: 0.8, flexGrow: 1 }}>
       {navItems.map((item) => {
         const isSelected = activeTab === item.id;
         const button = (
@@ -150,9 +150,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             }}
             sx={{
               borderRadius: '9999px',
-              mb: 0.6,
-              py: 0.85,
-              px: !isDrawer && sidebarCollapsed ? 1.5 : 1.8,
+              mb: 0.25,
+              py: 0.45,
+              px: !isDrawer && sidebarCollapsed ? 1.0 : 1.4,
+              minHeight: 32,
               justifyContent: !isDrawer && sidebarCollapsed ? 'center' : 'flex-start',
               bgcolor: isSelected ? '#2563eb !important' : 'transparent',
               color: isSelected ? '#ffffff !important' : '#4d4d4d',
@@ -190,10 +191,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           >
             <ListItemIcon
               sx={{
-                minWidth: !isDrawer && sidebarCollapsed ? 0 : 34,
+                minWidth: !isDrawer && sidebarCollapsed ? 0 : 28,
                 color: isSelected ? '#ffffff !important' : '#4d4d4d',
                 justifyContent: 'center',
                 transition: 'color 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                '& .MuiSvgIcon-root': {
+                  fontSize: 18,
+                },
               }}
             >
               {item.icon}
@@ -203,7 +207,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 primary={item.text}
                 primaryTypographyProps={{
                   sx: {
-                    fontSize: '0.84rem',
+                    fontSize: '0.78rem',
                     fontWeight: isSelected ? 600 : 500,
                     letterSpacing: '-0.01em',
                     color: isSelected ? '#ffffff !important' : '#4d4d4d',
@@ -253,9 +257,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
           {/* Sidebar Brand Header */}
           <Box
             sx={{
-              height: 60,
-              minHeight: 60,
-              px: sidebarCollapsed ? 1.5 : 2.2,
+              height: 46,
+              minHeight: 46,
+              px: sidebarCollapsed ? 1.0 : 1.6,
               borderBottom: '1px solid #e6e6e6',
               display: 'flex',
               alignItems: 'center',
@@ -267,25 +271,25 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 1.4,
+                gap: 1.0,
                 cursor: 'pointer',
                 overflow: 'hidden',
               }}
             >
               <Box
                 sx={{
-                  width: 34,
-                  height: 34,
-                  minWidth: 34,
-                  borderRadius: '10px',
+                  width: 28,
+                  height: 28,
+                  minWidth: 28,
+                  borderRadius: '8px',
                   bgcolor: '#2563eb', // User Primary Blue
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+                  boxShadow: '0 2px 6px rgba(37, 99, 235, 0.22)',
                 }}
               >
-                <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 20 }} />
+                <AccountBalanceWalletIcon sx={{ color: '#ffffff', fontSize: 16 }} />
               </Box>
               {!sidebarCollapsed && (
                 <Box sx={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
@@ -293,9 +297,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     variant="subtitle1"
                     sx={{
                       fontWeight: 700,
-                      lineHeight: 1.15,
+                      lineHeight: 1.1,
                       color: '#1a1a1a',
-                      fontSize: '0.98rem',
+                      fontSize: '0.88rem',
                       fontFamily: '"Space Grotesk", sans-serif',
                       letterSpacing: '-0.02em',
                     }}
@@ -306,7 +310,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     variant="caption"
                     sx={{
                       color: '#4d4d4d',
-                      fontSize: '0.66rem',
+                      fontSize: '0.62rem',
                       display: 'block',
                       fontWeight: 600,
                       letterSpacing: '0.04em',
@@ -412,25 +416,25 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
         >
           <Toolbar
             sx={{
-              minHeight: '60px !important',
-              height: 60,
-              px: { xs: 1.5, sm: 2.2, md: 3 },
+              minHeight: '46px !important',
+              height: 46,
+              px: { xs: 1.2, sm: 1.8, md: 2.2 },
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: 1.5,
+              gap: 1.0,
               width: '100%',
             }}
           >
             {/* Left: Mobile Toggle & Page Context Title */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.4, minWidth: 0 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.0, minWidth: 0 }}>
               {isMobile ? (
                 <IconButton
                   color="inherit"
                   edge="start"
                   size="small"
                   onClick={() => setMobileMenuOpen(true)}
-                  sx={{ color: '#1a1a1a' }}
+                  sx={{ color: '#1a1a1a', p: 0.5 }}
                 >
                   <MenuIcon fontSize="small" />
                 </IconButton>
@@ -438,19 +442,19 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                 <IconButton
                   size="small"
                   onClick={toggleSidebarCollapse}
-                  sx={{ color: '#4d4d4d', '&:hover': { color: '#1a1a1a', bgcolor: '#f3f4f6' } }}
+                  sx={{ color: '#4d4d4d', p: 0.5, '&:hover': { color: '#1a1a1a', bgcolor: '#f3f4f6' } }}
                   title={sidebarCollapsed ? 'Expand Menu' : 'Collapse Menu'}
                 >
                   {sidebarCollapsed ? <MenuIcon fontSize="small" /> : <MenuOpenIcon fontSize="small" />}
                 </IconButton>
               )}
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0, overflow: 'hidden' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8, minWidth: 0, overflow: 'hidden' }}>
                 <Typography
                   variant="h6"
                   sx={{
                     fontWeight: 700,
-                    fontSize: { xs: '0.92rem', sm: '1.05rem' },
+                    fontSize: { xs: '0.86rem', sm: '0.96rem' },
                     color: '#1a1a1a',
                     fontFamily: '"Space Grotesk", sans-serif',
                     letterSpacing: '-0.02em',
@@ -465,7 +469,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   sx={{
                     color: '#4d4d4d',
                     display: { xs: 'none', xl: 'inline' },
-                    fontSize: '0.74rem',
+                    fontSize: '0.7rem',
                     fontWeight: 500,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -478,12 +482,12 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
 
               {selectedOfficeId !== 'ALL' && (
                 <Chip
-                  icon={<CorporateFareIcon sx={{ fontSize: '13px !important', color: '#2563eb !important' }} />}
+                  icon={<CorporateFareIcon sx={{ fontSize: '12px !important', color: '#2563eb !important' }} />}
                   label={selectedOffice?.name || 'Office'}
                   size="small"
                   sx={{
-                    height: 24,
-                    fontSize: '0.72rem',
+                    height: 20,
+                    fontSize: '0.68rem',
                     fontWeight: 600,
                     bgcolor: '#fafafa',
                     color: '#1a1a1a',
@@ -496,19 +500,19 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             </Box>
 
             {/* Right: Operational Controls & Tools (Office Switcher, Sync, Balance, Quick Actions, User) */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.8, sm: 1.2 }, flexShrink: 0 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.6, sm: 0.9 }, flexShrink: 0 }}>
               {/* Global Office Switcher */}
               <Tooltip title="Filter whole system by Office / Branch or manage branches">
                 <Button
                   size="small"
                   variant="outlined"
                   onClick={(e) => setOfficeMenuAnchor(e.currentTarget)}
-                  startIcon={<CorporateFareIcon sx={{ fontSize: 16, color: '#2563eb !important' }} />}
-                  endIcon={<KeyboardArrowDownIcon sx={{ fontSize: 14 }} />}
+                  startIcon={<CorporateFareIcon sx={{ fontSize: 14, color: '#2563eb !important' }} />}
+                  endIcon={<KeyboardArrowDownIcon sx={{ fontSize: 13 }} />}
                   sx={{
-                    height: 34,
-                    px: { xs: 1.2, sm: 1.6 },
-                    fontSize: '0.78rem',
+                    height: 28,
+                    px: { xs: 0.9, sm: 1.2 },
+                    fontSize: '0.74rem',
                     fontWeight: 600,
                     borderRadius: '9999px',
                     borderColor: '#e6e6e6',
@@ -521,7 +525,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     },
                   }}
                 >
-                  <Box component="span" sx={{ maxWidth: { xs: 90, sm: 140 }, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <Box component="span" sx={{ maxWidth: { xs: 90, sm: 130 }, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {selectedOfficeId === 'ALL' ? 'All Offices' : selectedOffice?.name || 'Office'}
                   </Box>
                 </Button>
@@ -627,9 +631,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   }
                   onClick={() => setOpenSyncModal(true)}
                   sx={{
-                    height: 34,
-                    px: { xs: 1.2, sm: 1.6 },
-                    fontSize: '0.78rem',
+                    height: 28,
+                    px: { xs: 0.9, sm: 1.2 },
+                    fontSize: '0.74rem',
                     fontWeight: 600,
                     borderRadius: '9999px',
                     borderColor: syncState.hasFileHandle ? '#bbf7d0' : '#e6e6e6',
@@ -654,10 +658,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               {/* Available Balance Pill (ReUI Style) */}
               {availableBalance !== null && (
                 <Chip
-                  icon={<AccountBalanceWalletIcon sx={{ color: '#16a34a !important', fontSize: '16px !important' }} />}
+                  icon={<AccountBalanceWalletIcon sx={{ color: '#16a34a !important', fontSize: '14px !important' }} />}
                   label={
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
-                      <Typography variant="caption" sx={{ color: '#4d4d4d', fontWeight: 600, fontSize: '0.72rem', display: { xs: 'none', lg: 'inline' } }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <Typography variant="caption" sx={{ color: '#4d4d4d', fontWeight: 600, fontSize: '0.68rem', display: { xs: 'none', lg: 'inline' } }}>
                         Balance:
                       </Typography>
                       <Typography
@@ -666,7 +670,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                           fontWeight: 700,
                           color: availableBalance >= 0 ? '#15803d' : '#dc2626',
                           fontFamily: '"Space Mono", monospace',
-                          fontSize: '0.82rem',
+                          fontSize: '0.78rem',
                           letterSpacing: '-0.02em',
                         }}
                       >
@@ -677,8 +681,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   sx={{
                     bgcolor: '#f0fdf4',
                     border: '1px solid #bbf7d0',
-                    height: 34,
-                    px: 1,
+                    height: 28,
+                    px: 0.8,
                     borderRadius: '9999px',
                   }}
                 />
@@ -688,16 +692,16 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               <Button
                 variant="contained"
                 size="small"
-                startIcon={<AddIcon sx={{ fontSize: 16 }} />}
+                startIcon={<AddIcon sx={{ fontSize: 14 }} />}
                 onClick={() => setOpenIncomeModal(true)}
                 sx={{
                   fontWeight: 600,
                   borderRadius: '9999px',
                   bgcolor: '#16a34a',
                   color: '#ffffff',
-                  height: 34,
-                  px: 1.8,
-                  fontSize: '0.78rem',
+                  height: 28,
+                  px: 1.4,
+                  fontSize: '0.74rem',
                   textTransform: 'none',
                   display: { xs: 'none', sm: 'inline-flex' },
                   '&:hover': { bgcolor: '#15803d', boxShadow: '0 4px 12px rgba(22, 163, 74, 0.25)' },
@@ -710,16 +714,16 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
               <Button
                 variant="contained"
                 size="small"
-                startIcon={<AddIcon sx={{ fontSize: 16 }} />}
+                startIcon={<AddIcon sx={{ fontSize: 14 }} />}
                 onClick={() => setOpenExpenseModal(true)}
                 sx={{
                   fontWeight: 600,
                   borderRadius: '9999px',
                   bgcolor: '#2563eb',
                   color: '#ffffff',
-                  height: 34,
-                  px: 1.8,
-                  fontSize: '0.78rem',
+                  height: 28,
+                  px: 1.4,
+                  fontSize: '0.74rem',
                   textTransform: 'none',
                   display: { xs: 'none', sm: 'inline-flex' },
                   '&:hover': { bgcolor: '#1d4ed8', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' },
@@ -736,9 +740,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 1,
+                      gap: 0.8,
                       cursor: 'pointer',
-                      p: '3px 10px 3px 4px',
+                      p: '2px 8px 2px 3px',
                       borderRadius: '9999px',
                       bgcolor: '#ffffff',
                       border: '1px solid #e6e6e6',
@@ -751,9 +755,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
                   >
                     <Avatar
                       sx={{
-                        width: 28,
-                        height: 28,
-                        fontSize: '0.72rem',
+                        width: 24,
+                        height: 24,
+                        fontSize: '0.68rem',
                         fontWeight: 700,
                         bgcolor: '#2563eb',
                         color: '#ffffff',
@@ -846,7 +850,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             width: '100%',
             maxWidth: '1600px',
             mx: 'auto',
-            p: { xs: 1.5, sm: 2.5, md: 3.2 },
+            p: { xs: 1.2, sm: 1.6, md: 2.0 },
             bgcolor: '#ffffff',
           }}
         >

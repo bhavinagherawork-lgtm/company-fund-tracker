@@ -238,30 +238,30 @@ export const IncomePage: React.FC = () => {
   return (
     <Box sx={{ pb: 3 }}>
       {/* Top Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2.2, flexWrap: 'wrap', gap: 1.5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
           <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
             Income & Fund Inflows
           </Typography>
-          <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.82rem', mt: 0.2 }}>
+          <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.76rem', mt: 0.1 }}>
             Record cash received from management, filter by date/week, and track balances
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 1.2, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           <Button
             variant="outlined"
             size="small"
-            startIcon={<TableChartIcon sx={{ fontSize: 16 }} />}
+            startIcon={<TableChartIcon sx={{ fontSize: 15 }} />}
             onClick={handleExportExcel}
             sx={{
               fontWeight: 600,
               borderRadius: '9999px',
               borderColor: '#e2e8f0',
               color: '#0f172a',
-              height: 34,
-              px: 1.6,
-              fontSize: '0.78rem',
+              height: 28,
+              px: 1.4,
+              fontSize: '0.74rem',
               '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' },
             }}
           >
@@ -271,19 +271,19 @@ export const IncomePage: React.FC = () => {
           <Button
             variant="contained"
             size="small"
-            startIcon={<AddIcon sx={{ fontSize: 16 }} />}
+            startIcon={<AddIcon sx={{ fontSize: 15 }} />}
             onClick={() => {
               setEditingIncome(null);
               setOpenAddModal(true);
             }}
             sx={{
               fontWeight: 600,
-              px: 1.8,
+              px: 1.4,
               borderRadius: '9999px',
               bgcolor: '#22c55e',
               color: '#ffffff',
-              height: 34,
-              fontSize: '0.78rem',
+              height: 28,
+              fontSize: '0.74rem',
               '&:hover': { bgcolor: '#16a34a', boxShadow: '0 4px 12px rgba(34, 197, 94, 0.25)' }
             }}
           >
@@ -293,30 +293,30 @@ export const IncomePage: React.FC = () => {
       </Box>
 
       {feedbackNotice && (
-        <Alert severity="success" onClose={() => setFeedbackNotice(null)} sx={{ mb: 2, borderRadius: '12px', py: 0.5, fontSize: '0.8rem' }}>
+        <Alert severity="success" onClose={() => setFeedbackNotice(null)} sx={{ mb: 1.5, borderRadius: '8px', py: 0.4, fontSize: '0.78rem' }}>
           {feedbackNotice}
         </Alert>
       )}
 
-      {/* KPI Cards (Reui Soft Card 16px Radius) */}
-      <Grid container spacing={2} sx={{ mb: 2 }}>
+      {/* KPI Cards (Reui Soft Card 12px Radius) */}
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
-            <CardContent sx={{ p: '18px 20px !important' }}>
+          <Card sx={{ borderRadius: '12px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Total Funds Inflow {periodPreset !== 'ALL' && '(Filtered)'}
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#22c55e', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#22c55e', mt: 0.2, fontFamily: '"Space Mono", monospace', fontSize: '1.2rem', letterSpacing: '-0.02em' }}>
                     {formatINR(totalInflow)}
                   </Typography>
                 </Box>
-                <Box sx={{ p: 1, bgcolor: 'rgba(34, 197, 94, 0.1)', borderRadius: '12px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
-                  <TrendingUpIcon sx={{ color: '#22c55e', fontSize: 22 }} />
+                <Box sx={{ p: 0.75, bgcolor: 'rgba(34, 197, 94, 0.1)', borderRadius: '8px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
+                  <TrendingUpIcon sx={{ color: '#22c55e', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Operational capital credited in selected scope
               </Typography>
             </CardContent>
@@ -324,22 +324,22 @@ export const IncomePage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
-            <CardContent sx={{ p: '18px 20px !important' }}>
+          <Card sx={{ borderRadius: '12px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Recorded Inflows
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.2, fontFamily: '"Space Mono", monospace', fontSize: '1.2rem', letterSpacing: '-0.02em' }}>
                     {filteredIncomes.length} Entries
                   </Typography>
                 </Box>
-                <Box sx={{ p: 1, bgcolor: '#eff6ff', borderRadius: '12px', border: '1px solid #bfdbfe' }}>
-                  <CheckCircleIcon sx={{ color: '#2563eb', fontSize: 22 }} />
+                <Box sx={{ p: 0.75, bgcolor: '#eff6ff', borderRadius: '8px', border: '1px solid #bfdbfe' }}>
+                  <CheckCircleIcon sx={{ color: '#2563eb', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Matching deposits ({uniqueActiveDays} active deposit days)
               </Typography>
             </CardContent>
@@ -347,22 +347,22 @@ export const IncomePage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
-            <CardContent sx={{ p: '18px 20px !important' }}>
+          <Card sx={{ borderRadius: '12px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Primary Source
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.6, fontSize: '1.2rem', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mt: 0.2, fontSize: '1.05rem', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Executive Transfer
                   </Typography>
                 </Box>
-                <Box sx={{ p: 1, bgcolor: 'rgba(234, 179, 8, 0.15)', borderRadius: '12px', border: '1px solid rgba(234, 179, 8, 0.3)' }}>
-                  <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
+                <Box sx={{ p: 0.75, bgcolor: 'rgba(234, 179, 8, 0.15)', borderRadius: '8px', border: '1px solid rgba(234, 179, 8, 0.3)' }}>
+                  <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Authorized office management funds
               </Typography>
             </CardContent>
@@ -370,9 +370,9 @@ export const IncomePage: React.FC = () => {
         </Grid>
       </Grid>
 
-      {/* FILTER BAR (Reui Soft Card 16px) */}
-      <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
-        <CardContent sx={{ p: '16px 20px !important' }}>
+      {/* FILTER BAR (Reui Soft Card 12px) */}
+      <Card sx={{ mb: 1.5, borderRadius: '12px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)' }}>
+        <CardContent sx={{ p: '8px 12px !important' }}>
           <Grid container spacing={1.5} sx={{ alignItems: 'center' }}>
             {/* 1. Search Box */}
             <Grid size={{ xs: 12, sm: 6, md: 3.5 }}>
@@ -495,7 +495,7 @@ export const IncomePage: React.FC = () => {
                 <Chip
                   label={`${filteredIncomes.length} found`}
                   size="small"
-                  sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 600, fontSize: '0.74rem', border: '1px solid #bbf7d0', borderRadius: '9999px' }}
+                  sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 600, fontSize: '0.68rem', border: '1px solid #bbf7d0', borderRadius: '9999px', height: 20 }}
                 />
               )}
               <Button
@@ -503,7 +503,7 @@ export const IncomePage: React.FC = () => {
                 color="inherit"
                 size="small"
                 onClick={handleResetFilters}
-                sx={{ height: 34, fontSize: '0.78rem', fontWeight: 600, borderColor: '#e2e8f0', color: '#0f172a', minWidth: 70, borderRadius: '9999px', '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' } }}
+                sx={{ height: 28, fontSize: '0.74rem', fontWeight: 600, borderColor: '#e2e8f0', color: '#0f172a', minWidth: 64, borderRadius: '9999px', '&:hover': { borderColor: '#2563eb', bgcolor: '#f8fafc' } }}
               >
                 Reset
               </Button>
@@ -512,27 +512,27 @@ export const IncomePage: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Incomes Data Table (16px Soft Card) */}
-      <Card sx={{ borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', overflow: 'hidden' }}>
+      {/* Incomes Data Table (12px Soft Card) */}
+      <Card sx={{ borderRadius: '12px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)', overflow: 'hidden' }}>
         <TableContainer>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ py: 1.1 }}>ID</TableCell>
-                <TableCell sx={{ py: 1.1 }}>DATE</TableCell>
-                <TableCell sx={{ py: 1.1 }}>RECEIVED FROM / SOURCE</TableCell>
-                <TableCell sx={{ py: 1.1 }}>PAYMENT MODE</TableCell>
-                <TableCell sx={{ py: 1.1 }}>REF / UTR NO</TableCell>
-                <TableCell sx={{ py: 1.1 }}>PURPOSE & REMARKS</TableCell>
-                <TableCell align="right" sx={{ py: 1.1 }}>AMOUNT</TableCell>
-                <TableCell align="center" sx={{ py: 1.1 }}>STATUS</TableCell>
-                <TableCell align="center" sx={{ py: 1.1 }}>ACTIONS</TableCell>
+                <TableCell sx={{ py: 0.6 }}>ID</TableCell>
+                <TableCell sx={{ py: 0.6 }}>DATE</TableCell>
+                <TableCell sx={{ py: 0.6 }}>RECEIVED FROM / SOURCE</TableCell>
+                <TableCell sx={{ py: 0.6 }}>PAYMENT MODE</TableCell>
+                <TableCell sx={{ py: 0.6 }}>REF / UTR NO</TableCell>
+                <TableCell sx={{ py: 0.6 }}>PURPOSE & REMARKS</TableCell>
+                <TableCell align="right" sx={{ py: 0.6 }}>AMOUNT</TableCell>
+                <TableCell align="center" sx={{ py: 0.6 }}>STATUS</TableCell>
+                <TableCell align="center" sx={{ py: 0.6 }}>ACTIONS</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredIncomes.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={9} align="center" sx={{ py: 4, color: '#71717a' }}>
+                  <TableCell colSpan={9} align="center" sx={{ py: 3, color: '#71717a' }}>
                     No fund inflow records match the filter criteria.
                   </TableCell>
                 </TableRow>
@@ -541,30 +541,30 @@ export const IncomePage: React.FC = () => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item) => (
                     <TableRow key={item.id} hover sx={{ '&:hover': { bgcolor: '#f8fafc' } }}>
-                      <TableCell sx={{ py: 0.9, fontSize: '0.78rem', color: '#71717a', fontFamily: '"Space Mono", monospace' }}>
+                      <TableCell sx={{ py: 0.6, fontSize: '0.74rem', color: '#71717a', fontFamily: '"Space Mono", monospace' }}>
                         #{String(item.id).padStart(3, '0')}
                       </TableCell>
-                      <TableCell sx={{ py: 0.9, fontSize: '0.8rem', fontWeight: 600 }}>{formatDate(item.transactionDate)}</TableCell>
-                      <TableCell sx={{ py: 0.9 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0f172a', fontSize: '0.84rem' }}>
+                      <TableCell sx={{ py: 0.6, fontSize: '0.76rem', fontWeight: 600 }}>{formatDate(item.transactionDate)}</TableCell>
+                      <TableCell sx={{ py: 0.6 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0f172a', fontSize: '0.8rem' }}>
                           {item.receivedFrom}
                         </Typography>
                         <Chip
-                          icon={<CorporateFareIcon sx={{ fontSize: '11px !important', color: '#71717a !important' }} />}
+                          icon={<CorporateFareIcon sx={{ fontSize: '10px !important', color: '#71717a !important' }} />}
                           label={item.officeName || 'Head Office'}
                           size="small"
-                          sx={{ bgcolor: '#f8fafc', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, mt: 0.3, borderRadius: '9999px' }}
+                          sx={{ bgcolor: '#f8fafc', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.62rem', height: 18, mt: 0.2, borderRadius: '9999px' }}
                         />
                       </TableCell>
-                      <TableCell sx={{ py: 0.9 }}>
+                      <TableCell sx={{ py: 0.6 }}>
                         <Chip
                           label={item.paymentMode}
                           size="small"
-                          sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 600, fontSize: '0.72rem', height: 22, borderRadius: '9999px', border: '1px solid #bfdbfe' }}
+                          sx={{ bgcolor: '#eff6ff', color: '#1d4ed8', fontWeight: 600, fontSize: '0.68rem', height: 20, borderRadius: '9999px', border: '1px solid #bfdbfe' }}
                         />
                       </TableCell>
-                      <TableCell sx={{ py: 0.9 }}>
-                        <Typography variant="body2" sx={{ fontFamily: '"Space Mono", monospace', color: '#71717a', fontSize: '0.78rem' }}>
+                      <TableCell sx={{ py: 0.6 }}>
+                        <Typography variant="body2" sx={{ fontFamily: '"Space Mono", monospace', color: '#71717a', fontSize: '0.74rem' }}>
                           {item.referenceNumber || '—'}
                         </Typography>
                       </TableCell>

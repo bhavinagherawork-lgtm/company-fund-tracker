@@ -25,10 +25,10 @@
 
   --radius-pill-button: 9999px;
   --radius-pill: 9999px;
-  --radius-soft-card: 16px;
-  --radius-card: 16px;
-  --radius-modal-overlay: 24px;
-  --radius-modal: 24px;
+  --radius-soft-card: 12px;
+  --radius-card: 12px;
+  --radius-modal-overlay: 16px;
+  --radius-modal: 16px;
 
   --shadow-subtle-float: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-elevated-card: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
@@ -140,7 +140,7 @@ code, pre, .font-mono, .currency-mono {
   background: var(--surface-container);
   border: 1px solid var(--structural-border);
   border-radius: var(--radius-soft-card);
-  padding: 24px;
+  padding: 14px;
   box-shadow: var(--shadow-subtle-float);
   transition: all var(--duration-normal) var(--ease-standard);
 }
@@ -152,8 +152,9 @@ code, pre, .font-mono, .currency-mono {
   background: var(--surface-container);
   border: 1px solid var(--structural-border);
   border-radius: var(--radius-pill-button);
-  height: 42px;
-  padding: 0 16px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.8rem;
   font-family: var(--font-body);
   color: var(--high-contrast-text);
   outline: none;

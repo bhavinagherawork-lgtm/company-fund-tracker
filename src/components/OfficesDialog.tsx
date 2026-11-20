@@ -173,35 +173,35 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
   };
 
   return (
-    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1, borderBottom: '1px solid #e6e6e6' }}>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "16px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.25, px: 2, borderBottom: '1px solid #e6e6e6' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <CorporateFareIcon sx={{ color: '#2563eb', fontSize: 20 }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', color: '#1a1a1a' }}>
+          <CorporateFareIcon sx={{ color: '#2563eb', fontSize: 18 }} />
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '0.92rem', color: '#1a1a1a' }}>
             Office & Branch Management
           </Typography>
         </Box>
         <IconButton size="small" onClick={onClose} sx={{ color: '#4d4d4d' }}>
-          <CloseIcon sx={{ fontSize: 18 }} />
+          <CloseIcon sx={{ fontSize: 16 }} />
         </IconButton>
       </DialogTitle>
 
-      <DialogContent sx={{ pt: 2 }}>
+      <DialogContent sx={{ p: 2 }}>
         {error && (
-          <Alert severity="error" sx={{ mb: 1.8, borderRadius: '9999px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setError(null)}>
+          <Alert severity="error" sx={{ mb: 1.5, borderRadius: '8px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setError(null)}>
             {error}
           </Alert>
         )}
         {successMsg && (
-          <Alert severity="success" sx={{ mb: 1.8, borderRadius: '9999px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setSuccessMsg(null)}>
+          <Alert severity="success" sx={{ mb: 1.5, borderRadius: '8px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setSuccessMsg(null)}>
             {successMsg}
           </Alert>
         )}
 
         {/* Add/Edit Form */}
         {isAdding ? (
-          <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #2563eb', bgcolor: '#f8fafc' }}>
-            <CardContent sx={{ p: '14px !important' }}>
+          <Card sx={{ mb: 1.5, borderRadius: '12px', border: '1px solid #2563eb', bgcolor: '#f8fafc' }}>
+            <CardContent sx={{ p: '10px 12px !important' }}>
               <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0f172a', fontSize: '0.85rem', mb: 1.5 }}>
                 {editingOffice ? `Edit Office: ${editingOffice.name}` : 'Add New Office / Branch'}
               </Typography>

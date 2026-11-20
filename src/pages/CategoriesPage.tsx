@@ -223,8 +223,8 @@ export const CategoriesPage: React.FC = () => {
           const count = cat.id !== undefined ? (categoryCounts[cat.id] || 0) : 0;
           return (
             <Grid key={cat.id || cat.code} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <Card sx={{ height: '100%', borderTop: `3px solid ${cat.color}`, borderRadius: '16px', transition: 'box-shadow 150ms ease', '&:hover': { boxShadow: '0 4px 12px rgba(0,0,0,0.06)' } }}>
-                <CardContent sx={{ p: '12px 14px !important' }}>
+              <Card sx={{ height: '100%', borderTop: `3px solid ${cat.color}`, borderRadius: '12px', transition: 'box-shadow 150ms ease', '&:hover': { boxShadow: '0 2px 8px rgba(0,0,0,0.05)' } }}>
+                <CardContent sx={{ p: '10px 12px !important' }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 0.8 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8 }}>
                       <Box

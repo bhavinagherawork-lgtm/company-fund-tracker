@@ -306,24 +306,24 @@ export const UsersPage: React.FC = () => {
       )}
 
       {/* KPI Cards (60-30-10 Highlighter Rule: Clean structural borders, reserved accents) */}
-      <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Total Users
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a', fontFamily: '"Space Mono", monospace', fontSize: '1.05rem', mt: 0.2 }}>
                     {totalUsersCount} Accounts
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.66rem', mt: 0.2, display: 'block' }}>
                     Enrolled system profiles
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px', border: '1px solid #bfdbfe' }}>
-                  <PeopleIcon sx={{ color: '#2563eb', fontSize: 18 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#eff6ff', borderRadius: '8px', border: '1px solid #bfdbfe' }}>
+                  <PeopleIcon sx={{ color: '#2563eb', fontSize: 16 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -331,22 +331,22 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Active Users
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.05rem', mt: 0.2 }}>
                     {activeUsersCount} Active
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.66rem', mt: 0.2, display: 'block' }}>
                     Permitted to authenticate
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#f0fdf4', borderRadius: '9999px' }}>
-                  <CheckCircleIcon sx={{ color: '#22c55e', fontSize: 18 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#f0fdf4', borderRadius: '8px' }}>
+                  <CheckCircleIcon sx={{ color: '#22c55e', fontSize: 16 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -354,22 +354,22 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Administrators
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#2563eb', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#2563eb', fontFamily: '"Space Mono", monospace', fontSize: '1.05rem', mt: 0.2 }}>
                     {adminCount} Admins
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.66rem', mt: 0.2, display: 'block' }}>
                     Full operational authority
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px' }}>
-                  <AdminPanelSettingsIcon sx={{ color: '#2563eb', fontSize: 18 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#eff6ff', borderRadius: '8px' }}>
+                  <AdminPanelSettingsIcon sx={{ color: '#2563eb', fontSize: 16 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -377,22 +377,22 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Policy Status
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', color: '#eab308', fontSize: '1.0rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', color: '#eab308', fontSize: '0.95rem', mt: 0.2 }}>
                     Mandatory 1+
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.66rem', mt: 0.2, display: 'block' }}>
                     Protected from zero users
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#fffbeb', borderRadius: '9999px' }}>
-                  <SecurityIcon sx={{ color: '#f59e0b', fontSize: 18 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#fffbeb', borderRadius: '8px' }}>
+                  <SecurityIcon sx={{ color: '#f59e0b', fontSize: 16 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -401,8 +401,8 @@ export const UsersPage: React.FC = () => {
       </Grid>
 
       {/* Filter & Search Toolbar */}
-      <Card sx={{ mb: 1.8, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
-        <CardContent sx={{ p: '10px 14px !important' }}>
+      <Card sx={{ mb: 1.5, borderRadius: '12px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+        <CardContent sx={{ p: '8px 12px !important' }}>
           <Grid container spacing={1.2} alignItems="center">
             {/* Search */}
             <Grid size={{ xs: 12, sm: 5, md: 5 }}>

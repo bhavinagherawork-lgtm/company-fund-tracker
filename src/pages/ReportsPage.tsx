@@ -308,15 +308,15 @@ export const ReportsPage: React.FC = () => {
           {/* Weekly Summary KPIs (60-30-10 Highlighter Rule) */}
           <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-                <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+                <CardContent sx={{ p: '8px 12px !important' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Total Weekly Expense
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.2, fontFamily: '"Space Mono", monospace', fontSize: '1.15rem' }}>
                     -{formatINR(weeklyReport.totalExpense)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                     Mon through Sun total outflow
                   </Typography>
                 </CardContent>
@@ -324,15 +324,15 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-                <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+                <CardContent sx={{ p: '8px 12px !important' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Total Inflow Received
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.2, fontFamily: '"Space Mono", monospace', fontSize: '1.15rem' }}>
                     +{formatINR(weeklyReport.totalIncome)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                     Funds credited during this week
                   </Typography>
                 </CardContent>
@@ -340,9 +340,9 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-                <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+                <CardContent sx={{ p: '8px 12px !important' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Net Cash Position
                   </Typography>
                   <Typography
@@ -350,14 +350,14 @@ export const ReportsPage: React.FC = () => {
                     sx={{
                       fontWeight: 800,
                       color: weeklyReport.netCashFlow >= 0 ? '#15803d' : '#ef4444',
-                      mt: 0.3,
+                      mt: 0.2,
                       fontFamily: '"Space Mono", monospace',
-                      fontSize: '1.25rem',
+                      fontSize: '1.15rem',
                     }}
                   >
                     {formatINR(weeklyReport.netCashFlow)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                     Inflow minus outflow difference
                   </Typography>
                 </CardContent>
@@ -368,13 +368,13 @@ export const ReportsPage: React.FC = () => {
           {/* Daily Breakdown Chart & Table */}
           <Grid container spacing={1.5}>
             <Grid size={{ xs: 12, lg: 7 }}>
-              <Card sx={{ height: '100%', borderRadius: '16px' }}>
-                <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.85rem', mb: 0.5 }}>
+              <Card sx={{ height: '100%', borderRadius: '12px' }}>
+                <CardContent sx={{ p: '10px 12px !important' }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.82rem', mb: 0.5 }}>
                     Day-by-Day Expenditure (Mon – Sun)
                   </Typography>
 
-                  <Box sx={{ width: '100%', height: 210 }}>
+                  <Box sx={{ width: '100%', height: 190 }}>
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={weeklyReport.dayBreakdown} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />

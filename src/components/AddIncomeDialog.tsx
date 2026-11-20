@@ -136,8 +136,8 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
   const isEditing = Boolean(incomeToEdit);
 
   return (
-    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "16px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ m: 0, py: 1.25, px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {isEditing ? <EditIcon color="primary" /> : <AccountBalanceWalletIcon color="success" />}
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
@@ -150,14 +150,14 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
       </DialogTitle>
 
       <form noValidate onSubmit={handleSubmit}>
-        <DialogContent dividers sx={{ p: 2.5 }}>
+        <DialogContent dividers sx={{ p: 2 }}>
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert severity="error" sx={{ mb: 1.5, py: 0.4 }}>
               {error}
             </Alert>
           )}
 
-          <Grid container spacing={2}>
+          <Grid container spacing={1.5}>
             <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label="Date"
@@ -317,7 +317,7 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
           </Grid>
         </DialogContent>
 
-        <DialogActions sx={{ p: 2 }}>
+        <DialogActions sx={{ px: 2, py: 1.25 }}>
           <Button onClick={onClose} color="inherit" disabled={loading}>
             Cancel
           </Button>

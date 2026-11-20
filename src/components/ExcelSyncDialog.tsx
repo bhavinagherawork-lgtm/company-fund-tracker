@@ -334,11 +334,11 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
   };
 
   return (
-    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "16px" } }} open={open} onClose={onClose} maxWidth="md" fullWidth>
+      <DialogTitle sx={{ m: 0, py: 1.25, px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <TableChartIcon sx={{ color: '#2563eb' }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '0.95rem' }}>
             Excel & Google Sheets 2-Way Live Sync
           </Typography>
         </Box>
@@ -347,15 +347,15 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         </IconButton>
       </DialogTitle>
 
-      <DialogContent dividers sx={{ p: 2.5 }}>
+      <DialogContent dividers sx={{ p: 2 }}>
         {notification && (
-          <Alert severity={notification.type} sx={{ mb: 2 }} onClose={() => setNotification(null)}>
+          <Alert severity={notification.type} sx={{ mb: 1.5, py: 0.4 }} onClose={() => setNotification(null)}>
             {notification.message}
           </Alert>
         )}
 
         {/* Section 0: Month-Wise Google Sheet & Multi-PC Cloud Sync */}
-        <Box sx={{ mb: 3, p: 2, bgcolor: '#f0fdf4', borderRadius: '16px', border: '1px solid #86efac' }}>
+        <Box sx={{ mb: 2, p: 1.5, bgcolor: '#f0fdf4', borderRadius: '12px', border: '1px solid #86efac' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <TableChartIcon sx={{ color: '#22c55e', fontSize: 22 }} />

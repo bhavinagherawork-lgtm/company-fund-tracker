@@ -460,24 +460,24 @@ export const ExpensesPage: React.FC = () => {
       )}
 
       {/* KPI Cards (Dynamically Filtered - 60-30-10 Highlighter Rule) */}
-      <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Total Posted Expenses {periodPreset !== 'ALL' && '(Filtered)'}
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.2, fontFamily: "Space Mono, monospace", fontSize: '1.15rem' }}>
                     {formatINR(totalCompleted)}
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fef2f2', borderRadius: '9999px' }}>
-                  <TrendingDownIcon sx={{ color: '#ef4444', fontSize: 20 }} />
+                <Box sx={{ p: 0.6, bgcolor: '#fef2f2', borderRadius: '8px' }}>
+                  <TrendingDownIcon sx={{ color: '#ef4444', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Operational deductions in selected scope
               </Typography>
             </CardContent>
@@ -485,22 +485,22 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Active Expense Days
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0f172a', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0f172a', mt: 0.2, fontFamily: "Space Mono, monospace", fontSize: '1.15rem' }}>
                     {totalFilteredActiveDays} Days
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#eff6ff', borderRadius: '16px', border: '1px solid #bfdbfe' }}>
-                  <CalendarMonthIcon sx={{ color: '#2563eb', fontSize: 20 }} />
+                <Box sx={{ p: 0.6, bgcolor: '#eff6ff', borderRadius: '8px', border: '1px solid #bfdbfe' }}>
+                  <CalendarMonthIcon sx={{ color: '#2563eb', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Calendar days with matching expenses
               </Typography>
             </CardContent>
@@ -508,22 +508,22 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '12px' }}>
+            <CardContent sx={{ p: '8px 12px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.66rem', textTransform: 'uppercase' }}>
                     Matching Transactions
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.2, fontFamily: "Space Mono, monospace", fontSize: '1.15rem' }}>
                     {filteredExpenses.length} Records
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#f8fafc', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
-                  <ReceiptLongIcon sx={{ color: '#22c55e', fontSize: 20 }} />
+                <Box sx={{ p: 0.6, bgcolor: '#f8fafc', borderRadius: '8px', border: '1px solid #e4e4e7' }}>
+                  <ReceiptLongIcon sx={{ color: '#22c55e', fontSize: 18 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.4, fontSize: '0.68rem' }}>
                 Audited expense vouchers in scope
               </Typography>
             </CardContent>
@@ -532,8 +532,8 @@ export const ExpensesPage: React.FC = () => {
       </Grid>
 
       {/* UNIFIED DATE, WEEK & CATEGORY FILTER BAR */}
-      <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
-        <CardContent sx={{ p: '12px 14px !important' }}>
+      <Card sx={{ mb: 1.5, borderRadius: '12px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+        <CardContent sx={{ p: '8px 12px !important' }}>
           <Grid container spacing={1.2} sx={{ alignItems: 'center' }}>
             {/* 1. Search Box */}
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -851,15 +851,15 @@ export const ExpensesPage: React.FC = () => {
                       <Card
                         key={dayGroup.date}
                         sx={{
-                          borderRadius: '16px',
+                          borderRadius: '12px',
                           border: '1px solid #e2e8f0',
-                          boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                           bgcolor: '#ffffff',
                           overflow: 'hidden',
                           transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
                           '&:hover': {
                             borderColor: '#d4d4d8',
-                            boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+                            boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
                           },
                         }}
                       >
@@ -870,7 +870,7 @@ export const ExpensesPage: React.FC = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            p: '9px 14px',
+                            p: '6px 12px',
                             cursor: 'pointer',
                             bgcolor: isExpanded ? '#f8fafc' : '#ffffff',
                             borderBottom: isExpanded ? '1px solid #e2e8f0' : 'none',
@@ -882,13 +882,13 @@ export const ExpensesPage: React.FC = () => {
                           }}
                         >
                           {/* Left: Mini Calendar Badge + Date & Item count */}
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
                             {/* Mini Calendar Square */}
                             <Box
                               sx={{
-                                width: 38,
-                                height: 38,
-                                borderRadius: '9999px',
+                                width: 32,
+                                height: 32,
+                                borderRadius: '8px',
                                 border: '1px solid #dbeafe',
                                 bgcolor: '#ffffff',
                                 display: 'flex',
@@ -896,15 +896,15 @@ export const ExpensesPage: React.FC = () => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 flexShrink: 0,
-                                boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
                               }}
                             >
                               <Typography
                                 sx={{
-                                  fontSize: '0.58rem',
+                                  fontSize: '0.52rem',
                                   fontWeight: 800,
                                   color: '#2563eb',
-                                  letterSpacing: '0.4px',
+                                  letterSpacing: '0.3px',
                                   lineHeight: 1,
                                 }}
                               >
@@ -912,7 +912,7 @@ export const ExpensesPage: React.FC = () => {
                               </Typography>
                               <Typography
                                 sx={{
-                                  fontSize: '0.95rem',
+                                  fontSize: '0.85rem',
                                   fontWeight: 800,
                                   color: '#0f172a',
                                   lineHeight: 1.1,
@@ -930,7 +930,7 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{
                                   fontWeight: 700,
                                   color: '#0f172a',
-                                  fontSize: '0.85rem',
+                                  fontSize: '0.8rem',
                                   lineHeight: 1.2,
                                 }}
                               >
@@ -940,11 +940,11 @@ export const ExpensesPage: React.FC = () => {
                                 variant="caption"
                                 sx={{
                                   color: '#71717a',
-                                  fontSize: '0.7rem',
+                                  fontSize: '0.66rem',
                                   display: 'flex',
                                   alignItems: 'center',
-                                  gap: 0.6,
-                                  mt: 0.2,
+                                  gap: 0.5,
+                                  mt: 0.1,
                                 }}
                               >
                                 <span>{dayGroup.dayOfWeek}</span>
@@ -955,7 +955,7 @@ export const ExpensesPage: React.FC = () => {
                           </Box>
 
                           {/* Right: Outflow pill + Expand/Collapse chevron */}
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Chip
                               label={`-${formatINR(dayGroup.totalAmount)}`}
                               size="small"
@@ -963,23 +963,23 @@ export const ExpensesPage: React.FC = () => {
                                 bgcolor: '#fef2f2',
                                 color: '#ef4444',
                                 fontWeight: 800,
-                                fontSize: '0.78rem',
+                                fontSize: '0.72rem',
                                 fontFamily: "Space Mono, monospace",
                                 border: '1px solid #fecaca',
-                                height: 26,
-                                px: 0.5,
+                                height: 22,
+                                px: 0.3,
                               }}
                             />
                             <IconButton
                               size="small"
                               sx={{
-                                p: 0.4,
+                                p: 0.3,
                                 color: '#71717a',
                                 transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                                 transition: 'transform 0.2s ease',
                               }}
                             >
-                              <ExpandMoreIcon sx={{ fontSize: 18 }} />
+                              <ExpandMoreIcon sx={{ fontSize: 16 }} />
                             </IconButton>
                           </Box>
                         </Box>
@@ -996,12 +996,12 @@ export const ExpensesPage: React.FC = () => {
                                 <Box
                                   key={exp.id || idx}
                                   sx={{
-                                    p: '9px 14px',
+                                    p: '6px 12px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     flexWrap: 'wrap',
-                                    gap: 1.5,
+                                    gap: 1.2,
                                     borderBottom: idx === dayGroup.expenses.length - 1 ? 'none' : '1px solid #f1f5f9',
                                     bgcolor: isVoided ? '#f8fafc' : '#ffffff',
                                     opacity: isVoided ? 0.65 : 1,
@@ -1012,12 +1012,12 @@ export const ExpensesPage: React.FC = () => {
                                   }}
                                 >
                                   {/* Left: Category Color Strip + Title + Subtitle + Meta Chips */}
-                                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, minWidth: 260, flex: '1 1 340px' }}>
+                                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 240, flex: '1 1 300px' }}>
                                     {/* Category Color Strip */}
                                     <Box
                                       sx={{
-                                        width: 3.5,
-                                        height: 36,
+                                        width: 3,
+                                        height: 28,
                                         borderRadius: '2px',
                                         bgcolor: catColor,
                                         flexShrink: 0,
@@ -1025,13 +1025,13 @@ export const ExpensesPage: React.FC = () => {
                                     />
 
                                     <Box sx={{ minWidth: 0, flex: 1 }}>
-                                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8, flexWrap: 'wrap' }}>
+                                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6, flexWrap: 'wrap' }}>
                                         <Typography
                                           variant="body2"
                                           sx={{
                                             fontWeight: 700,
                                             color: isVoided ? '#a1a1aa' : '#0f172a',
-                                            fontSize: '0.82rem',
+                                            fontSize: '0.78rem',
                                             textDecoration: isVoided ? 'line-through' : 'none',
                                           }}
                                         >
@@ -1249,7 +1249,7 @@ export const ExpensesPage: React.FC = () => {
 
               {/* VIEW STYLE 2: Compact Statement Ledger Table */}
               {dayViewStyle === 'compact' && (
-                <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff', overflow: 'hidden' }}>
+                <Card sx={{ borderRadius: '12px', border: '1px solid #e2e8f0', bgcolor: '#ffffff', overflow: 'hidden' }}>
                   <TableContainer>
                     <Table size="small">
                       <TableHead sx={{ bgcolor: '#f8fafc' }}>
@@ -1497,7 +1497,7 @@ export const ExpensesPage: React.FC = () => {
               )}
 
               {/* Day-Wise Pagination Bar */}
-              <Card sx={{ mt: 1.5, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+              <Card sx={{ mt: 1.5, borderRadius: '12px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
                 <TablePagination
                   component="div"
                   count={filteredDayWiseList.length}
@@ -1531,7 +1531,7 @@ export const ExpensesPage: React.FC = () => {
 
       {/* Tab 1: All Records Data Table */}
       {tabValue === 1 && (
-        <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+        <Card sx={{ borderRadius: '12px', border: '1px solid #e2e8f0' }}>
           <TableContainer>
             <Table size="small">
               <TableHead sx={{ bgcolor: '#f8fafc' }}>
