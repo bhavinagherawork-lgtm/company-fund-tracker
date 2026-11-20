@@ -182,7 +182,7 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
   const isEditing = Boolean(expenseToEdit);
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {isEditing ? <EditIcon color="primary" /> : <ReceiptIcon color="error" />}
@@ -341,7 +341,7 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
                   borderRadius: 2,
                   p: 2,
                   textAlign: 'center',
-                  bgcolor: '#f8fafc',
+                  bgcolor: '#fafafa',
                 }}
               >
                 <input
@@ -382,8 +382,8 @@ export const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({
             disabled={loading}
             sx={{
               fontWeight: 700,
-              bgcolor: isEditing ? '#0052ff' : '#dc2626',
-              '&:hover': { bgcolor: isEditing ? '#0042cc' : '#b91c1c' },
+              bgcolor: isEditing ? '#18181b' : '#ef4444',
+              '&:hover': { bgcolor: isEditing ? '#27272a' : '#dc2626' },
             }}
           >
             {loading ? 'Saving...' : isEditing ? 'Save Changes' : 'Record Expense'}

@@ -157,7 +157,7 @@ export const ReportsPage: React.FC = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-            <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.15rem' }}>
+            <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
               Financial Reports & Multi-Sheet Statements
             </Typography>
             {selectedOfficeId !== 'ALL' && (
@@ -182,13 +182,13 @@ export const ReportsPage: React.FC = () => {
             onClick={tabValue === 0 ? handleExportWeeklyExcel : handleExportMonthlyExcel}
             sx={{
               fontWeight: 800,
-              borderRadius: '6px',
-              bgcolor: '#0052ff',
+              borderRadius: '9999px',
+              bgcolor: '#18181b',
               color: '#ffffff',
               height: 30,
               px: 1.4,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#0042cc' },
+              '&:hover': { bgcolor: '#27272a' },
             }}
           >
             Export 2-Sheet Excel (.xlsx)
@@ -201,13 +201,13 @@ export const ReportsPage: React.FC = () => {
             onClick={handleExportMasterExcel}
             sx={{
               fontWeight: 700,
-              borderRadius: '6px',
-              borderColor: '#05b169',
-              color: '#05b169',
+              borderRadius: '9999px',
+              borderColor: '#22c55e',
+              color: '#22c55e',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { borderColor: '#048e54', bgcolor: '#f0fdf4' },
+              '&:hover': { borderColor: '#22c55e', bgcolor: '#f0fdf4' },
             }}
           >
             Export Master Excel
@@ -218,7 +218,7 @@ export const ReportsPage: React.FC = () => {
             size="small"
             startIcon={<DownloadIcon sx={{ fontSize: 15 }} />}
             onClick={handleExportCSV}
-            sx={{ fontWeight: 700, borderRadius: '6px', borderColor: '#e2e8f0', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e4e4e7', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
           >
             CSV
           </Button>
@@ -228,7 +228,7 @@ export const ReportsPage: React.FC = () => {
             size="small"
             startIcon={<PrintIcon sx={{ fontSize: 15 }} />}
             onClick={() => window.print()}
-            sx={{ fontWeight: 700, borderRadius: '6px', borderColor: '#e2e8f0', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#e4e4e7', color: '#5b616e', height: 30, px: 1, fontSize: '0.75rem' }}
           >
             Print
           </Button>
@@ -242,10 +242,10 @@ export const ReportsPage: React.FC = () => {
       )}
 
       {/* 2-Sheet Architecture Info Pill */}
-      <Card sx={{ p: 1.2, mb: 1.8, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #dbeafe' }}>
+      <Card sx={{ p: 1.2, mb: 1.8, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #dbeafe' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <TableChartIcon sx={{ color: '#0052ff', fontSize: 18 }} />
+            <TableChartIcon sx={{ color: '#18181b', fontSize: 18 }} />
             <Typography variant="body2" sx={{ fontWeight: 700, color: '#1e40af', fontSize: '0.8rem' }}>
               Two-Sheet Excel Architecture:
             </Typography>
@@ -253,7 +253,7 @@ export const ReportsPage: React.FC = () => {
               Every export generates <strong>Sheet 1: OverAll</strong> (Executive Summary & Category Breakdown) and <strong>Sheet 2: Details</strong> (Itemized rows with <strong>Day-Wise Opening Balance</strong> column).
             </Typography>
           </Box>
-          <Chip label="2 Sheets / 1 File" size="small" sx={{ bgcolor: '#0052ff', color: '#ffffff', fontWeight: 800, fontSize: '0.65rem', height: 20 }} />
+          <Chip label="2 Sheets / 1 File" size="small" sx={{ bgcolor: '#18181b', color: '#ffffff', fontWeight: 800, fontSize: '0.65rem', height: 20 }} />
         </Box>
       </Card>
 
@@ -269,20 +269,20 @@ export const ReportsPage: React.FC = () => {
       {tabValue === 0 && weeklyReport && (
         <Box>
           {/* Week Navigation Header */}
-          <Card sx={{ p: 1.2, mb: 1.5, bgcolor: '#ffffff', borderRadius: '8px' }}>
+          <Card sx={{ p: 1.2, mb: 1.5, bgcolor: '#ffffff', borderRadius: '16px' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
               <Button
                 variant="outlined"
                 size="small"
                 startIcon={<ArrowBackIcon sx={{ fontSize: 14 }} />}
                 onClick={() => setWeekOffset((prev) => prev + 1)}
-                sx={{ fontSize: '0.72rem', py: 0.3, px: 1, borderRadius: '6px' }}
+                sx={{ fontSize: '0.72rem', py: 0.3, px: 1, borderRadius: '9999px' }}
               >
                 Previous Week
               </Button>
 
               <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '0.88rem' }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#09090b', fontSize: '0.88rem' }}>
                   {weeklyReport.weekLabel}
                 </Typography>
                 <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem' }}>
@@ -297,7 +297,7 @@ export const ReportsPage: React.FC = () => {
                   endIcon={<ArrowForwardIcon sx={{ fontSize: 14 }} />}
                   disabled={weekOffset === 0}
                   onClick={() => setWeekOffset((prev) => Math.max(0, prev - 1))}
-                  sx={{ fontSize: '0.72rem', py: 0.3, px: 1, borderRadius: '6px' }}
+                  sx={{ fontSize: '0.72rem', py: 0.3, px: 1, borderRadius: '9999px' }}
                 >
                   Next Week
                 </Button>
@@ -308,12 +308,12 @@ export const ReportsPage: React.FC = () => {
           {/* Weekly Summary KPIs */}
           <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '8px' }}>
+              <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Weekly Expense
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#dc2626', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
                     -{formatINR(weeklyReport.totalExpense)}
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
@@ -324,12 +324,12 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '8px' }}>
+              <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Inflow Received
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#05b169', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
                     +{formatINR(weeklyReport.totalIncome)}
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
@@ -340,7 +340,7 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: `3px solid ${weeklyReport.netCashFlow >= 0 ? '#0052ff' : '#f59e0b'}`, borderRadius: '8px' }}>
+              <Card sx={{ borderLeft: `3px solid ${weeklyReport.netCashFlow >= 0 ? '#18181b' : '#f59e0b'}`, borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Net Cash Position
@@ -349,9 +349,9 @@ export const ReportsPage: React.FC = () => {
                     variant="h5"
                     sx={{
                       fontWeight: 800,
-                      color: weeklyReport.netCashFlow >= 0 ? '#0052ff' : '#d97706',
+                      color: weeklyReport.netCashFlow >= 0 ? '#18181b' : '#d97706',
                       mt: 0.3,
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: '"Space Mono", monospace',
                       fontSize: '1.25rem',
                     }}
                   >
@@ -368,7 +368,7 @@ export const ReportsPage: React.FC = () => {
           {/* Daily Breakdown Chart & Table */}
           <Grid container spacing={1.5}>
             <Grid size={{ xs: 12, lg: 7 }}>
-              <Card sx={{ height: '100%', borderRadius: '8px' }}>
+              <Card sx={{ height: '100%', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.85rem', mb: 0.5 }}>
                     Day-by-Day Expenditure (Mon – Sun)
@@ -382,7 +382,7 @@ export const ReportsPage: React.FC = () => {
                         <YAxis stroke="#5b616e" fontSize={10.5} tickLine={false} axisLine={false} tickFormatter={(v) => formatINRCompact(v)} />
                         <RechartsTooltip
                           formatter={(v: any) => [formatINR(Number(v)), 'Spent']}
-                          contentStyle={{ borderRadius: '6px', border: '1px solid #e2e8f0', fontSize: '12px' }}
+                          contentStyle={{ borderRadius: '9999px', border: '1px solid #e2e8f0', fontSize: '12px' }}
                         />
                         <Bar dataKey="amount" fill="#0052ff" radius={[3, 3, 0, 0]} maxBarSize={32} />
                       </BarChart>
@@ -393,7 +393,7 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, lg: 5 }}>
-              <Card sx={{ height: '100%', borderRadius: '8px' }}>
+              <Card sx={{ height: '100%', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.85rem', mb: 0.5 }}>
                     Day-Wise Audit Log
@@ -413,7 +413,7 @@ export const ReportsPage: React.FC = () => {
                           <TableRow key={row.date} hover>
                             <TableCell sx={{ fontWeight: 700, py: 0.6, fontSize: '0.78rem' }}>{row.day.split(' ')[0]}</TableCell>
                             <TableCell sx={{ py: 0.6, fontSize: '0.78rem' }}>{formatDate(row.date)}</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 700, color: row.amount > 0 ? '#dc2626' : '#94a3b8', py: 0.6, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem' }}>
+                            <TableCell align="right" sx={{ fontWeight: 700, color: row.amount > 0 ? '#ef4444' : '#a1a1aa', py: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '0.8rem' }}>
                               {row.amount > 0 ? `-${formatINR(row.amount)}` : '₹0.00'}
                             </TableCell>
                           </TableRow>
@@ -432,10 +432,10 @@ export const ReportsPage: React.FC = () => {
       {tabValue === 1 && monthlyReport && (
         <Box>
           {/* Executive Ledger Statement Card */}
-          <Card sx={{ mb: 1.5, p: 1.8, bgcolor: '#ffffff', borderRadius: '8px' }}>
+          <Card sx={{ mb: 1.5, p: 1.8, bgcolor: '#ffffff', borderRadius: '16px' }}>
             <Box sx={{ borderBottom: '1px solid #e2e8f0', pb: 1.2, mb: 1.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
               <Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.05rem' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b', fontSize: '1.05rem' }}>
                   Financial Statement: {monthlyReport.monthLabel}
                 </Typography>
                 <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.7rem' }}>
@@ -464,7 +464,7 @@ export const ReportsPage: React.FC = () => {
                   size="small"
                   startIcon={<TableChartIcon sx={{ fontSize: 15 }} />}
                   onClick={handleExportMonthlyExcel}
-                  sx={{ bgcolor: '#0052ff', fontWeight: 700, height: 32, fontSize: '0.75rem' }}
+                  sx={{ bgcolor: '#18181b', fontWeight: 700, height: 32, fontSize: '0.75rem' }}
                 >
                   Export {monthlyReport.monthLabel} Excel
                 </Button>
@@ -473,11 +473,11 @@ export const ReportsPage: React.FC = () => {
 
             <Grid container spacing={1.5}>
               <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ p: '10px 12px', bgcolor: '#f5f8ff', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                <Box sx={{ p: '10px 12px', bgcolor: '#fafafa', borderRadius: '9999px', border: '1px solid #e2e8f0' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     1. Opening Balance
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#0a0b0d', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.05rem' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#09090b', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.05rem' }}>
                     {formatINR(monthlyReport.openingBalance)}
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem' }}>
@@ -487,11 +487,11 @@ export const ReportsPage: React.FC = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ p: '10px 12px', bgcolor: '#f5f8ff', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                <Box sx={{ p: '10px 12px', bgcolor: '#fafafa', borderRadius: '9999px', border: '1px solid #e2e8f0' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     2. Funds Received
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#05b169', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.05rem' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.05rem' }}>
                     +{formatINR(monthlyReport.totalIncome)}
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem' }}>
@@ -501,11 +501,11 @@ export const ReportsPage: React.FC = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ p: '10px 12px', bgcolor: '#f5f8ff', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                <Box sx={{ p: '10px 12px', bgcolor: '#fafafa', borderRadius: '9999px', border: '1px solid #e2e8f0' }}>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     3. Total Expenses
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#dc2626', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.05rem' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.05rem' }}>
                     -{formatINR(monthlyReport.totalExpense)}
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem' }}>
@@ -515,14 +515,14 @@ export const ReportsPage: React.FC = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ p: '10px 12px', bgcolor: '#ecfdf5', borderRadius: '6px', border: '1px solid #a7f3d0' }}>
-                  <Typography variant="caption" sx={{ color: '#065f46', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                <Box sx={{ p: '10px 12px', bgcolor: '#f0fdf4', borderRadius: '9999px', border: '1px solid #a7f3d0' }}>
+                  <Typography variant="caption" sx={{ color: '#15803d', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     4. Closing Available Balance
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#05b169', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.05rem' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.05rem' }}>
                     {formatINR(monthlyReport.closingBalance)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#065f46', fontSize: '0.68rem' }}>
+                  <Typography variant="caption" sx={{ color: '#15803d', fontSize: '0.68rem' }}>
                     = (1) + (2) - (3)
                   </Typography>
                 </Box>
@@ -534,7 +534,7 @@ export const ReportsPage: React.FC = () => {
           <Grid container spacing={1.5}>
             {/* Category Expense Breakdown */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <Card sx={{ height: '100%', borderRadius: '8px' }}>
+              <Card sx={{ height: '100%', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.85rem', mb: 1 }}>
                     Category Expenditure Breakdown ({monthlyReport.monthLabel})
@@ -556,7 +556,7 @@ export const ReportsPage: React.FC = () => {
                             <Typography variant="body2" sx={{ fontWeight: 600, fontSize: '0.78rem' }}>
                               {cat.name} ({cat.count} tx)
                             </Typography>
-                            <Typography variant="body2" sx={{ fontWeight: 800, fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem' }}>
+                            <Typography variant="body2" sx={{ fontWeight: 800, fontFamily: '"Space Mono", monospace', fontSize: '0.78rem' }}>
                               {formatINR(cat.amount)} ({percentage}%)
                             </Typography>
                           </Box>
@@ -566,8 +566,8 @@ export const ReportsPage: React.FC = () => {
                             sx={{
                               height: 5,
                               borderRadius: 3,
-                              bgcolor: '#f1f5f9',
-                              '& .MuiLinearProgress-bar': { bgcolor: cat.color || '#0052ff', borderRadius: 3 },
+                              bgcolor: '#f4f4f5',
+                              '& .MuiLinearProgress-bar': { bgcolor: cat.color || '#18181b', borderRadius: 3 },
                             }}
                           />
                         </Box>
@@ -580,7 +580,7 @@ export const ReportsPage: React.FC = () => {
 
             {/* Top 10 Major Expenses */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <Card sx={{ height: '100%', borderRadius: '8px' }}>
+              <Card sx={{ height: '100%', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.85rem', mb: 1 }}>
                     Top Expense Items ({monthlyReport.monthLabel})
@@ -621,10 +621,10 @@ export const ReportsPage: React.FC = () => {
                                 <Chip
                                   label={item.categoryName || 'General'}
                                   size="small"
-                                  sx={{ fontSize: '0.65rem', height: 18, bgcolor: '#f5f8ff', color: '#0052ff', fontWeight: 600 }}
+                                  sx={{ fontSize: '0.65rem', height: 18, bgcolor: '#fafafa', color: '#18181b', fontWeight: 600 }}
                                 />
                               </TableCell>
-                              <TableCell align="right" sx={{ py: 0.6, fontWeight: 800, color: '#dc2626', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.78rem' }}>
+                              <TableCell align="right" sx={{ py: 0.6, fontWeight: 800, color: '#ef4444', fontFamily: '"Space Mono", monospace', fontSize: '0.78rem' }}>
                                 -{formatINR(item.amount)}
                               </TableCell>
                             </TableRow>

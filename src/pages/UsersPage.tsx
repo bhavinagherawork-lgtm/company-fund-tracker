@@ -225,7 +225,7 @@ export const UsersPage: React.FC = () => {
       case 'Accountant':
         return { bg: '#dcfce7', color: '#15803d', border: '#bbf7d0' };
       default:
-        return { bg: '#f1f5f9', color: '#475569', border: '#e2e8f0' };
+        return { bg: '#f4f4f5', color: '#71717a', border: '#e4e4e7' };
     }
   };
 
@@ -241,7 +241,7 @@ export const UsersPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.15rem' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             User Management & Access Control
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -257,13 +257,13 @@ export const UsersPage: React.FC = () => {
           sx={{
             fontWeight: 700,
             px: 1.5,
-            borderRadius: '6px',
-            bgcolor: '#0052ff',
+            borderRadius: '9999px',
+            bgcolor: '#18181b',
             color: '#ffffff',
             height: 30,
             fontSize: '0.75rem',
             textTransform: 'none',
-            '&:hover': { bgcolor: '#0042cc' },
+            '&:hover': { bgcolor: '#27272a' },
           }}
         >
           + Add New User
@@ -273,10 +273,10 @@ export const UsersPage: React.FC = () => {
       {/* Mandatory User Requirement Notice Banner */}
       <Alert
         severity="info"
-        icon={<ShieldIcon sx={{ fontSize: 18, color: '#0052ff' }} />}
+        icon={<ShieldIcon sx={{ fontSize: 18, color: '#18181b' }} />}
         sx={{
           mb: 1.8,
-          borderRadius: '8px',
+          borderRadius: '16px',
           py: 0.5,
           fontSize: '0.76rem',
           bgcolor: '#eff6ff',
@@ -291,7 +291,7 @@ export const UsersPage: React.FC = () => {
         <Alert
           severity={alertMessage.type}
           onClose={() => setAlertMessage(null)}
-          sx={{ mb: 1.8, borderRadius: '6px', py: 0.5, fontSize: '0.8rem' }}
+          sx={{ mb: 1.8, borderRadius: '9999px', py: 0.5, fontSize: '0.8rem' }}
         >
           {alertMessage.text}
         </Alert>
@@ -300,22 +300,22 @@ export const UsersPage: React.FC = () => {
       {/* KPI Cards */}
       <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Users
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#0a0b0d', fontFamily: 'JetBrains Mono, monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {totalUsersCount} Accounts
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Enrolled system profiles
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '6px' }}>
-                  <PeopleIcon sx={{ color: '#0052ff', fontSize: 18 }} />
+                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px' }}>
+                  <PeopleIcon sx={{ color: '#18181b', fontSize: 18 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -323,22 +323,22 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Active Users
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#05b169', fontFamily: 'JetBrains Mono, monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {activeUsersCount} Active
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Permitted to authenticate
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#ecfdf5', borderRadius: '6px' }}>
-                  <CheckCircleIcon sx={{ color: '#05b169', fontSize: 18 }} />
+                <Box sx={{ p: 0.8, bgcolor: '#f0fdf4', borderRadius: '9999px' }}>
+                  <CheckCircleIcon sx={{ color: '#22c55e', fontSize: 18 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -346,21 +346,21 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #7c3aed', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #7c3aed', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Administrators
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#7c3aed', fontFamily: 'JetBrains Mono, monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#7c3aed', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {adminCount} Admins
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Full operational authority
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#f5f3ff', borderRadius: '6px' }}>
+                <Box sx={{ p: 0.8, bgcolor: '#f5f3ff', borderRadius: '9999px' }}>
                   <AdminPanelSettingsIcon sx={{ color: '#7c3aed', fontSize: 18 }} />
                 </Box>
               </Box>
@@ -369,21 +369,21 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #f59e0b', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #f59e0b', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Policy Status
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#f59e0b', fontSize: '1.0rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', color: '#f59e0b', fontSize: '1.0rem', mt: 0.3 }}>
                     Mandatory 1+
                   </Typography>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Protected from zero users
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#fffbeb', borderRadius: '6px' }}>
+                <Box sx={{ p: 0.8, bgcolor: '#fffbeb', borderRadius: '9999px' }}>
                   <SecurityIcon sx={{ color: '#f59e0b', fontSize: 18 }} />
                 </Box>
               </Box>
@@ -393,7 +393,7 @@ export const UsersPage: React.FC = () => {
       </Grid>
 
       {/* Filter & Search Toolbar */}
-      <Card sx={{ mb: 1.8, borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+      <Card sx={{ mb: 1.8, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
         <CardContent sx={{ p: '10px 14px !important' }}>
           <Grid container spacing={1.2} alignItems="center">
             {/* Search */}
@@ -466,7 +466,7 @@ export const UsersPage: React.FC = () => {
                   setRoleFilter('ALL');
                   setStatusFilter('ALL');
                 }}
-                sx={{ height: 32, fontSize: '0.75rem', fontWeight: 600, borderColor: '#e2e8f0', minWidth: 64 }}
+                sx={{ height: 32, fontSize: '0.75rem', fontWeight: 600, borderColor: '#e4e4e7', minWidth: 64 }}
               >
                 Reset
               </Button>
@@ -476,28 +476,28 @@ export const UsersPage: React.FC = () => {
       </Card>
 
       {/* Users Table */}
-      <TableContainer component={Paper} sx={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: 'none' }}>
+      <TableContainer component={Paper} sx={{ borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: 'none' }}>
         <Table size="small">
-          <TableHead sx={{ bgcolor: '#f8fafc' }}>
+          <TableHead sx={{ bgcolor: '#fafafa' }}>
             <TableRow>
-              <TableCell sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>USER PROFILE</TableCell>
-              <TableCell sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>EMAIL ADDRESS</TableCell>
-              <TableCell sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>SECURITY ROLE</TableCell>
-              <TableCell sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>STATUS</TableCell>
-              <TableCell sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>LAST LOGIN</TableCell>
-              <TableCell align="center" sx={{ fontWeight: 800, color: '#475569', fontSize: '0.72rem', py: 1 }}>ACTIONS</TableCell>
+              <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>USER PROFILE</TableCell>
+              <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>EMAIL ADDRESS</TableCell>
+              <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>SECURITY ROLE</TableCell>
+              <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>STATUS</TableCell>
+              <TableCell sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>LAST LOGIN</TableCell>
+              <TableCell align="center" sx={{ fontWeight: 800, color: '#71717a', fontSize: '0.72rem', py: 1 }}>ACTIONS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#64748b' }}>
+                <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#71717a' }}>
                   <CircularProgress size={20} sx={{ mr: 1 }} /> Loading user profiles...
                 </TableCell>
               </TableRow>
             ) : filteredUsers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#64748b', fontSize: '0.8rem' }}>
+                <TableCell colSpan={6} align="center" sx={{ py: 3, color: '#71717a', fontSize: '0.8rem' }}>
                   No users found matching your search criteria.
                 </TableCell>
               </TableRow>
@@ -518,7 +518,7 @@ export const UsersPage: React.FC = () => {
                             height: 32,
                             fontSize: '0.75rem',
                             fontWeight: 800,
-                            bgcolor: u.role === 'Admin' ? '#0052ff' : '#64748b',
+                            bgcolor: u.role === 'Admin' ? '#18181b' : '#71717a',
                             color: '#ffffff',
                           }}
                         >
@@ -526,18 +526,18 @@ export const UsersPage: React.FC = () => {
                         </Avatar>
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.6 }}>
-                            <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.82rem' }}>
+                            <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.82rem' }}>
                               {u.fullName}
                             </Typography>
                             {isCurrent && (
                               <Chip
                                 label="YOU"
                                 size="small"
-                                sx={{ bgcolor: '#ecfdf5', color: '#065f46', fontWeight: 800, fontSize: '0.58rem', height: 16 }}
+                                sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 800, fontSize: '0.58rem', height: 16 }}
                               />
                             )}
                           </Box>
-                          <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.7rem', display: 'block', fontFamily: 'JetBrains Mono, monospace' }}>
+                          <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.7rem', display: 'block', fontFamily: '"Space Mono", monospace' }}>
                             @{u.username}
                           </Typography>
                         </Box>
@@ -545,8 +545,8 @@ export const UsersPage: React.FC = () => {
                     </TableCell>
 
                     {/* Email */}
-                    <TableCell sx={{ py: 0.8, color: '#334155', fontSize: '0.8rem' }}>
-                      {u.email || <span style={{ color: '#94a3b8' }}>—</span>}
+                    <TableCell sx={{ py: 0.8, color: '#09090b', fontSize: '0.8rem' }}>
+                      {u.email || <span style={{ color: '#a1a1aa' }}>—</span>}
                     </TableCell>
 
                     {/* Security Role */}
@@ -571,8 +571,8 @@ export const UsersPage: React.FC = () => {
                         label={u.status}
                         size="small"
                         sx={{
-                          bgcolor: u.status === 'Active' ? '#ecfdf5' : '#f1f5f9',
-                          color: u.status === 'Active' ? '#05b169' : '#64748b',
+                          bgcolor: u.status === 'Active' ? '#f0fdf4' : '#f4f4f5',
+                          color: u.status === 'Active' ? '#22c55e' : '#71717a',
                           fontWeight: 700,
                           fontSize: '0.68rem',
                           height: 20,
@@ -581,7 +581,7 @@ export const UsersPage: React.FC = () => {
                     </TableCell>
 
                     {/* Last Login */}
-                    <TableCell sx={{ py: 0.8, color: '#64748b', fontSize: '0.75rem', fontFamily: 'JetBrains Mono, monospace' }}>
+                    <TableCell sx={{ py: 0.8, color: '#71717a', fontSize: '0.75rem', fontFamily: '"Space Mono", monospace' }}>
                       {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Never'}
                     </TableCell>
 
@@ -589,7 +589,7 @@ export const UsersPage: React.FC = () => {
                     <TableCell align="center" sx={{ py: 0.8 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.4 }}>
                         <Tooltip title="Edit User Profile">
-                          <IconButton size="small" onClick={() => handleOpenEdit(u)} sx={{ p: 0.4, color: '#0052ff' }}>
+                          <IconButton size="small" onClick={() => handleOpenEdit(u)} sx={{ p: 0.4, color: '#18181b' }}>
                             <EditIcon sx={{ fontSize: 16 }} />
                           </IconButton>
                         </Tooltip>
@@ -598,7 +598,7 @@ export const UsersPage: React.FC = () => {
                         {isOnlyUser ? (
                           <Tooltip title="Mandatory Safeguard: Cannot delete the only remaining user in User Table.">
                             <span>
-                              <IconButton size="small" disabled sx={{ p: 0.4, color: '#cbd5e1' }}>
+                              <IconButton size="small" disabled sx={{ p: 0.4, color: '#d4d4d8' }}>
                                 <LockIcon sx={{ fontSize: 16 }} />
                               </IconButton>
                             </span>
@@ -606,14 +606,14 @@ export const UsersPage: React.FC = () => {
                         ) : isCurrent ? (
                           <Tooltip title="Cannot delete your own logged-in account.">
                             <span>
-                              <IconButton size="small" disabled sx={{ p: 0.4, color: '#cbd5e1' }}>
+                              <IconButton size="small" disabled sx={{ p: 0.4, color: '#d4d4d8' }}>
                                 <DeleteIcon sx={{ fontSize: 16 }} />
                               </IconButton>
                             </span>
                           </Tooltip>
                         ) : (
                           <Tooltip title="Delete User">
-                            <IconButton size="small" onClick={() => handleDeleteUser(u)} sx={{ p: 0.4, color: '#dc2626' }}>
+                            <IconButton size="small" onClick={() => handleDeleteUser(u)} sx={{ p: 0.4, color: '#ef4444' }}>
                               <DeleteIcon sx={{ fontSize: 16 }} />
                             </IconButton>
                           </Tooltip>
@@ -629,7 +629,7 @@ export const UsersPage: React.FC = () => {
       </TableContainer>
 
       {/* Add / Edit User Modal */}
-      <Dialog open={openModal} onClose={() => !saving && setOpenModal(false)} maxWidth="xs" fullWidth>
+      <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={openModal} onClose={() => !saving && setOpenModal(false)} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ fontWeight: 800, fontSize: '0.98rem', pb: 1, borderBottom: '1px solid #e2e8f0' }}>
           {editingUser ? `Edit User: @${editingUser.username}` : 'Add New User'}
         </DialogTitle>
@@ -637,7 +637,7 @@ export const UsersPage: React.FC = () => {
         <form onSubmit={handleSaveUser}>
           <DialogContent sx={{ pt: 2, display: 'flex', flexDirection: 'column', gap: 1.8 }}>
             {modalError && (
-              <Alert severity="error" sx={{ borderRadius: '6px', fontSize: '0.75rem', py: 0.2 }} onClose={() => setModalError(null)}>
+              <Alert severity="error" sx={{ borderRadius: '9999px', fontSize: '0.75rem', py: 0.2 }} onClose={() => setModalError(null)}>
                 {modalError}
               </Alert>
             )}
@@ -726,7 +726,7 @@ export const UsersPage: React.FC = () => {
               variant="contained"
               disabled={saving}
               size="small"
-              sx={{ bgcolor: '#0052ff', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#0042cc' } }}
+              sx={{ bgcolor: '#18181b', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#27272a' } }}
             >
               {saving ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
             </Button>

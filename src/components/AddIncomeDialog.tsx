@@ -124,7 +124,7 @@ export const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({
   const isEditing = Boolean(incomeToEdit);
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {isEditing ? <EditIcon color="primary" /> : <AccountBalanceWalletIcon color="success" />}

@@ -53,7 +53,7 @@ import { downloadExcelReport } from '../services/excelService';
 import { AddIncomeDialog } from '../components/AddIncomeDialog';
 import { useOffice } from '../context/OfficeContext';
 import type { IncomeRecord } from '../types';
-import { formatINR, toPaise, fromPaise } from '../utils/currency';
+import { formatINR } from '../utils/currency';
 import { formatDate } from '../utils/formatters';
 
 export const IncomePage: React.FC = () => {
@@ -123,8 +123,8 @@ export const IncomePage: React.FC = () => {
 
   const handleResetFilters = () => {
     setSearchTerm('');
-    setPaymentModeFilter('ALL');
     setOfficeFilter('ALL');
+    setPaymentModeFilter('ALL');
     setPeriodPreset('ALL');
     setStartDate('');
     setEndDate('');
@@ -133,7 +133,7 @@ export const IncomePage: React.FC = () => {
 
   const handleExportExcel = async () => {
     try {
-      let periodLabel = 'Received Company Operational Capital';
+      let periodLabel = 'Direct Fund Inflows Ledger';
       if (periodPreset === 'THIS_WEEK') periodLabel = 'This Week (Mon–Sun)';
       else if (periodPreset === 'LAST_WEEK') periodLabel = 'Last Week';
       else if (periodPreset === 'THIS_MONTH') periodLabel = 'This Month';
@@ -141,12 +141,12 @@ export const IncomePage: React.FC = () => {
       else if (startDate || endDate) periodLabel = `Period: ${startDate || 'Start'} to ${endDate || 'Latest'}`;
 
       await downloadExcelReport({
-        title: 'Company Funds & Inflows - Audited Ledger',
+        title: 'Company Fund Inflows - Management Deposits',
         periodLabel,
         startDate: startDate || undefined,
         endDate: endDate || undefined,
         officeId: officeFilter !== 'ALL' ? Number(officeFilter) : undefined,
-        filename: `ExpenseFlow_Funds_${periodPreset !== 'ALL' ? periodPreset : 'All'}.xlsx`,
+        filename: `ExpenseFlow_Incomes_${periodPreset !== 'ALL' ? periodPreset : 'All'}.xlsx`,
       });
       setFeedbackNotice('2-Sheet Excel file exported successfully (OverAll & Details with Day-Wise Opening Balance)!');
     } catch (err: any) {
@@ -170,33 +170,40 @@ export const IncomePage: React.FC = () => {
     loadData();
   }, [loadData]);
 
-  // Filtered incomes
+  // Filtered dataset
   const filteredIncomes = useMemo(() => {
     return incomes.filter((item) => {
-      if (officeFilter !== 'ALL' && item.officeId !== Number(officeFilter)) return false;
-      if (paymentModeFilter !== 'ALL' && item.paymentMode !== paymentModeFilter) return false;
+      // 1. Search term
+      if (searchTerm.trim()) {
+        const term = searchTerm.toLowerCase();
+        const matchSource = item.receivedFrom.toLowerCase().includes(term);
+        const matchRef = item.referenceNumber?.toLowerCase().includes(term);
+        const matchDesc = item.description?.toLowerCase().includes(term);
+        if (!matchSource && !matchRef && !matchDesc) return false;
+      }
+
+      // 2. Office filter
+      if (officeFilter !== 'ALL') {
+        if (String(item.officeId || 1) !== String(officeFilter)) return false;
+      }
+
+      // 3. Payment mode
+      if (paymentModeFilter !== 'ALL' && item.paymentMode !== paymentModeFilter) {
+        return false;
+      }
+
+      // 4. Date range filter
       if (startDate && item.transactionDate < startDate) return false;
       if (endDate && item.transactionDate > endDate) return false;
 
-      if (searchTerm.trim()) {
-        const q = searchTerm.toLowerCase();
-        const mFrom = item.receivedFrom.toLowerCase().includes(q);
-        const mRef = item.referenceNumber?.toLowerCase().includes(q) || false;
-        const mDesc = item.description?.toLowerCase().includes(q) || false;
-        const mOffice = item.officeName?.toLowerCase().includes(q) || false;
-        const mAmt = item.amount.toString().includes(q);
-        if (!mFrom && !mRef && !mDesc && !mOffice && !mAmt) return false;
-      }
       return true;
     });
-  }, [incomes, officeFilter, paymentModeFilter, startDate, endDate, searchTerm]);
+  }, [incomes, searchTerm, officeFilter, paymentModeFilter, startDate, endDate]);
 
-  // Dynamic KPI totals based on filtered items
   const totalInflow = useMemo(() => {
-    return fromPaise(
-      filteredIncomes
-        .filter((i) => !i.isVoid)
-        .reduce((acc, curr) => acc + toPaise(curr.amount), 0)
+    return filteredIncomes.reduce(
+      (sum, item) => (item.isVoid ? sum : sum + item.amount),
+      0
     );
   }, [filteredIncomes]);
 
@@ -220,19 +227,6 @@ export const IncomePage: React.FC = () => {
     }
   };
 
-  const handleVoid = async (id?: number) => {
-    if (!id) return;
-    const found = incomes.find(i => i.id === id);
-    if (found) {
-      await handleToggleVoid(found);
-    } else {
-      if (window.confirm('Voiding this income will deduct it from the available balance. Proceed?')) {
-        await voidIncome(id);
-        loadData();
-      }
-    }
-  };
-
   const handleDelete = async (id?: number) => {
     if (!id) return;
     if (window.confirm('Are you sure you want to permanently delete this income transaction?')) {
@@ -244,31 +238,31 @@ export const IncomePage: React.FC = () => {
   return (
     <Box sx={{ pb: 3 }}>
       {/* Top Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2.2, flexWrap: 'wrap', gap: 1.5 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.15rem' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}>
             Income & Fund Inflows
           </Typography>
-          <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
+          <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.82rem', mt: 0.2 }}>
             Record cash received from management, filter by date/week, and track balances
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', gap: 1.2, flexWrap: 'wrap' }}>
           <Button
             variant="outlined"
             size="small"
             startIcon={<TableChartIcon sx={{ fontSize: 16 }} />}
             onClick={handleExportExcel}
             sx={{
-              fontWeight: 700,
-              borderRadius: '6px',
-              borderColor: '#05b169',
-              color: '#05b169',
-              height: 30,
-              px: 1.2,
-              fontSize: '0.75rem',
-              '&:hover': { borderColor: '#048e54', bgcolor: '#f0fdf4' },
+              fontWeight: 600,
+              borderRadius: '9999px',
+              borderColor: '#e4e4e7',
+              color: '#09090b',
+              height: 34,
+              px: 1.6,
+              fontSize: '0.78rem',
+              '&:hover': { borderColor: '#18181b', bgcolor: '#ffffff' },
             }}
           >
             Export 2-Sheet Excel
@@ -283,14 +277,14 @@ export const IncomePage: React.FC = () => {
               setOpenAddModal(true);
             }}
             sx={{
-              fontWeight: 700,
-              px: 1.5,
-              borderRadius: '6px',
-              bgcolor: '#05b169',
+              fontWeight: 600,
+              px: 1.8,
+              borderRadius: '9999px',
+              bgcolor: '#22c55e',
               color: '#ffffff',
-              height: 30,
-              fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#048e54' }
+              height: 34,
+              fontSize: '0.78rem',
+              '&:hover': { bgcolor: '#16a34a' }
             }}
           >
             + Add Income
@@ -299,30 +293,30 @@ export const IncomePage: React.FC = () => {
       </Box>
 
       {feedbackNotice && (
-        <Alert severity="success" onClose={() => setFeedbackNotice(null)} sx={{ mb: 1.5, py: 0.4, fontSize: '0.8rem' }}>
+        <Alert severity="success" onClose={() => setFeedbackNotice(null)} sx={{ mb: 2, borderRadius: '12px', py: 0.5, fontSize: '0.8rem' }}>
           {feedbackNotice}
         </Alert>
       )}
 
-      {/* KPI Cards (Dynamically Filtered) */}
-      <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
+      {/* KPI Cards (Reui Soft Card 16px Radius) */}
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '8px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+            <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Total Funds Inflow {periodPreset !== 'ALL' && '(Filtered)'}
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#05b169', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#22c55e', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
                     {formatINR(totalInflow)}
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#f5f8ff', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
-                  <TrendingUpIcon sx={{ color: '#05b169', fontSize: 20 }} />
+                <Box sx={{ p: 1, bgcolor: 'rgba(34, 197, 94, 0.1)', borderRadius: '12px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
+                  <TrendingUpIcon sx={{ color: '#22c55e', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
                 Operational capital credited in selected scope
               </Typography>
             </CardContent>
@@ -330,22 +324,22 @@ export const IncomePage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '8px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+            <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Recorded Inflows
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0052ff', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
-                    {filteredIncomes.length} Transactions
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', mt: 0.6, fontFamily: '"Space Mono", monospace', fontSize: '1.45rem', letterSpacing: '-0.02em' }}>
+                    {filteredIncomes.length} Entries
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                  <CheckCircleIcon sx={{ color: '#0052ff', fontSize: 20 }} />
+                <Box sx={{ p: 1, bgcolor: 'rgba(24, 24, 27, 0.06)', borderRadius: '12px', border: '1px solid #e4e4e7' }}>
+                  <CheckCircleIcon sx={{ color: '#18181b', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
                 Matching deposits ({uniqueActiveDays} active deposit days)
               </Typography>
             </CardContent>
@@ -353,33 +347,33 @@ export const IncomePage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #f59e0b', borderRadius: '8px' }}>
-            <CardContent sx={{ p: '12px 14px !important' }}>
+          <Card sx={{ borderRadius: '16px', bgcolor: '#ffffff', border: '1px solid #e4e4e7', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+            <CardContent sx={{ p: '18px 20px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: '"Space Grotesk", sans-serif' }}>
                     Primary Source
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', mt: 0.3, fontSize: '1.15rem' }}>
-                    Sir & Management
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: '#09090b', mt: 0.6, fontSize: '1.2rem', fontFamily: '"Space Grotesk", sans-serif' }}>
+                    Executive Transfer
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fef3c7', borderRadius: '8px' }}>
-                  <AccountBalanceWalletIcon sx={{ color: '#d97706', fontSize: 20 }} />
+                <Box sx={{ p: 1, bgcolor: 'rgba(234, 179, 8, 0.15)', borderRadius: '12px', border: '1px solid rgba(234, 179, 8, 0.3)' }}>
+                  <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
-                Executive fund transfers
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 1, fontSize: '0.74rem' }}>
+                Authorized office management funds
               </Typography>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
 
-      {/* DATE, WEEK & PAYMENT MODE FILTER BAR */}
-      <Card sx={{ mb: 2, borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
-        <CardContent sx={{ p: '12px 14px !important' }}>
-          <Grid container spacing={1.2} sx={{ alignItems: 'center' }}>
+      {/* FILTER BAR (Reui Soft Card 16px) */}
+      <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)' }}>
+        <CardContent sx={{ p: '16px 20px !important' }}>
+          <Grid container spacing={1.5} sx={{ alignItems: 'center' }}>
             {/* 1. Search Box */}
             <Grid size={{ xs: 12, sm: 6, md: 3.5 }}>
               <TextField
@@ -392,7 +386,7 @@ export const IncomePage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SearchIcon sx={{ color: '#94a3b8', fontSize: 18 }} />
+                        <SearchIcon sx={{ color: '#71717a', fontSize: 18 }} />
                       </InputAdornment>
                     ),
                   },
@@ -413,7 +407,7 @@ export const IncomePage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <DateRangeIcon sx={{ color: '#05b169', fontSize: 17 }} />
+                        <DateRangeIcon sx={{ color: '#18181b', fontSize: 17 }} />
                       </InputAdornment>
                     ),
                   },
@@ -501,7 +495,7 @@ export const IncomePage: React.FC = () => {
                 <Chip
                   label={`${filteredIncomes.length} found`}
                   size="small"
-                  sx={{ bgcolor: '#ecfdf5', color: '#065f46', fontWeight: 700, fontSize: '0.72rem' }}
+                  sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 600, fontSize: '0.74rem', border: '1px solid #bbf7d0', borderRadius: '9999px' }}
                 />
               )}
               <Button
@@ -509,7 +503,7 @@ export const IncomePage: React.FC = () => {
                 color="inherit"
                 size="small"
                 onClick={handleResetFilters}
-                sx={{ height: 32, fontSize: '0.75rem', fontWeight: 600, borderColor: '#e2e8f0', minWidth: 64 }}
+                sx={{ height: 34, fontSize: '0.78rem', fontWeight: 600, borderColor: '#e4e4e7', minWidth: 70, borderRadius: '9999px', '&:hover': { borderColor: '#18181b', bgcolor: '#fafafa' } }}
               >
                 Reset
               </Button>
@@ -518,27 +512,27 @@ export const IncomePage: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Incomes Data Table */}
-      <Card sx={{ borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+      {/* Incomes Data Table (16px Soft Card) */}
+      <Card sx={{ borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', overflow: 'hidden' }}>
         <TableContainer>
           <Table size="small">
-            <TableHead sx={{ bgcolor: '#f8fafc' }}>
+            <TableHead>
               <TableRow>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>ID</TableCell>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>DATE</TableCell>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>RECEIVED FROM / SOURCE</TableCell>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>PAYMENT MODE</TableCell>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>REF / UTR NO</TableCell>
-                <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>PURPOSE & REMARKS</TableCell>
-                <TableCell align="right" sx={{ py: 0.8, fontSize: '0.72rem' }}>AMOUNT</TableCell>
-                <TableCell align="center" sx={{ py: 0.8, fontSize: '0.72rem' }}>STATUS</TableCell>
-                <TableCell align="center" sx={{ py: 0.8, fontSize: '0.72rem' }}>ACTIONS</TableCell>
+                <TableCell sx={{ py: 1.1 }}>ID</TableCell>
+                <TableCell sx={{ py: 1.1 }}>DATE</TableCell>
+                <TableCell sx={{ py: 1.1 }}>RECEIVED FROM / SOURCE</TableCell>
+                <TableCell sx={{ py: 1.1 }}>PAYMENT MODE</TableCell>
+                <TableCell sx={{ py: 1.1 }}>REF / UTR NO</TableCell>
+                <TableCell sx={{ py: 1.1 }}>PURPOSE & REMARKS</TableCell>
+                <TableCell align="right" sx={{ py: 1.1 }}>AMOUNT</TableCell>
+                <TableCell align="center" sx={{ py: 1.1 }}>STATUS</TableCell>
+                <TableCell align="center" sx={{ py: 1.1 }}>ACTIONS</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredIncomes.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={9} align="center" sx={{ py: 4, color: 'text.secondary' }}>
+                  <TableCell colSpan={9} align="center" sx={{ py: 4, color: '#71717a' }}>
                     No fund inflow records match the filter criteria.
                   </TableCell>
                 </TableRow>
@@ -546,88 +540,93 @@ export const IncomePage: React.FC = () => {
                 filteredIncomes
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item) => (
-                    <TableRow key={item.id} hover>
-                      <TableCell sx={{ py: 0.6, fontSize: '0.75rem', color: '#64748b' }}>
+                    <TableRow key={item.id} hover sx={{ '&:hover': { bgcolor: '#fafafa' } }}>
+                      <TableCell sx={{ py: 0.9, fontSize: '0.78rem', color: '#71717a', fontFamily: '"Space Mono", monospace' }}>
                         #{String(item.id).padStart(3, '0')}
                       </TableCell>
-                      <TableCell sx={{ py: 0.6, fontSize: '0.78rem' }}>{formatDate(item.transactionDate)}</TableCell>
-                      <TableCell sx={{ py: 0.6 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.8rem' }}>
+                      <TableCell sx={{ py: 0.9, fontSize: '0.8rem', fontWeight: 600 }}>{formatDate(item.transactionDate)}</TableCell>
+                      <TableCell sx={{ py: 0.9 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#09090b', fontSize: '0.84rem' }}>
                           {item.receivedFrom}
                         </Typography>
                         <Chip
-                          icon={<CorporateFareIcon sx={{ fontSize: '10px !important', color: '#1e40af !important' }} />}
+                          icon={<CorporateFareIcon sx={{ fontSize: '11px !important', color: '#71717a !important' }} />}
                           label={item.officeName || 'Head Office'}
                           size="small"
-                          sx={{ bgcolor: '#eff6ff', color: '#1e40af', border: '1px solid #bfdbfe', fontWeight: 600, fontSize: '0.62rem', height: 18, mt: 0.3 }}
+                          sx={{ bgcolor: '#fafafa', color: '#71717a', border: '1px solid #e4e4e7', fontWeight: 600, fontSize: '0.64rem', height: 19, mt: 0.3, borderRadius: '9999px' }}
                         />
                       </TableCell>
-                      <TableCell sx={{ py: 0.6 }}>
+                      <TableCell sx={{ py: 0.9 }}>
                         <Chip
                           label={item.paymentMode}
                           size="small"
-                          sx={{ bgcolor: '#f1f5f9', color: '#334155', fontWeight: 600, fontSize: '0.7rem', height: 20 }}
+                          sx={{ bgcolor: '#f4f4f5', color: '#18181b', fontWeight: 600, fontSize: '0.72rem', height: 22, borderRadius: '9999px', border: '1px solid #e4e4e7' }}
                         />
                       </TableCell>
-                      <TableCell sx={{ py: 0.6 }}>
-                        <Typography variant="body2" sx={{ fontFamily: 'monospace', color: '#64748b', fontSize: '0.75rem' }}>
+                      <TableCell sx={{ py: 0.9 }}>
+                        <Typography variant="body2" sx={{ fontFamily: '"Space Mono", monospace', color: '#71717a', fontSize: '0.78rem' }}>
                           {item.referenceNumber || '—'}
                         </Typography>
                       </TableCell>
-                      <TableCell sx={{ py: 0.6 }}>
-                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.78rem' }}>
+                      <TableCell sx={{ py: 0.9 }}>
+                        <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.8rem' }}>
                           {item.description || '—'}
                         </Typography>
                       </TableCell>
-                      <TableCell align="right" sx={{ fontWeight: 800, color: item.isVoid ? '#94a3b8' : '#16a34a', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.82rem', py: 0.6 }}>
+                      <TableCell align="right" sx={{ fontWeight: 700, color: item.isVoid ? '#a1a1aa' : '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '0.88rem', py: 0.9 }}>
                         +{formatINR(item.amount)}
                       </TableCell>
-                      <TableCell align="center" sx={{ py: 0.6 }}>
+                      <TableCell align="center" sx={{ py: 0.9 }}>
                         <Chip
                           label={item.isVoid ? 'Voided' : 'Received'}
                           size="small"
-                          color={item.isVoid ? 'default' : 'success'}
-                          variant={item.isVoid ? 'outlined' : 'filled'}
-                          sx={{ minWidth: 60, height: 20, fontSize: '0.68rem' }}
+                          sx={{
+                            minWidth: 64,
+                            height: 22,
+                            fontSize: '0.7rem',
+                            fontWeight: 600,
+                            borderRadius: '9999px',
+                            bgcolor: item.isVoid ? '#f4f4f5' : '#f0fdf4',
+                            color: item.isVoid ? '#71717a' : '#15803d',
+                            border: `1px solid ${item.isVoid ? '#e4e4e7' : '#bbf7d0'}`,
+                          }}
                         />
                       </TableCell>
-                      <TableCell align="center" sx={{ py: 0.6 }}>
+                      <TableCell align="center" sx={{ py: 0.9 }}>
                         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.5 }}>
                           <Tooltip title="View Details">
-                            <IconButton size="small" onClick={() => setViewDetailModal(item)} sx={{ p: 0.4 }}>
-                              <VisibilityIcon sx={{ fontSize: 16 }} />
+                            <IconButton size="small" onClick={() => setViewDetailModal(item)} sx={{ p: 0.5, borderRadius: '9999px', '&:hover': { bgcolor: '#f4f4f5' } }}>
+                              <VisibilityIcon sx={{ fontSize: 17, color: '#71717a' }} />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title="Edit Income">
                             <IconButton
                               size="small"
-                              color="primary"
                               onClick={() => {
                                 setEditingIncome(item);
                                 setOpenAddModal(true);
                               }}
-                              sx={{ p: 0.4 }}
+                              sx={{ p: 0.5, borderRadius: '9999px', '&:hover': { bgcolor: '#f4f4f5' } }}
                             >
-                              <EditIcon sx={{ fontSize: 16 }} />
+                              <EditIcon sx={{ fontSize: 17, color: '#18181b' }} />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title={item.isVoid ? "Unvoid / Restore" : "Void"}>
                             <IconButton
                               size="small"
-                              color={item.isVoid ? "success" : "warning"}
                               onClick={() => handleToggleVoid(item)}
-                              sx={{ p: 0.4 }}
+                              sx={{ p: 0.5, borderRadius: '9999px', '&:hover': { bgcolor: '#f4f4f5' } }}
                             >
                               {item.isVoid ? (
-                                <RestoreIcon sx={{ fontSize: 16, color: '#05b169' }} />
+                                <RestoreIcon sx={{ fontSize: 17, color: '#22c55e' }} />
                               ) : (
-                                <BlockIcon sx={{ fontSize: 16 }} />
+                                <BlockIcon sx={{ fontSize: 17, color: '#eab308' }} />
                               )}
                             </IconButton>
                           </Tooltip>
                           <Tooltip title="Delete">
-                            <IconButton size="small" color="error" onClick={() => handleDelete(item.id)} sx={{ p: 0.4 }}>
-                              <DeleteIcon sx={{ fontSize: 16 }} />
+                            <IconButton size="small" onClick={() => handleDelete(item.id)} sx={{ p: 0.5, borderRadius: '9999px', '&:hover': { bgcolor: '#fee2e2' } }}>
+                              <DeleteIcon sx={{ fontSize: 17, color: '#ef4444' }} />
                             </IconButton>
                           </Tooltip>
                         </Box>
@@ -664,59 +663,58 @@ export const IncomePage: React.FC = () => {
         onSuccess={loadData}
       />
 
-      {/* View Detail Modal */}
+      {/* View Detail Modal (24px Radius Reui Overlay) */}
       <Dialog open={Boolean(viewDetailModal)} onClose={() => setViewDetailModal(null)} maxWidth="xs" fullWidth>
-        <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+        <DialogTitle sx={{ m: 0, p: 2.2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e4e4e7' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1.05rem', color: '#09090b' }}>
             Income Transaction Details
           </Typography>
-          <IconButton onClick={() => setViewDetailModal(null)} size="small">
-            <CloseIcon />
+          <IconButton onClick={() => setViewDetailModal(null)} size="small" sx={{ borderRadius: '9999px' }}>
+            <CloseIcon fontSize="small" />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers sx={{ p: 2.5 }}>
+        <DialogContent sx={{ p: 2.5 }}>
           {viewDetailModal && (
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.8 }}>
               <Box>
-                <Typography variant="caption" color="text.secondary">TRANSACTION ID</Typography>
-                <Typography variant="body1" sx={{ fontWeight: 700 }}>#FND-{String(viewDetailModal.id).padStart(3, '0')}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>TRANSACTION ID</Typography>
+                <Typography variant="body1" sx={{ fontWeight: 700, fontFamily: '"Space Mono", monospace', mt: 0.2 }}>#FND-{String(viewDetailModal.id).padStart(3, '0')}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">RECEIVED FROM</Typography>
-                <Typography variant="body1" sx={{ fontWeight: 600 }}>{viewDetailModal.receivedFrom}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>RECEIVED FROM</Typography>
+                <Typography variant="body1" sx={{ fontWeight: 600, color: '#09090b', mt: 0.2 }}>{viewDetailModal.receivedFrom}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">AMOUNT</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 800, color: '#16a34a' }}>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>AMOUNT</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 700, color: '#22c55e', fontFamily: '"Space Mono", monospace', mt: 0.2 }}>
                   +{formatINR(viewDetailModal.amount)}
                 </Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">TRANSACTION DATE</Typography>
-                <Typography variant="body2">{formatDate(viewDetailModal.transactionDate)}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>TRANSACTION DATE</Typography>
+                <Typography variant="body2" sx={{ color: '#09090b', fontWeight: 500, mt: 0.2 }}>{formatDate(viewDetailModal.transactionDate)}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">PAYMENT MODE</Typography>
-                <Typography variant="body2">{viewDetailModal.paymentMode}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>PAYMENT MODE</Typography>
+                <Typography variant="body2" sx={{ color: '#09090b', fontWeight: 500, mt: 0.2 }}>{viewDetailModal.paymentMode}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">REFERENCE NUMBER</Typography>
-                <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>{viewDetailModal.referenceNumber || 'N/A'}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>REFERENCE NUMBER</Typography>
+                <Typography variant="body2" sx={{ fontFamily: '"Space Mono", monospace', color: '#71717a', mt: 0.2 }}>{viewDetailModal.referenceNumber || 'N/A'}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">REMARKS</Typography>
-                <Typography variant="body2">{viewDetailModal.description || 'No remarks provided.'}</Typography>
+                <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>REMARKS</Typography>
+                <Typography variant="body2" sx={{ color: '#09090b', mt: 0.2 }}>{viewDetailModal.description || 'No remarks provided.'}</Typography>
               </Box>
             </Box>
           )}
         </DialogContent>
-        <DialogActions sx={{ p: 2, justifyContent: 'space-between' }}>
+        <DialogActions sx={{ p: 2, borderTop: '1px solid #e4e4e7', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', gap: 1 }}>
             <Button
               startIcon={viewDetailModal?.isVoid ? <RestoreIcon /> : <BlockIcon />}
               variant="outlined"
               size="small"
-              color={viewDetailModal?.isVoid ? "success" : "warning"}
               onClick={async () => {
                 const item = viewDetailModal;
                 if (item) {
@@ -724,27 +722,26 @@ export const IncomePage: React.FC = () => {
                   await handleToggleVoid(item);
                 }
               }}
-              sx={{ fontWeight: 700 }}
+              sx={{ fontWeight: 600, borderRadius: '9999px', borderColor: '#e4e4e7' }}
             >
-              {viewDetailModal?.isVoid ? 'Unvoid / Restore' : 'Void Fund Entry'}
+              {viewDetailModal?.isVoid ? 'Restore' : 'Void'}
             </Button>
             <Button
               startIcon={<EditIcon />}
               variant="outlined"
               size="small"
-              color="success"
               onClick={() => {
                 const item = viewDetailModal;
                 setViewDetailModal(null);
                 setEditingIncome(item);
                 setOpenAddModal(true);
               }}
-              sx={{ fontWeight: 700 }}
+              sx={{ fontWeight: 600, borderRadius: '9999px', borderColor: '#e4e4e7' }}
             >
-              Edit Fund Entry
+              Edit
             </Button>
           </Box>
-          <Button onClick={() => setViewDetailModal(null)} variant="contained" color="primary">
+          <Button onClick={() => setViewDetailModal(null)} variant="contained" sx={{ bgcolor: '#18181b', borderRadius: '9999px' }}>
             Close
           </Button>
         </DialogActions>

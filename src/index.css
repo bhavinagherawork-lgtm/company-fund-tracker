@@ -1,19 +1,31 @@
 :root {
-  --fintech-sapphire-primary: #0052ff; /* Primary CTA / Brand */
-  --accent-highlight: #05b169; /* Focus / Active State */
-  --canvas-base: #ffffff; /* Document Background */
-  --surface-container: #f5f8ff; /* Card / Panel Surface */
-  --structural-border: #e2e8f0; /* Dividers / Line Stroke */
-  --high-contrast-text: #0a0b0d; /* Headlines */
-  --muted-typography: #5b616e; /* Body Copy / Labels */
-  --status-accent: #05b169; /* Validation / Active */
+  --obsidian-gold-primary: #18181b; /* Primary CTA / Brand */
+  --accent-highlight: #eab308; /* Focus / Active State / Gold */
+  --canvas-base: #fafafa; /* Document Background */
+  --surface-container: #ffffff; /* Card / Panel Surface */
+  --structural-border: #e4e4e7; /* Dividers / Line Stroke */
+  --high-contrast-text: #09090b; /* Headlines */
+  --muted-typography: #71717a; /* Body Copy / Labels */
+  --status-accent: #22c55e; /* Validation / Active / Inflow */
+  --danger-accent: #ef4444; /* Expense / Outflow / Danger */
 
-  --radius-button-control: 8px;
-  --radius-panel-card: 12px;
-  --radius-pill-tag: 9999px;
+  --radius-pill-button: 9999px;
+  --radius-soft-card: 16px;
+  --radius-modal-overlay: 24px;
 
   --shadow-subtle-float: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-elevated-card: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 20px 40px -12px rgba(0, 0, 0, 0.18);
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 180ms;
+  --duration-normal: 270ms;
+  --duration-slow: 440ms;
 }
 
 * {
@@ -29,14 +41,20 @@ body,
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   background-color: var(--canvas-base);
   color: var(--high-contrast-text);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-code, pre, .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+code, pre, .font-mono, .currency-mono {
+  font-family: var(--font-mono);
 }
 
 ::-webkit-scrollbar {
@@ -44,14 +62,14 @@ code, pre, .font-mono {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--surface-container);
+  background: var(--canvas-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #d4d4d8;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #a1a1aa;
 }
 
 /* Animations from DESIGN.md */
@@ -76,48 +94,55 @@ code, pre, .font-mono {
 }
 
 .fade-in-up {
-  animation: fadeInUp 240ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  animation: fadeInUp var(--duration-normal) var(--ease-standard) forwards;
 }
 
 /* Core Component CSS from DESIGN.md */
 .btn-primary {
-  background: var(--fintech-sapphire-primary);
+  background: var(--obsidian-gold-primary);
   color: #ffffff;
-  font-weight: 600;
-  border-radius: var(--radius-button-control);
+  font-weight: 500;
+  border-radius: var(--radius-pill-button);
   padding: 10px 20px;
-  transition: all 160ms cubic-bezier(0.32, 0.72, 0, 1);
-  border: none;
+  font-family: var(--font-body);
+  transition: all var(--duration-fast) var(--ease-standard);
+  border: 1px solid var(--obsidian-gold-primary);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .btn-primary:hover {
-  background: #0045d8;
+  background: #27272a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 24, 27, 0.15);
 }
 
 .card-surface {
   background: var(--surface-container);
   border: 1px solid var(--structural-border);
-  border-radius: var(--radius-panel-card);
+  border-radius: var(--radius-soft-card);
   padding: 24px;
   box-shadow: var(--shadow-subtle-float);
-  transition: box-shadow 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: all var(--duration-normal) var(--ease-standard);
 }
 .card-surface:hover {
   box-shadow: var(--shadow-elevated-card);
 }
 
 .input-control {
-  background: #ffffff;
+  background: var(--surface-container);
   border: 1px solid var(--structural-border);
-  border-radius: var(--radius-button-control);
-  height: 44px;
-  padding: 0 14px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-radius: var(--radius-pill-button);
+  height: 42px;
+  padding: 0 16px;
+  font-family: var(--font-body);
   color: var(--high-contrast-text);
   outline: none;
-  transition: border-color 160ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
 }
 .input-control:focus {
-  border-color: var(--fintech-sapphire-primary);
-  box-shadow: 0 0 0 2px rgba(0, 82, 255, 0.15);
+  border-color: var(--obsidian-gold-primary);
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
 }

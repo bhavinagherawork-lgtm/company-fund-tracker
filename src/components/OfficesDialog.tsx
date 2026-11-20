@@ -162,36 +162,36 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1, borderBottom: '1px solid #e2e8f0' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <CorporateFareIcon sx={{ color: '#0052ff', fontSize: 20 }} />
-          <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1rem', color: '#0a0b0d' }}>
+          <CorporateFareIcon sx={{ color: '#18181b', fontSize: 20 }} />
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', color: '#09090b' }}>
             Office & Branch Management
           </Typography>
         </Box>
-        <IconButton size="small" onClick={onClose} sx={{ color: '#64748b' }}>
+        <IconButton size="small" onClick={onClose} sx={{ color: '#71717a' }}>
           <CloseIcon sx={{ fontSize: 18 }} />
         </IconButton>
       </DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
         {error && (
-          <Alert severity="error" sx={{ mb: 1.8, borderRadius: '6px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setError(null)}>
+          <Alert severity="error" sx={{ mb: 1.8, borderRadius: '9999px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setError(null)}>
             {error}
           </Alert>
         )}
         {successMsg && (
-          <Alert severity="success" sx={{ mb: 1.8, borderRadius: '6px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setSuccessMsg(null)}>
+          <Alert severity="success" sx={{ mb: 1.8, borderRadius: '9999px', fontSize: '0.75rem', py: 0.3 }} onClose={() => setSuccessMsg(null)}>
             {successMsg}
           </Alert>
         )}
 
         {/* Add/Edit Form */}
         {isAdding ? (
-          <Card sx={{ mb: 2, borderRadius: '8px', border: '1px solid #0052ff', bgcolor: '#f8faff' }}>
+          <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #0052ff', bgcolor: '#fafafa' }}>
             <CardContent sx={{ p: '14px !important' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0052ff', fontSize: '0.85rem', mb: 1.5 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b', fontSize: '0.85rem', mb: 1.5 }}>
                 {editingOffice ? `Edit Office: ${editingOffice.name}` : '+ Add New Office / Branch'}
               </Typography>
 
@@ -249,7 +249,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                     variant="contained"
                     size="small"
                     disabled={loading}
-                    sx={{ bgcolor: '#0052ff', fontSize: '0.75rem', fontWeight: 700, '&:hover': { bgcolor: '#0042cc' } }}
+                    sx={{ bgcolor: '#18181b', fontSize: '0.75rem', fontWeight: 700, '&:hover': { bgcolor: '#27272a' } }}
                   >
                     {loading ? <CircularProgress size={14} color="inherit" /> : editingOffice ? 'Update Office' : 'Save Office'}
                   </Button>
@@ -259,7 +259,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
           </Card>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8 }}>
-            <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.75rem', fontWeight: 600 }}>
+            <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.75rem', fontWeight: 600 }}>
               The system organizes transactions, reports, and balances by office.
             </Typography>
             <Button
@@ -267,7 +267,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
               variant="contained"
               startIcon={<AddIcon sx={{ fontSize: 15 }} />}
               onClick={handleOpenAdd}
-              sx={{ bgcolor: '#0052ff', height: 28, fontSize: '0.72rem', fontWeight: 700, '&:hover': { bgcolor: '#0042cc' } }}
+              sx={{ bgcolor: '#18181b', height: 28, fontSize: '0.72rem', fontWeight: 700, '&:hover': { bgcolor: '#27272a' } }}
             >
               + Add Office
             </Button>
@@ -286,9 +286,9 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
               <Card
                 key={off.id}
                 sx={{
-                  borderRadius: '8px',
+                  borderRadius: '16px',
                   border: off.isDefault ? '1.5px solid #0052ff' : '1px solid #e2e8f0',
-                  bgcolor: off.isDefault ? '#fbfcfe' : '#ffffff',
+                  bgcolor: off.isDefault ? '#fafafa' : '#ffffff',
                   boxShadow: 'none',
                 }}
               >
@@ -299,9 +299,9 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                         sx={{
                           width: 32,
                           height: 32,
-                          borderRadius: '6px',
-                          bgcolor: off.isDefault ? '#0052ff' : '#f1f5f9',
-                          color: off.isDefault ? '#ffffff' : '#334155',
+                          borderRadius: '9999px',
+                          bgcolor: off.isDefault ? '#18181b' : '#f4f4f5',
+                          color: off.isDefault ? '#ffffff' : '#09090b',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -313,7 +313,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                       </Box>
                       <Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8 }}>
-                          <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0f172a', fontSize: '0.85rem' }}>
+                          <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#09090b', fontSize: '0.85rem' }}>
                             {off.name}
                           </Typography>
                           {off.isDefault && (
@@ -326,7 +326,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                           )}
                         </Box>
                         {off.location && (
-                          <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.7rem', display: 'block' }}>
+                          <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.7rem', display: 'block' }}>
                             {off.location}
                           </Typography>
                         )}
@@ -336,13 +336,13 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                     {/* Action buttons */}
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                       <Tooltip title="Edit Office">
-                        <IconButton size="small" onClick={() => handleOpenEdit(off)} sx={{ p: 0.4, color: '#0052ff' }}>
+                        <IconButton size="small" onClick={() => handleOpenEdit(off)} sx={{ p: 0.4, color: '#18181b' }}>
                           <EditIcon sx={{ fontSize: 16 }} />
                         </IconButton>
                       </Tooltip>
                       {!off.isDefault && (
                         <Tooltip title="Delete Office">
-                          <IconButton size="small" onClick={() => handleDelete(off)} sx={{ p: 0.4, color: '#dc2626' }}>
+                          <IconButton size="small" onClick={() => handleDelete(off)} sx={{ p: 0.4, color: '#ef4444' }}>
                             <DeleteIcon sx={{ fontSize: 16 }} />
                           </IconButton>
                         </Tooltip>
@@ -355,7 +355,7 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                     <Chip
                       label={`Expenses: -${formatINR(expTotal)} (${m?.expCount || 0})`}
                       size="small"
-                      sx={{ bgcolor: '#fee2e2', color: '#dc2626', fontWeight: 700, fontSize: '0.68rem', height: 20 }}
+                      sx={{ bgcolor: '#fef2f2', color: '#ef4444', fontWeight: 700, fontSize: '0.68rem', height: 20 }}
                     />
                     <Chip
                       label={`Funds: +${formatINR(incTotal)} (${m?.incCount || 0})`}
@@ -366,10 +366,10 @@ export const OfficesDialog: React.FC<OfficesDialogProps> = ({ open, onClose }) =
                       label={`Net: ${formatINR(netBalance)}`}
                       size="small"
                       sx={{
-                        bgcolor: netBalance >= 0 ? '#ecfdf5' : '#fef2f2',
-                        color: netBalance >= 0 ? '#05b169' : '#dc2626',
+                        bgcolor: netBalance >= 0 ? '#f0fdf4' : '#fef2f2',
+                        color: netBalance >= 0 ? '#22c55e' : '#ef4444',
                         fontWeight: 800,
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: '"Space Mono", monospace',
                         fontSize: '0.68rem',
                         height: 20,
                       }}

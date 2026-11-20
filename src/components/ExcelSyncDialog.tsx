@@ -334,11 +334,11 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+    <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <TableChartIcon sx={{ color: '#0052ff' }} />
-          <Typography variant="h6" sx={{ fontWeight: 800 }}>
+          <TableChartIcon sx={{ color: '#18181b' }} />
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif' }}>
             Excel & Google Sheets 2-Way Live Sync
           </Typography>
         </Box>
@@ -355,11 +355,11 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         )}
 
         {/* Section 0: Month-Wise Google Sheet & Multi-PC Cloud Sync */}
-        <Box sx={{ mb: 3, p: 2, bgcolor: '#f0fdf4', borderRadius: '8px', border: '1px solid #86efac' }}>
+        <Box sx={{ mb: 3, p: 2, bgcolor: '#f0fdf4', borderRadius: '16px', border: '1px solid #86efac' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <TableChartIcon sx={{ color: '#05b169', fontSize: 22 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#065f46' }}>
+              <TableChartIcon sx={{ color: '#22c55e', fontSize: 22 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#15803d' }}>
                 Multi-PC Shared Google Sheet (Month-Wise Structure)
               </Typography>
             </Box>
@@ -380,15 +380,15 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
               startIcon={<FileDownloadIcon />}
               onClick={handleDownloadMonthWiseTemplate}
               disabled={busy}
-              sx={{ bgcolor: '#05b169', fontWeight: 800, py: 0.8, px: 2, '&:hover': { bgcolor: '#048e54' } }}
+              sx={{ bgcolor: '#22c55e', fontWeight: 800, py: 0.8, px: 2, '&:hover': { bgcolor: '#22c55e' } }}
             >
               Download Month-Wise Google Sheet Template (.xlsx)
             </Button>
           </Box>
 
           {/* Apps Script 2-Way Live Webhook */}
-          <Box sx={{ p: 1.5, bgcolor: '#ffffff', borderRadius: '6px', border: '1px solid #bbf7d0' }}>
-            <Typography variant="caption" sx={{ fontWeight: 800, color: '#065f46', textTransform: 'uppercase', display: 'block', mb: 0.8 }}>
+          <Box sx={{ p: 1.5, bgcolor: '#ffffff', borderRadius: '9999px', border: '1px solid #bbf7d0' }}>
+            <Typography variant="caption" sx={{ fontWeight: 800, color: '#15803d', textTransform: 'uppercase', display: 'block', mb: 0.8 }}>
               Real-Time 2-Way Sync via Google Apps Script Web App:
             </Typography>
 
@@ -412,7 +412,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                   startIcon={syncState.googleSheetSyncing ? <CircularProgress size={16} color="inherit" /> : <SyncIcon />}
                   onClick={handleSyncAppsScript}
                   disabled={busy || syncState.googleSheetSyncing}
-                  sx={{ height: 40, bgcolor: '#0052ff', fontWeight: 700 }}
+                  sx={{ height: 40, bgcolor: '#18181b', fontWeight: 700 }}
                 >
                   {syncState.googleSheetSyncing ? 'Syncing...' : 'Sync All Months'}
                 </Button>
@@ -427,8 +427,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LinkIcon sx={{ color: '#0052ff', fontSize: 20 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0a0b0d' }}>
+              <LinkIcon sx={{ color: '#18181b', fontSize: 20 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
                 1. Local Excel File Direct Sync (Two-Way)
               </Typography>
             </Box>
@@ -437,7 +437,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                 icon={<CheckCircleIcon sx={{ fontSize: '14px !important', color: '#05b169 !important' }} />}
                 label={`Connected: ${syncState.fileName}`}
                 size="small"
-                sx={{ bgcolor: '#ecfdf5', color: '#065f46', fontWeight: 700, border: '1px solid #a7f3d0' }}
+                sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 700, border: '1px solid #a7f3d0' }}
               />
             )}
           </Box>
@@ -447,12 +447,12 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             Vice-versa: you can load/refresh updates from the Excel file directly into the website!
           </Typography>
 
-          <Box sx={{ p: 2, bgcolor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+          <Box sx={{ p: 2, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
             {syncState.hasFileHandle ? (
               <Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1, mb: 1.5 }}>
                   <Box>
-                    <Typography variant="body2" sx={{ fontWeight: 700, color: '#0a0b0d' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b' }}>
                       Linked Workbook: <strong>{syncState.fileName}</strong>
                     </Typography>
                     <Typography variant="caption" sx={{ color: '#5b616e' }}>
@@ -481,7 +481,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<CloudUploadIcon />}
                     onClick={handleSaveNow}
                     disabled={busy || syncState.isSyncing}
-                    sx={{ bgcolor: '#0052ff', fontWeight: 700 }}
+                    sx={{ bgcolor: '#18181b', fontWeight: 700 }}
                   >
                     Save UI to Excel Now
                   </Button>
@@ -508,7 +508,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
               </Box>
             ) : (
               <Box>
-                <Typography variant="body2" sx={{ color: '#64748b', mb: 1.5 }}>
+                <Typography variant="body2" sx={{ color: '#71717a', mb: 1.5 }}>
                   No local Excel file is currently connected. Click below to create or select your Excel workbook.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
@@ -517,7 +517,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                     startIcon={<LinkIcon />}
                     onClick={handleConnectNew}
                     disabled={busy || !isSupported}
-                    sx={{ bgcolor: '#0052ff', fontWeight: 700 }}
+                    sx={{ bgcolor: '#18181b', fontWeight: 700 }}
                   >
                     Connect New / Existing Excel File
                   </Button>
@@ -547,15 +547,15 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexWrap: 'wrap', gap: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <SyncIcon sx={{ color: '#05b169', fontSize: 20 }} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0a0b0d' }}>
+              <SyncIcon sx={{ color: '#22c55e', fontSize: 20 }} />
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
                 2. Google Sheets Live Integration (Vice-Versa)
               </Typography>
             </Box>
             <Chip
               label="CORS-Safe JSONP Engine Active"
               size="small"
-              sx={{ bgcolor: '#ecfdf5', color: '#05b169', fontWeight: 700, fontSize: '0.68rem', border: '1px solid #a7f3d0' }}
+              sx={{ bgcolor: '#f0fdf4', color: '#22c55e', fontWeight: 700, fontSize: '0.68rem', border: '1px solid #a7f3d0' }}
             />
           </Box>
 
@@ -563,7 +563,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             Direct sync with your live public Google Sheet without CORS errors using real-time Google Visualization JSONP protocol.
           </Typography>
 
-          <Box sx={{ p: 2, bgcolor: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
+          <Box sx={{ p: 2, bgcolor: '#f0fdf4', borderRadius: '16px', border: '1px solid #bbf7d0' }}>
             <Grid container spacing={1.5} sx={{ alignItems: 'center', mb: 1.5 }}>
               <Grid size={{ xs: 12, sm: 7 }}>
                 <TextField
@@ -608,7 +608,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
                 startIcon={syncState.googleSheetSyncing ? <CircularProgress size={16} color="inherit" /> : <SyncIcon />}
                 onClick={handleSyncGoogleSheet}
                 disabled={busy || syncState.googleSheetSyncing}
-                sx={{ bgcolor: '#05b169', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#048e54' } }}
+                sx={{ bgcolor: '#22c55e', fontWeight: 700, px: 2, '&:hover': { bgcolor: '#22c55e' } }}
               >
                 {syncState.googleSheetSyncing ? 'Fetching Live Sheet...' : 'Sync from Google Sheet Now'}
               </Button>
@@ -619,7 +619,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         <Divider sx={{ my: 2 }} />
 
         {/* Section 3: Fresh Reset - Clear All Data & Re-sync */}
-        <Box sx={{ mb: 3, p: 2, bgcolor: '#fffbeb', borderRadius: '8px', border: '1px solid #fde68a' }}>
+        <Box sx={{ mb: 3, p: 2, bgcolor: '#fffbeb', borderRadius: '16px', border: '1px solid #fde68a' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1.5 }}>
             <Box>
               <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#92400e' }}>
@@ -662,8 +662,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         {/* Section 4: Two-Sheet Excel Export Format */}
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-            <FileDownloadIcon sx={{ color: '#0052ff', fontSize: 20 }} />
-            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0a0b0d' }}>
+            <FileDownloadIcon sx={{ color: '#18181b', fontSize: 20 }} />
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#09090b' }}>
               4. Two-Sheet Excel Architecture (OverAll & Details)
             </Typography>
           </Box>
@@ -673,8 +673,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
           </Typography>
 
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 1.5, mb: 2 }}>
-            <Box sx={{ p: 1.5, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0052ff' }}>
+            <Box sx={{ p: 1.5, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b' }}>
                 Sheet 1: OverAll
               </Typography>
               <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5 }}>
@@ -684,8 +684,8 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
               </Typography>
             </Box>
 
-            <Box sx={{ p: 1.5, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0052ff' }}>
+            <Box sx={{ p: 1.5, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#18181b' }}>
                 Sheet 2: Details
               </Typography>
               <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5 }}>
@@ -702,7 +702,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             onClick={handleDownloadMaster}
             disabled={busy}
             fullWidth
-            sx={{ fontWeight: 700, borderColor: '#0052ff', color: '#0052ff', py: 1 }}
+            sx={{ fontWeight: 700, borderColor: '#18181b', color: '#18181b', py: 1 }}
           >
             Download Complete Master 2-Sheet Excel (.xlsx)
           </Button>
@@ -710,7 +710,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
-        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#0052ff' }}>
+        <Button onClick={onClose} variant="contained" sx={{ fontWeight: 700, bgcolor: '#18181b' }}>
           Done
         </Button>
       </DialogActions>
@@ -721,7 +721,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
         onClose={() => setConfirmDialogOpen(false)}
         maxWidth="xs"
         fullWidth
-        sx={{ zIndex: 1400 }}
+        sx={{ zIndex: 1400, "& .MuiDialog-paper": { borderRadius: "24px" } }}
       >
         <DialogTitle sx={{ fontWeight: 800, color: '#b45309', display: 'flex', alignItems: 'center', gap: 1 }}>
           <RestartAltIcon sx={{ color: '#d97706' }} />
@@ -731,7 +731,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
           <Typography variant="body2" sx={{ color: '#1e293b', mb: 1.5, fontWeight: 500, lineHeight: 1.6 }}>
             Are you sure you want to clear all data and re-sync freshly from the authentic Excel/Google Sheets dataset?
           </Typography>
-          <Box sx={{ p: 1.5, bgcolor: '#fffbeb', borderRadius: '6px', border: '1px solid #fde68a' }}>
+          <Box sx={{ p: 1.5, bgcolor: '#fffbeb', borderRadius: '9999px', border: '1px solid #fde68a' }}>
             <Typography variant="caption" sx={{ color: '#92400e', fontWeight: 600, display: 'block' }}>
               • All local temporary/test records will be wiped.
               <br />• 63 authentic expenses & 5 fund deposits restored.
@@ -745,7 +745,7 @@ export const ExcelSyncDialog: React.FC<ExcelSyncDialogProps> = ({ open, onClose,
             onClick={() => setConfirmDialogOpen(false)}
             variant="outlined"
             size="small"
-            sx={{ fontWeight: 600, color: '#64748b', borderColor: '#cbd5e1' }}
+            sx={{ fontWeight: 600, color: '#71717a', borderColor: '#d4d4d8' }}
           >
             Cancel
           </Button>

@@ -1,15 +1,15 @@
-# DESIGN SYSTEM SPECIFICATION: Admission
+# DESIGN SYSTEM SPECIFICATION: Reui
 
-> Target Domain: https://admission.gnums.co.in
+> Target Domain: https://reui.io
 > System Classification: AI Extracted Website
-> Extracted Date: 2026-11-19
+> Extracted Date: 2026-11-20
 > Specification Standard: Context.dev System RFC v2
 
 ---
 
 ## 1. Brand Identity & Principles
 
-Extracted visual design system and tokens for admission.gnums.co.in.
+Extracted visual design system and tokens for reui.io.
 
 ### Design Pillars
 
@@ -21,29 +21,29 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 
 ## 2. Color Palette & Semantic Tokens
 
-| Token                        | Hex Value | Role                   | Contrast  | Recommended Usage                           |
-| :--------------------------- | :-------- | :--------------------- | :-------- | :------------------------------------------ |
-| `--fintech-sapphire-primary` | `#0052FF` | Primary CTA / Brand    | `#FFFFFF` | UI elements matching primary cta / brand    |
-| `--accent-highlight`         | `#05B169` | Focus / Active State   | `#FFFFFF` | UI elements matching focus / active state   |
-| `--canvas-base`              | `#FFFFFF` | Document Background    | `#0A0B0D` | UI elements matching document background    |
-| `--surface-container`        | `#F5F8FF` | Card / Panel Surface   | `#0A0B0D` | UI elements matching card / panel surface   |
-| `--structural-border`        | `#E2E8F0` | Dividers / Line Stroke | `#5B616E` | UI elements matching dividers / line stroke |
-| `--high-contrast-text`       | `#0A0B0D` | Headlines              | `#FFFFFF` | UI elements matching headlines              |
-| `--muted-typography`         | `#5B616E` | Body Copy / Labels     | `#FFFFFF` | UI elements matching body copy / labels     |
-| `--status-accent`            | `#05B169` | Validation / Active    | `#FFFFFF` | UI elements matching validation / active    |
+| Token                     | Hex Value | Role                   | Contrast  | Recommended Usage                           |
+| :------------------------ | :-------- | :--------------------- | :-------- | :------------------------------------------ |
+| `--obsidian-gold-primary` | `#18181B` | Primary CTA / Brand    | `#FFFFFF` | UI elements matching primary cta / brand    |
+| `--accent-highlight`      | `#EAB308` | Focus / Active State   | `#FFFFFF` | UI elements matching focus / active state   |
+| `--canvas-base`           | `#FAFAFA` | Document Background    | `#09090B` | UI elements matching document background    |
+| `--surface-container`     | `#FFFFFF` | Card / Panel Surface   | `#09090B` | UI elements matching card / panel surface   |
+| `--structural-border`     | `#E4E4E7` | Dividers / Line Stroke | `#71717A` | UI elements matching dividers / line stroke |
+| `--high-contrast-text`    | `#09090B` | Headlines              | `#FAFAFA` | UI elements matching headlines              |
+| `--muted-typography`      | `#71717A` | Body Copy / Labels     | `#FAFAFA` | UI elements matching body copy / labels     |
+| `--status-accent`         | `#22C55E` | Validation / Active    | `#FFFFFF` | UI elements matching validation / active    |
 
 ### CSS Variables Definition (:root)
 
 ```css
 :root {
-  --fintech-sapphire-primary: #0052ff; /* Primary CTA / Brand */
-  --accent-highlight: #05b169; /* Focus / Active State */
-  --canvas-base: #ffffff; /* Document Background */
-  --surface-container: #f5f8ff; /* Card / Panel Surface */
-  --structural-border: #e2e8f0; /* Dividers / Line Stroke */
-  --high-contrast-text: #0a0b0d; /* Headlines */
-  --muted-typography: #5b616e; /* Body Copy / Labels */
-  --status-accent: #05b169; /* Validation / Active */
+  --obsidian-gold-primary: #18181b; /* Primary CTA / Brand */
+  --accent-highlight: #eab308; /* Focus / Active State */
+  --canvas-base: #fafafa; /* Document Background */
+  --surface-container: #ffffff; /* Card / Panel Surface */
+  --structural-border: #e4e4e7; /* Dividers / Line Stroke */
+  --high-contrast-text: #09090b; /* Headlines */
+  --muted-typography: #71717a; /* Body Copy / Labels */
+  --status-accent: #22c55e; /* Validation / Active */
 }
 ```
 
@@ -51,30 +51,28 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 
 ## 3. Typography Hierarchy & Font Stacks
 
-- **Heading Stack**: `Plus Jakarta Sans, sans-serif`
-- **Body / Interface Stack**: `Plus Jakarta Sans, sans-serif`
-- **Code / Monospace Stack**: `JetBrains Mono, monospace`
+- **Heading Stack**: `Space Grotesk, sans-serif`
+- **Body / Interface Stack**: `Inter, sans-serif`
+- **Code / Monospace Stack**: `Space Mono, monospace`
 
 ### Typographic Scale
 
-| Hierarchy Level  | Font Size | Weight | Line Height | Usage Context                  |
-| :--------------- | :-------- | :----- | :---------- | :----------------------------- |
-| **Display Hero** | `52px`    | `700`  | `1.15`      | Display Hero typographic roles |
-| **Heading 1**    | `36px`    | `700`  | `1.2`       | Heading 1 typographic roles    |
-| **Heading 2**    | `24px`    | `600`  | `1.3`       | Heading 2 typographic roles    |
-| **Body Large**   | `17px`    | `400`  | `1.5`       | Body Large typographic roles   |
-| **Body Regular** | `15px`    | `400`  | `1.6`       | Body Regular typographic roles |
-| **Caption**      | `13px`    | `500`  | `1.4`       | Caption typographic roles      |
+| Hierarchy Level    | Font Size | Weight | Line Height | Usage Context                    |
+| :----------------- | :-------- | :----- | :---------- | :------------------------------- |
+| **Hero Banner**    | `48px`    | `700`  | `1.1`       | Hero Banner typographic roles    |
+| **Section Header** | `32px`    | `600`  | `1.25`      | Section Header typographic roles |
+| **Subhead**        | `22px`    | `600`  | `1.3`       | Subhead typographic roles        |
+| **Body Regular**   | `15px`    | `400`  | `1.5`       | Body Regular typographic roles   |
+| **Label**          | `13px`    | `500`  | `1.4`       | Label typographic roles          |
 
 ### CSS Typography Mixins
 
 ```css
---type-display-hero: 700 52px/1.15 Plus Jakarta Sans, sans-serif;
---type-heading-1: 700 36px/1.2 Plus Jakarta Sans, sans-serif;
---type-heading-2: 600 24px/1.3 Plus Jakarta Sans, sans-serif;
---type-body-large: 400 17px/1.5 Plus Jakarta Sans, sans-serif;
---type-body-regular: 400 15px/1.6 Plus Jakarta Sans, sans-serif;
---type-caption: 500 13px/1.4 Plus Jakarta Sans, sans-serif;
+--type-hero-banner: 700 48px/1.1 Space Grotesk, sans-serif;
+--type-section-header: 600 32px/1.25 Inter, sans-serif;
+--type-subhead: 600 22px/1.3 Inter, sans-serif;
+--type-body-regular: 400 15px/1.5 Inter, sans-serif;
+--type-label: 500 13px/1.4 Inter, sans-serif;
 ```
 
 ---
@@ -85,11 +83,11 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 
 ### Geometric Corner Radii
 
-| Token Name                | Radius Value | Target Controls & Containers       |
-| :------------------------ | :----------- | :--------------------------------- |
-| `--radius-button-control` | `8px`        | Button Control controls & elements |
-| `--radius-panel-card`     | `12px`       | Panel / Card controls & elements   |
-| `--radius-pill-tag`       | `9999px`     | Pill Tag controls & elements       |
+| Token Name               | Radius Value | Target Controls & Containers      |
+| :----------------------- | :----------- | :-------------------------------- |
+| `--radius-pill-button`   | `9999px`     | Pill Button controls & elements   |
+| `--radius-soft-card`     | `16px`       | Soft Card controls & elements     |
+| `--radius-modal-overlay` | `24px`       | Modal Overlay controls & elements |
 
 ### Elevation & Box Shadows
 
@@ -107,10 +105,10 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 ```css
 /* Primary interactive call-to-action */
 .btn-primary {
-  background: #0052ff;
+  background: #18181b;
   color: #ffffff;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 9999px;
   padding: 10px 20px;
 }
 ```
@@ -120,9 +118,9 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 ```css
 /* Elevated content panel */
 .card-surface {
-  background: #f5f8ff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 16px;
   padding: 24px;
 }
 ```
@@ -133,8 +131,8 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 /* Standard interactive text input */
 .input-control {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid #e4e4e7;
+  border-radius: 9999px;
   height: 44px;
   padding: 0 14px;
 }
@@ -144,23 +142,23 @@ Extracted visual design system and tokens for admission.gnums.co.in.
 
 ## 6. Motion Tokens & Micro-Interactions
 
-The motion system for **Admission** is engineered with strict timing scales and deceleration curves.
+The motion system for **Reui** is engineered with strict timing scales and deceleration curves.
 
 ### Easing Functions
 
-| Curve Name   | Cubic Bezier Definition                   | Interaction Role                         |
-| :----------- | :---------------------------------------- | :--------------------------------------- |
-| **Standard** | `cubic-bezier(0.32, 0.72, 0, 1)`          | Button hovers, micro-interactions        |
-| **Entrance** | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | Viewport reveals, modal dialog entries   |
-| **Hover**    | `cubic-bezier(0.32, 0.72, 0, 1)`          | State shifts, tooltip appearances        |
-| **Bounce**   | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | Spring physics, playful tactile feedback |
+| Curve Name   | Cubic Bezier Definition             | Interaction Role                         |
+| :----------- | :---------------------------------- | :--------------------------------------- |
+| **Standard** | `cubic-bezier(0.16, 1, 0.3, 1)`     | Button hovers, micro-interactions        |
+| **Entrance** | `cubic-bezier(0.16, 1, 0.3, 1)`     | Viewport reveals, modal dialog entries   |
+| **Hover**    | `cubic-bezier(0.16, 1, 0.3, 1)`     | State shifts, tooltip appearances        |
+| **Bounce**   | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Spring physics, playful tactile feedback |
 
 ### Timing Durations
 
-- **Instant**: `90ms` (checkboxes, radio buttons, icons)
-- **Fast**: `160ms` (button hover, chip selection, tooltips)
-- **Normal**: `240ms` (card elevation, dropdown menus)
-- **Slow**: `380ms` (page transitions, complex modal reveals)
+- **Instant**: `110ms` (checkboxes, radio buttons, icons)
+- **Fast**: `180ms` (button hover, chip selection, tooltips)
+- **Normal**: `270ms` (card elevation, dropdown menus)
+- **Slow**: `440ms` (page transitions, complex modal reveals)
 
 ### Keyframe Animation Snippets
 
@@ -192,10 +190,10 @@ The motion system for **Admission** is engineered with strict timing scales and 
 
 ## 7. AI Agent Implementation Directives
 
-When implementing features or refactoring UI for **Admission**, AI coding agents (Cursor, Claude, Copilot, Antigravity) MUST obey these constraints:
+When implementing features or refactoring UI for **Reui**, AI coding agents (Cursor, Claude, Copilot, Antigravity) MUST obey these constraints:
 
 1. **Never introduce arbitrary hex codes**: Use solely the extracted semantic tokens defined in Section 2.
-2. **Preserve Font Pairings**: Ensure headings strictly use `Plus Jakarta Sans` and body copy uses `Plus Jakarta Sans`.
-3. **Respect Corner Geometry**: Apply `8px` for interactive controls and `12px` for cards and modals.
+2. **Preserve Font Pairings**: Ensure headings strictly use `Space Grotesk` and body copy uses `Inter`.
+3. **Respect Corner Geometry**: Apply `9999px` for interactive controls and `16px` for cards and modals.
 4. **Contrast Compliance**: Ensure text contrast meets WCAG AA standards using the contrast pairings defined in Section 2.
-5. **Honor Motion Physics**: Use `cubic-bezier(0.32, 0.72, 0, 1)` for all hover transitions and `160ms` for button micro-interactions.
+5. **Honor Motion Physics**: Use `cubic-bezier(0.16, 1, 0.3, 1)` for all hover transitions and `180ms` for button micro-interactions.

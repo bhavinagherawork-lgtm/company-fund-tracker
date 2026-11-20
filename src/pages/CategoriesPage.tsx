@@ -41,7 +41,7 @@ export const CategoriesPage: React.FC = () => {
 
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
-  const [color, setColor] = useState('#0052ff');
+  const [color, setColor] = useState('#18181b');
   const [description, setDescription] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
@@ -77,7 +77,7 @@ export const CategoriesPage: React.FC = () => {
     setEditingCategory(null);
     setName('');
     setCode('');
-    setColor('#0052ff');
+    setColor('#18181b');
     setDescription('');
     setError(null);
     setOpenModal(true);
@@ -87,7 +87,7 @@ export const CategoriesPage: React.FC = () => {
     setEditingCategory(cat);
     setName(cat.name);
     setCode(cat.code || '');
-    setColor(cat.color || '#0052ff');
+    setColor(cat.color || '#18181b');
     setDescription(cat.description || '');
     setError(null);
     setOpenModal(true);
@@ -158,7 +158,7 @@ export const CategoriesPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.15rem' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             Expense Categories
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -172,7 +172,7 @@ export const CategoriesPage: React.FC = () => {
             size="small"
             startIcon={<RestartAltIcon sx={{ fontSize: 16 }} />}
             onClick={handleResetSeed}
-            sx={{ fontWeight: 700, borderRadius: '6px', borderColor: '#f59e0b', color: '#d97706', height: 30, px: 1.2, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#f59e0b', color: '#d97706', height: 30, px: 1.2, fontSize: '0.75rem' }}
           >
             Re-sync Baseline
           </Button>
@@ -183,13 +183,13 @@ export const CategoriesPage: React.FC = () => {
             onClick={handleOpenAdd}
             sx={{
               fontWeight: 700,
-              borderRadius: '6px',
-              bgcolor: '#0052ff',
+              borderRadius: '9999px',
+              bgcolor: '#18181b',
               color: '#ffffff',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#0042cc' }
+              '&:hover': { bgcolor: '#27272a' }
             }}
           >
             + Add Category
@@ -198,7 +198,7 @@ export const CategoriesPage: React.FC = () => {
       </Box>
 
       {syncMsg && (
-        <Alert severity="success" onClose={() => setSyncMsg(null)} sx={{ mb: 1.8, borderRadius: '6px', py: 0.5, fontSize: '0.8rem' }}>
+        <Alert severity="success" onClose={() => setSyncMsg(null)} sx={{ mb: 1.8, borderRadius: '9999px', py: 0.5, fontSize: '0.8rem' }}>
           {syncMsg}
         </Alert>
       )}
@@ -209,7 +209,7 @@ export const CategoriesPage: React.FC = () => {
           const count = cat.id !== undefined ? (categoryCounts[cat.id] || 0) : 0;
           return (
             <Grid key={cat.id || cat.code} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <Card sx={{ height: '100%', borderTop: `3px solid ${cat.color}`, borderRadius: '8px', transition: 'box-shadow 150ms ease', '&:hover': { boxShadow: '0 4px 12px rgba(0,0,0,0.06)' } }}>
+              <Card sx={{ height: '100%', borderTop: `3px solid ${cat.color}`, borderRadius: '16px', transition: 'box-shadow 150ms ease', '&:hover': { boxShadow: '0 4px 12px rgba(0,0,0,0.06)' } }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 0.8 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8 }}>
@@ -222,7 +222,7 @@ export const CategoriesPage: React.FC = () => {
                           flexShrink: 0,
                         }}
                       />
-                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0a0b0d', fontSize: '0.85rem' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.85rem' }}>
                         {cat.name}
                       </Typography>
                     </Box>
@@ -235,7 +235,7 @@ export const CategoriesPage: React.FC = () => {
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Delete Category">
-                        <IconButton size="small" color="error" onClick={() => handleOpenDelete(cat)} sx={{ p: 0.4, '&:hover': { bgcolor: '#fee2e2' } }}>
+                        <IconButton size="small" color="error" onClick={() => handleOpenDelete(cat)} sx={{ p: 0.4, '&:hover': { bgcolor: '#fef2f2' } }}>
                           <DeleteIcon sx={{ fontSize: 16 }} />
                         </IconButton>
                       </Tooltip>
@@ -246,18 +246,18 @@ export const CategoriesPage: React.FC = () => {
                     <Chip
                       label={cat.code}
                       size="small"
-                      sx={{ bgcolor: '#f1f5f9', color: '#475569', fontWeight: 600, fontSize: '0.7rem', height: 20 }}
+                      sx={{ bgcolor: '#f4f4f5', color: '#71717a', fontWeight: 600, fontSize: '0.7rem', height: 20 }}
                     />
                     <Chip
                       label={`${count} ${count === 1 ? 'expense' : 'expenses'}`}
                       size="small"
                       sx={{
-                        bgcolor: count > 0 ? '#f0fdf4' : '#f8fafc',
-                        color: count > 0 ? '#166534' : '#94a3b8',
+                        bgcolor: count > 0 ? '#f0fdf4' : '#fafafa',
+                        color: count > 0 ? '#166534' : '#a1a1aa',
                         fontWeight: 700,
                         fontSize: '0.68rem',
                         height: 20,
-                        border: `1px solid ${count > 0 ? '#bbf7d0' : '#e2e8f0'}`
+                        border: `1px solid ${count > 0 ? '#bbf7d0' : '#e4e4e7'}`
                       }}
                     />
                   </Box>
@@ -273,13 +273,12 @@ export const CategoriesPage: React.FC = () => {
       </Grid>
 
       {/* Delete Confirmation Modal */}
-      <Dialog
-        open={Boolean(deleteConfirmCat)}
+      <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={Boolean(deleteConfirmCat)}
         onClose={() => !isDeleting && setDeleteConfirmCat(null)}
         maxWidth="xs"
         fullWidth
       >
-        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#dc2626', fontWeight: 800 }}>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#ef4444', fontWeight: 800 }}>
           <WarningAmberIcon color="error" />
           Delete Category
         </DialogTitle>
@@ -291,7 +290,7 @@ export const CategoriesPage: React.FC = () => {
               </Typography>
 
               {deleteConfirmCat.id !== undefined && (categoryCounts[deleteConfirmCat.id] || 0) > 0 && (
-                <Box sx={{ p: 1.5, bgcolor: '#fffbeb', borderRadius: '6px', border: '1px solid #fde68a', mb: 2 }}>
+                <Box sx={{ p: 1.5, bgcolor: '#fffbeb', borderRadius: '9999px', border: '1px solid #fde68a', mb: 2 }}>
                   <Typography variant="caption" sx={{ color: '#92400e', fontWeight: 600, display: 'block', mb: 1 }}>
                     ⚠️ This category currently has <strong>{categoryCounts[deleteConfirmCat.id]}</strong> recorded expense transactions.
                   </Typography>
@@ -315,7 +314,7 @@ export const CategoriesPage: React.FC = () => {
                 </Box>
               )}
 
-              <Typography variant="caption" sx={{ color: '#64748b', display: 'block' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block' }}>
                 This category will be permanently removed. The Excel ledger will automatically reflect the change.
               </Typography>
             </Box>
@@ -339,7 +338,7 @@ export const CategoriesPage: React.FC = () => {
       </Dialog>
 
       {/* Add / Edit Category Dialog */}
-      <Dialog open={openModal} onClose={() => setOpenModal(false)} maxWidth="xs" fullWidth>
+      <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={openModal} onClose={() => setOpenModal(false)} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             {editingCategory ? <EditIcon color="primary" /> : <CategoryIcon color="primary" />}
@@ -409,7 +408,7 @@ export const CategoriesPage: React.FC = () => {
             <Button onClick={() => setOpenModal(false)} color="inherit">
               Cancel
             </Button>
-            <Button type="submit" variant="contained" color="primary" sx={{ px: 3, fontWeight: 700, bgcolor: '#0052ff' }}>
+            <Button type="submit" variant="contained" color="primary" sx={{ px: 3, fontWeight: 700, bgcolor: '#18181b' }}>
               {editingCategory ? 'Save Changes' : 'Add Category'}
             </Button>
           </DialogActions>

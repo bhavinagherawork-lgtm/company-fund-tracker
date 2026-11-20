@@ -384,7 +384,7 @@ export const ExpensesPage: React.FC = () => {
       {/* Top Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.8, flexWrap: 'wrap', gap: 1 }}>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 800, color: '#0a0b0d', fontSize: '1.15rem' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: "#09090b", fontFamily: '"Space Grotesk", sans-serif', letterSpacing: "-0.02em" }}>
             Day-Wise Expenses
           </Typography>
           <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.72rem' }}>
@@ -405,7 +405,7 @@ export const ExpensesPage: React.FC = () => {
             size="small"
             startIcon={<UploadFileIcon sx={{ fontSize: 16 }} />}
             onClick={() => fileInputRef.current?.click()}
-            sx={{ fontWeight: 700, borderRadius: '6px', borderColor: '#0052ff', color: '#0052ff', height: 30, px: 1.2, fontSize: '0.75rem' }}
+            sx={{ fontWeight: 700, borderRadius: '9999px', borderColor: '#18181b', color: '#18181b', height: 30, px: 1.2, fontSize: '0.75rem' }}
           >
             Import CSV
           </Button>
@@ -417,13 +417,13 @@ export const ExpensesPage: React.FC = () => {
             onClick={handleExportExcel}
             sx={{
               fontWeight: 700,
-              borderRadius: '6px',
-              borderColor: '#05b169',
-              color: '#05b169',
+              borderRadius: '9999px',
+              borderColor: '#22c55e',
+              color: '#22c55e',
               height: 30,
               px: 1.2,
               fontSize: '0.75rem',
-              '&:hover': { borderColor: '#048e54', bgcolor: '#f0fdf4' }
+              '&:hover': { borderColor: '#22c55e', bgcolor: '#f0fdf4' }
             }}
           >
             Export 2-Sheet Excel
@@ -440,12 +440,12 @@ export const ExpensesPage: React.FC = () => {
             sx={{
               fontWeight: 700,
               px: 1.5,
-              borderRadius: '6px',
-              bgcolor: '#0052ff',
+              borderRadius: '9999px',
+              bgcolor: '#18181b',
               color: '#ffffff',
               height: 30,
               fontSize: '0.75rem',
-              '&:hover': { bgcolor: '#0042cc' }
+              '&:hover': { bgcolor: '#27272a' }
             }}
           >
             + Record Expense
@@ -454,7 +454,7 @@ export const ExpensesPage: React.FC = () => {
       </Box>
 
       {importStatus && (
-        <Alert severity="success" onClose={() => setImportStatus(null)} sx={{ mb: 1.8, borderRadius: '6px', py: 0.5, fontSize: '0.8rem' }}>
+        <Alert severity="success" onClose={() => setImportStatus(null)} sx={{ mb: 1.8, borderRadius: '9999px', py: 0.5, fontSize: '0.8rem' }}>
           {importStatus}
         </Alert>
       )}
@@ -462,19 +462,19 @@ export const ExpensesPage: React.FC = () => {
       {/* KPI Cards (Dynamically Filtered) */}
       <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Posted Expenses {periodPreset !== 'ALL' && '(Filtered)'}
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#dc2626', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {formatINR(totalCompleted)}
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fee2e2', borderRadius: '6px' }}>
-                  <TrendingDownIcon sx={{ color: '#dc2626', fontSize: 20 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#fef2f2', borderRadius: '9999px' }}>
+                  <TrendingDownIcon sx={{ color: '#ef4444', fontSize: 20 }} />
                 </Box>
               </Box>
               <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
@@ -485,19 +485,19 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Active Expense Days
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#0052ff', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#18181b', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {totalFilteredActiveDays} Days
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                  <CalendarMonthIcon sx={{ color: '#0052ff', fontSize: 20 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                  <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 20 }} />
                 </Box>
               </Box>
               <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
@@ -508,19 +508,19 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '8px' }}>
+          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
                   <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Matching Transactions
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#05b169', mt: 0.3, fontFamily: 'JetBrains Mono, monospace', fontSize: '1.25rem' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {filteredExpenses.length} Records
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#f5f8ff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                  <ReceiptLongIcon sx={{ color: '#05b169', fontSize: 20 }} />
+                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                  <ReceiptLongIcon sx={{ color: '#22c55e', fontSize: 20 }} />
                 </Box>
               </Box>
               <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
@@ -532,7 +532,7 @@ export const ExpensesPage: React.FC = () => {
       </Grid>
 
       {/* UNIFIED DATE, WEEK & CATEGORY FILTER BAR */}
-      <Card sx={{ mb: 2, borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+      <Card sx={{ mb: 2, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
         <CardContent sx={{ p: '12px 14px !important' }}>
           <Grid container spacing={1.2} sx={{ alignItems: 'center' }}>
             {/* 1. Search Box */}
@@ -547,7 +547,7 @@ export const ExpensesPage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SearchIcon sx={{ color: '#94a3b8', fontSize: 18 }} />
+                        <SearchIcon sx={{ color: '#a1a1aa', fontSize: 18 }} />
                       </InputAdornment>
                     ),
                   },
@@ -568,7 +568,7 @@ export const ExpensesPage: React.FC = () => {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <DateRangeIcon sx={{ color: '#0052ff', fontSize: 17 }} />
+                        <DateRangeIcon sx={{ color: '#18181b', fontSize: 17 }} />
                       </InputAdornment>
                     ),
                   },
@@ -675,7 +675,7 @@ export const ExpensesPage: React.FC = () => {
                 <Chip
                   label={`${filteredExpenses.length} found`}
                   size="small"
-                  sx={{ bgcolor: '#ecfdf5', color: '#065f46', fontWeight: 700, fontSize: '0.72rem' }}
+                  sx={{ bgcolor: '#f0fdf4', color: '#15803d', fontWeight: 700, fontSize: '0.72rem' }}
                 />
               )}
               <Button
@@ -683,7 +683,7 @@ export const ExpensesPage: React.FC = () => {
                 color="inherit"
                 size="small"
                 onClick={handleResetFilters}
-                sx={{ height: 32, fontSize: '0.75rem', fontWeight: 600, borderColor: '#e2e8f0', minWidth: 64 }}
+                sx={{ height: 32, fontSize: '0.75rem', fontWeight: 600, borderColor: '#e4e4e7', minWidth: 64 }}
               >
                 Reset
               </Button>
@@ -708,7 +708,7 @@ export const ExpensesPage: React.FC = () => {
               Loading day-wise expenses...
             </Typography>
           ) : filteredDayWiseList.length === 0 ? (
-            <Card sx={{ p: 4, textAlign: 'center', borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+            <Card sx={{ p: 4, textAlign: 'center', borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
               <Typography variant="body2" color="text.secondary">
                 No expenses match the selected date / week filter. Try resetting filters or clicking "+ Record Expense".
               </Typography>
@@ -733,8 +733,8 @@ export const ExpensesPage: React.FC = () => {
                     label={`${filteredDayWiseList.length} Active Days`}
                     size="small"
                     sx={{
-                      bgcolor: '#0052ff10',
-                      color: '#0052ff',
+                      bgcolor: 'rgba(24, 24, 27, 0.06)',
+                      color: '#18181b',
                       fontWeight: 700,
                       fontSize: '0.72rem',
                       height: 26,
@@ -745,11 +745,11 @@ export const ExpensesPage: React.FC = () => {
                     label={`Total: ${formatINR(totalCompleted)}`}
                     size="small"
                     sx={{
-                      bgcolor: '#fee2e2',
-                      color: '#dc2626',
+                      bgcolor: '#fef2f2',
+                      color: '#ef4444',
                       fontWeight: 800,
                       fontSize: '0.72rem',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: "Space Mono, monospace",
                       height: 26,
                       border: '1px solid #fecaca',
                     }}
@@ -758,11 +758,11 @@ export const ExpensesPage: React.FC = () => {
                     label={`Avg: ${formatINR(filteredDayWiseList.length ? Math.round(totalCompleted / filteredDayWiseList.length) : 0)} / day`}
                     size="small"
                     sx={{
-                      bgcolor: '#f1f5f9',
-                      color: '#475569',
+                      bgcolor: '#f4f4f5',
+                      color: '#71717a',
                       fontWeight: 600,
                       fontSize: '0.72rem',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: "Space Mono, monospace",
                       height: 26,
                     }}
                   />
@@ -787,12 +787,12 @@ export const ExpensesPage: React.FC = () => {
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         textTransform: 'none',
-                        color: '#475569',
-                        borderColor: '#cbd5e1',
+                        color: '#71717a',
+                        borderColor: '#d4d4d8',
                         '&.Mui-selected': {
-                          bgcolor: '#0052ff',
+                          bgcolor: '#18181b',
                           color: '#ffffff !important',
-                          '&:hover': { bgcolor: '#0042cc' },
+                          '&:hover': { bgcolor: '#27272a' },
                         },
                       },
                     }}
@@ -817,10 +817,10 @@ export const ExpensesPage: React.FC = () => {
                       fontSize: '0.72rem',
                       fontWeight: 700,
                       textTransform: 'none',
-                      borderColor: '#cbd5e1',
-                      color: '#334155',
+                      borderColor: '#d4d4d8',
+                      color: '#09090b',
                       bgcolor: '#ffffff',
-                      '&:hover': { bgcolor: '#f8fafc', borderColor: '#94a3b8' },
+                      '&:hover': { bgcolor: '#fafafa', borderColor: '#a1a1aa' },
                     }}
                   >
                     {allCollapsed ? 'Expand All' : 'Collapse All'}
@@ -851,14 +851,14 @@ export const ExpensesPage: React.FC = () => {
                       <Card
                         key={dayGroup.date}
                         sx={{
-                          borderRadius: '8px',
+                          borderRadius: '16px',
                           border: '1px solid #e2e8f0',
                           boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                           bgcolor: '#ffffff',
                           overflow: 'hidden',
                           transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
                           '&:hover': {
-                            borderColor: '#cbd5e1',
+                            borderColor: '#d4d4d8',
                             boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
                           },
                         }}
@@ -872,12 +872,12 @@ export const ExpensesPage: React.FC = () => {
                             justifyContent: 'space-between',
                             p: '9px 14px',
                             cursor: 'pointer',
-                            bgcolor: isExpanded ? '#f8fafc' : '#ffffff',
+                            bgcolor: isExpanded ? '#fafafa' : '#ffffff',
                             borderBottom: isExpanded ? '1px solid #e2e8f0' : 'none',
                             transition: 'background-color 0.15s ease',
                             userSelect: 'none',
                             '&:hover': {
-                              bgcolor: '#f1f5f9',
+                              bgcolor: '#f4f4f5',
                             },
                           }}
                         >
@@ -888,7 +888,7 @@ export const ExpensesPage: React.FC = () => {
                               sx={{
                                 width: 38,
                                 height: 38,
-                                borderRadius: '6px',
+                                borderRadius: '9999px',
                                 border: '1px solid #dbeafe',
                                 bgcolor: '#ffffff',
                                 display: 'flex',
@@ -903,7 +903,7 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{
                                   fontSize: '0.58rem',
                                   fontWeight: 800,
-                                  color: '#0052ff',
+                                  color: '#18181b',
                                   letterSpacing: '0.4px',
                                   lineHeight: 1,
                                 }}
@@ -914,9 +914,9 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{
                                   fontSize: '0.95rem',
                                   fontWeight: 800,
-                                  color: '#0f172a',
+                                  color: '#09090b',
                                   lineHeight: 1.1,
-                                  fontFamily: 'JetBrains Mono, monospace',
+                                  fontFamily: "Space Mono, monospace",
                                 }}
                               >
                                 {dayNum}
@@ -929,7 +929,7 @@ export const ExpensesPage: React.FC = () => {
                                 variant="subtitle2"
                                 sx={{
                                   fontWeight: 700,
-                                  color: '#0f172a',
+                                  color: '#09090b',
                                   fontSize: '0.85rem',
                                   lineHeight: 1.2,
                                 }}
@@ -939,7 +939,7 @@ export const ExpensesPage: React.FC = () => {
                               <Typography
                                 variant="caption"
                                 sx={{
-                                  color: '#64748b',
+                                  color: '#71717a',
                                   fontSize: '0.7rem',
                                   display: 'flex',
                                   alignItems: 'center',
@@ -960,11 +960,11 @@ export const ExpensesPage: React.FC = () => {
                               label={`-${formatINR(dayGroup.totalAmount)}`}
                               size="small"
                               sx={{
-                                bgcolor: '#fee2e2',
-                                color: '#dc2626',
+                                bgcolor: '#fef2f2',
+                                color: '#ef4444',
                                 fontWeight: 800,
                                 fontSize: '0.78rem',
-                                fontFamily: 'JetBrains Mono, monospace',
+                                fontFamily: "Space Mono, monospace",
                                 border: '1px solid #fecaca',
                                 height: 26,
                                 px: 0.5,
@@ -974,7 +974,7 @@ export const ExpensesPage: React.FC = () => {
                               size="small"
                               sx={{
                                 p: 0.4,
-                                color: '#64748b',
+                                color: '#71717a',
                                 transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                                 transition: 'transform 0.2s ease',
                               }}
@@ -989,7 +989,7 @@ export const ExpensesPage: React.FC = () => {
                           <Box sx={{ bgcolor: '#ffffff' }}>
                             {dayGroup.expenses.map((exp, idx) => {
                               const cat = exp.categoryId ? categoryMap.get(exp.categoryId) : undefined;
-                              const catColor = cat?.color || '#0052ff';
+                              const catColor = cat?.color || '#18181b';
                               const isVoided = exp.status === 'Void';
 
                               return (
@@ -1007,7 +1007,7 @@ export const ExpensesPage: React.FC = () => {
                                     opacity: isVoided ? 0.65 : 1,
                                     transition: 'background-color 0.15s ease',
                                     '&:hover': {
-                                      bgcolor: isVoided ? '#f4f4f5' : '#f8fafc',
+                                      bgcolor: isVoided ? '#f4f4f5' : '#fafafa',
                                     },
                                   }}
                                 >
@@ -1030,7 +1030,7 @@ export const ExpensesPage: React.FC = () => {
                                           variant="body2"
                                           sx={{
                                             fontWeight: 700,
-                                            color: isVoided ? '#94a3b8' : '#0f172a',
+                                            color: isVoided ? '#a1a1aa' : '#09090b',
                                             fontSize: '0.82rem',
                                             textDecoration: isVoided ? 'line-through' : 'none',
                                           }}
@@ -1043,7 +1043,7 @@ export const ExpensesPage: React.FC = () => {
                                             size="small"
                                             sx={{
                                               bgcolor: '#fef2f2',
-                                              color: '#dc2626',
+                                              color: '#ef4444',
                                               fontWeight: 800,
                                               fontSize: '0.62rem',
                                               height: 18,
@@ -1057,7 +1057,7 @@ export const ExpensesPage: React.FC = () => {
                                         <Typography
                                           variant="caption"
                                           sx={{
-                                            color: '#64748b',
+                                            color: '#71717a',
                                             display: 'block',
                                             fontSize: '0.7rem',
                                             mt: 0.2,
@@ -1083,7 +1083,7 @@ export const ExpensesPage: React.FC = () => {
                                             fontWeight: 700,
                                             fontSize: '0.65rem',
                                             height: 19,
-                                            borderRadius: '4px',
+                                            borderRadius: '9999px',
                                           }}
                                         />
 
@@ -1099,7 +1099,7 @@ export const ExpensesPage: React.FC = () => {
                                             fontWeight: 700,
                                             fontSize: '0.62rem',
                                             height: 19,
-                                            borderRadius: '4px',
+                                            borderRadius: '9999px',
                                             '& .MuiChip-icon': { ml: 0.5, mr: -0.3 },
                                           }}
                                         />
@@ -1111,12 +1111,12 @@ export const ExpensesPage: React.FC = () => {
                                             label={exp.vendor}
                                             size="small"
                                             sx={{
-                                              bgcolor: '#f1f5f9',
-                                              color: '#334155',
+                                              bgcolor: '#f4f4f5',
+                                              color: '#09090b',
                                               fontWeight: 600,
                                               fontSize: '0.65rem',
                                               height: 19,
-                                              borderRadius: '4px',
+                                              borderRadius: '9999px',
                                               '& .MuiChip-icon': { ml: 0.5, mr: -0.3 },
                                             }}
                                           />
@@ -1124,7 +1124,7 @@ export const ExpensesPage: React.FC = () => {
 
                                         {/* Bill / Invoice # */}
                                         {exp.billNumber && (
-                                          <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.65rem', fontFamily: 'JetBrains Mono, monospace' }}>
+                                          <Typography variant="caption" sx={{ color: '#a1a1aa', fontSize: '0.65rem', fontFamily: "Space Mono, monospace" }}>
                                             #{exp.billNumber}
                                           </Typography>
                                         )}
@@ -1136,12 +1136,12 @@ export const ExpensesPage: React.FC = () => {
                                           size="small"
                                           variant="outlined"
                                           sx={{
-                                            borderColor: '#e2e8f0',
-                                            color: '#475569',
+                                            borderColor: '#e4e4e7',
+                                            color: '#71717a',
                                             fontWeight: 600,
                                             fontSize: '0.65rem',
                                             height: 19,
-                                            borderRadius: '4px',
+                                            borderRadius: '9999px',
                                             '& .MuiChip-icon': { ml: 0.5, mr: -0.3 },
                                           }}
                                         />
@@ -1160,9 +1160,9 @@ export const ExpensesPage: React.FC = () => {
                                           sx={{
                                             p: 0.5,
                                             bgcolor: '#eff6ff',
-                                            color: '#0052ff',
+                                            color: '#18181b',
                                             border: '1px solid #bfdbfe',
-                                            borderRadius: '6px',
+                                            borderRadius: '9999px',
                                             '&:hover': { bgcolor: '#dbeafe' },
                                           }}
                                         >
@@ -1176,10 +1176,10 @@ export const ExpensesPage: React.FC = () => {
                                     {/* Outflow Amount */}
                                     <Typography
                                       sx={{
-                                        fontFamily: 'JetBrains Mono, monospace',
+                                        fontFamily: "Space Mono, monospace",
                                         fontWeight: 800,
                                         fontSize: '0.88rem',
-                                        color: isVoided ? '#94a3b8' : '#dc2626',
+                                        color: isVoided ? '#a1a1aa' : '#ef4444',
                                         minWidth: 95,
                                         textAlign: 'right',
                                       }}
@@ -1193,15 +1193,15 @@ export const ExpensesPage: React.FC = () => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 0.2,
-                                        bgcolor: '#f8fafc',
+                                        bgcolor: '#fafafa',
                                         border: '1px solid #e2e8f0',
-                                        borderRadius: '6px',
+                                        borderRadius: '9999px',
                                         p: 0.2,
                                       }}
                                     >
                                       <Tooltip title="View Details">
                                         <IconButton size="small" onClick={() => setViewDetailModal(exp)} sx={{ p: 0.4 }}>
-                                          <VisibilityIcon sx={{ fontSize: 15, color: '#475569' }} />
+                                          <VisibilityIcon sx={{ fontSize: 15, color: '#71717a' }} />
                                         </IconButton>
                                       </Tooltip>
                                       <Tooltip title="Edit Expense">
@@ -1213,7 +1213,7 @@ export const ExpensesPage: React.FC = () => {
                                           }}
                                           sx={{ p: 0.4 }}
                                         >
-                                          <EditIcon sx={{ fontSize: 15, color: '#0052ff' }} />
+                                          <EditIcon sx={{ fontSize: 15, color: '#18181b' }} />
                                         </IconButton>
                                       </Tooltip>
                                       <Tooltip title={isVoided ? 'Unvoid / Restore Expense' : 'Void Expense'}>
@@ -1223,7 +1223,7 @@ export const ExpensesPage: React.FC = () => {
                                           sx={{ p: 0.4 }}
                                         >
                                           {isVoided ? (
-                                            <RestoreIcon sx={{ fontSize: 15, color: '#05b169' }} />
+                                            <RestoreIcon sx={{ fontSize: 15, color: '#22c55e' }} />
                                           ) : (
                                             <BlockIcon sx={{ fontSize: 15, color: '#f59e0b' }} />
                                           )}
@@ -1231,7 +1231,7 @@ export const ExpensesPage: React.FC = () => {
                                       </Tooltip>
                                       <Tooltip title="Delete Expense">
                                         <IconButton size="small" onClick={() => handleDelete(exp.id)} sx={{ p: 0.4 }}>
-                                          <DeleteIcon sx={{ fontSize: 15, color: '#dc2626' }} />
+                                          <DeleteIcon sx={{ fontSize: 15, color: '#ef4444' }} />
                                         </IconButton>
                                       </Tooltip>
                                     </Box>
@@ -1249,10 +1249,10 @@ export const ExpensesPage: React.FC = () => {
 
               {/* VIEW STYLE 2: Compact Statement Ledger Table */}
               {dayViewStyle === 'compact' && (
-                <Card sx={{ borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff', overflow: 'hidden' }}>
+                <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff', overflow: 'hidden' }}>
                   <TableContainer>
                     <Table size="small">
-                      <TableHead sx={{ bgcolor: '#f8fafc' }}>
+                      <TableHead sx={{ bgcolor: '#fafafa' }}>
                         <TableRow>
                           <TableCell sx={{ py: 0.8, fontSize: '0.72rem', fontWeight: 700 }}>PARTICULARS & NOTES</TableCell>
                           <TableCell sx={{ py: 0.8, fontSize: '0.72rem', fontWeight: 700 }}>CATEGORY</TableCell>
@@ -1274,9 +1274,9 @@ export const ExpensesPage: React.FC = () => {
                               <TableRow
                                 onClick={() => toggleDay(dayGroup.date)}
                                 sx={{
-                                  bgcolor: isExpanded ? '#f1f5f9' : '#f8fafc',
+                                  bgcolor: isExpanded ? '#f4f4f5' : '#fafafa',
                                   cursor: 'pointer',
-                                  '&:hover': { bgcolor: '#e2e8f0' },
+                                  '&:hover': { bgcolor: '#e4e4e7' },
                                   userSelect: 'none',
                                   borderTop: '1px solid #e2e8f0',
                                 }}
@@ -1287,21 +1287,21 @@ export const ExpensesPage: React.FC = () => {
                                       size="small"
                                       sx={{
                                         p: 0.2,
-                                        color: '#475569',
+                                        color: '#71717a',
                                         transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                                         transition: 'transform 0.15s ease',
                                       }}
                                     >
                                       <ExpandMoreIcon sx={{ fontSize: 16 }} />
                                     </IconButton>
-                                    <CalendarMonthIcon sx={{ color: '#0052ff', fontSize: 16 }} />
-                                    <Typography variant="body2" sx={{ fontWeight: 800, color: '#0f172a', fontSize: '0.82rem' }}>
+                                    <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 16 }} />
+                                    <Typography variant="body2" sx={{ fontWeight: 800, color: '#09090b', fontSize: '0.82rem' }}>
                                       {formatDate(dayGroup.date)} ({dayGroup.dayOfWeek})
                                     </Typography>
                                     <Chip
                                       label={`${dayGroup.expenseCount} vouchers`}
                                       size="small"
-                                      sx={{ bgcolor: '#e2e8f0', color: '#334155', fontWeight: 700, fontSize: '0.65rem', height: 18 }}
+                                      sx={{ bgcolor: '#e4e4e7', color: '#09090b', fontWeight: 700, fontSize: '0.65rem', height: 18 }}
                                     />
                                   </Box>
                                 </TableCell>
@@ -1310,11 +1310,11 @@ export const ExpensesPage: React.FC = () => {
                                     label={`Day Total: -${formatINR(dayGroup.totalAmount)}`}
                                     size="small"
                                     sx={{
-                                      bgcolor: '#fee2e2',
-                                      color: '#dc2626',
+                                      bgcolor: '#fef2f2',
+                                      color: '#ef4444',
                                       fontWeight: 800,
                                       fontSize: '0.75rem',
-                                      fontFamily: 'JetBrains Mono, monospace',
+                                      fontFamily: "Space Mono, monospace",
                                       border: '1px solid #fecaca',
                                       height: 22,
                                     }}
@@ -1326,7 +1326,7 @@ export const ExpensesPage: React.FC = () => {
                               {isExpanded &&
                                 dayGroup.expenses.map((exp, expIdx) => {
                                   const cat = exp.categoryId ? categoryMap.get(exp.categoryId) : undefined;
-                                  const catColor = cat?.color || '#0052ff';
+                                  const catColor = cat?.color || '#18181b';
                                   const isVoided = exp.status === 'Void';
 
                                   return (
@@ -1347,7 +1347,7 @@ export const ExpensesPage: React.FC = () => {
                                               variant="body2"
                                               sx={{
                                                 fontWeight: 700,
-                                                color: isVoided ? '#94a3b8' : '#0f172a',
+                                                color: isVoided ? '#a1a1aa' : '#09090b',
                                                 fontSize: '0.8rem',
                                                 textDecoration: isVoided ? 'line-through' : 'none',
                                               }}
@@ -1355,7 +1355,7 @@ export const ExpensesPage: React.FC = () => {
                                               {exp.expenseTitle}
                                             </Typography>
                                             {exp.description && (
-                                              <Typography variant="caption" sx={{ color: '#64748b', display: 'block', fontSize: '0.68rem' }}>
+                                              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', fontSize: '0.68rem' }}>
                                                 {exp.description}
                                               </Typography>
                                             )}
@@ -1373,7 +1373,7 @@ export const ExpensesPage: React.FC = () => {
                                               fontWeight: 700,
                                               fontSize: '0.65rem',
                                               height: 19,
-                                              borderRadius: '4px',
+                                              borderRadius: '9999px',
                                             }}
                                           />
                                           <Chip
@@ -1396,18 +1396,18 @@ export const ExpensesPage: React.FC = () => {
                                       <TableCell sx={{ py: 0.6 }}>
                                         {exp.vendor ? (
                                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                            <StorefrontIcon sx={{ fontSize: 13, color: '#64748b' }} />
-                                            <Typography variant="body2" sx={{ fontSize: '0.78rem', color: '#334155' }}>
+                                            <StorefrontIcon sx={{ fontSize: 13, color: '#71717a' }} />
+                                            <Typography variant="body2" sx={{ fontSize: '0.78rem', color: '#09090b' }}>
                                               {exp.vendor}
                                             </Typography>
                                             {exp.billNumber && (
-                                              <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.65rem', fontFamily: 'JetBrains Mono, monospace' }}>
+                                              <Typography variant="caption" sx={{ color: '#a1a1aa', fontSize: '0.65rem', fontFamily: "Space Mono, monospace" }}>
                                                 #{exp.billNumber}
                                               </Typography>
                                             )}
                                           </Box>
                                         ) : (
-                                          <Typography variant="body2" sx={{ color: '#94a3b8', fontSize: '0.78rem' }}>—</Typography>
+                                          <Typography variant="body2" sx={{ color: '#a1a1aa', fontSize: '0.78rem' }}>—</Typography>
                                         )}
                                       </TableCell>
                                       <TableCell sx={{ py: 0.6 }}>
@@ -1417,12 +1417,12 @@ export const ExpensesPage: React.FC = () => {
                                           size="small"
                                           variant="outlined"
                                           sx={{
-                                            borderColor: '#e2e8f0',
-                                            color: '#475569',
+                                            borderColor: '#e4e4e7',
+                                            color: '#71717a',
                                             fontWeight: 600,
                                             fontSize: '0.65rem',
                                             height: 19,
-                                            borderRadius: '4px',
+                                            borderRadius: '9999px',
                                             '& .MuiChip-icon': { ml: 0.5, mr: -0.3 },
                                           }}
                                         />
@@ -1433,7 +1433,7 @@ export const ExpensesPage: React.FC = () => {
                                             <IconButton
                                               size="small"
                                               onClick={() => setPreviewReceipt({ title: exp.expenseTitle, dataUrl: exp.receiptDataUrl! })}
-                                              sx={{ p: 0.3, color: '#0052ff' }}
+                                              sx={{ p: 0.3, color: '#18181b' }}
                                             >
                                               <AttachFileIcon sx={{ fontSize: 15 }} />
                                             </IconButton>
@@ -1442,14 +1442,14 @@ export const ExpensesPage: React.FC = () => {
                                           <Typography variant="caption" color="text.secondary">—</Typography>
                                         )}
                                       </TableCell>
-                                      <TableCell align="right" sx={{ py: 0.6, fontWeight: 800, color: isVoided ? '#94a3b8' : '#dc2626', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem' }}>
+                                      <TableCell align="right" sx={{ py: 0.6, fontWeight: 800, color: isVoided ? '#a1a1aa' : '#ef4444', fontFamily: "Space Mono, monospace", fontSize: '0.85rem' }}>
                                         -{formatINR(exp.amount)}
                                       </TableCell>
                                       <TableCell align="center" sx={{ py: 0.6 }}>
                                         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.2 }}>
                                           <Tooltip title="View Details">
                                             <IconButton size="small" onClick={() => setViewDetailModal(exp)} sx={{ p: 0.3 }}>
-                                              <VisibilityIcon sx={{ fontSize: 14, color: '#475569' }} />
+                                              <VisibilityIcon sx={{ fontSize: 14, color: '#71717a' }} />
                                             </IconButton>
                                           </Tooltip>
                                           <Tooltip title="Edit Expense">
@@ -1461,7 +1461,7 @@ export const ExpensesPage: React.FC = () => {
                                               }}
                                               sx={{ p: 0.3 }}
                                             >
-                                              <EditIcon sx={{ fontSize: 14, color: '#0052ff' }} />
+                                              <EditIcon sx={{ fontSize: 14, color: '#18181b' }} />
                                             </IconButton>
                                           </Tooltip>
                                           <Tooltip title={isVoided ? 'Unvoid / Restore Expense' : 'Void Expense'}>
@@ -1471,7 +1471,7 @@ export const ExpensesPage: React.FC = () => {
                                               sx={{ p: 0.3 }}
                                             >
                                               {isVoided ? (
-                                                <RestoreIcon sx={{ fontSize: 14, color: '#05b169' }} />
+                                                <RestoreIcon sx={{ fontSize: 14, color: '#22c55e' }} />
                                               ) : (
                                                 <BlockIcon sx={{ fontSize: 14, color: '#f59e0b' }} />
                                               )}
@@ -1479,7 +1479,7 @@ export const ExpensesPage: React.FC = () => {
                                           </Tooltip>
                                           <Tooltip title="Delete Expense">
                                             <IconButton size="small" onClick={() => handleDelete(exp.id)} sx={{ p: 0.3 }}>
-                                              <DeleteIcon sx={{ fontSize: 14, color: '#dc2626' }} />
+                                              <DeleteIcon sx={{ fontSize: 14, color: '#ef4444' }} />
                                             </IconButton>
                                           </Tooltip>
                                         </Box>
@@ -1497,7 +1497,7 @@ export const ExpensesPage: React.FC = () => {
               )}
 
               {/* Day-Wise Pagination Bar */}
-              <Card sx={{ mt: 1.5, borderRadius: '8px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
+              <Card sx={{ mt: 1.5, borderRadius: '16px', border: '1px solid #e2e8f0', bgcolor: '#ffffff' }}>
                 <TablePagination
                   component="div"
                   count={filteredDayWiseList.length}
@@ -1515,7 +1515,7 @@ export const ExpensesPage: React.FC = () => {
                     '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
                       fontSize: '0.78rem',
                       fontWeight: 600,
-                      color: '#475569',
+                      color: '#71717a',
                     },
                     '& .MuiTablePagination-select': {
                       fontSize: '0.78rem',
@@ -1531,10 +1531,10 @@ export const ExpensesPage: React.FC = () => {
 
       {/* Tab 1: All Records Data Table */}
       {tabValue === 1 && (
-        <Card sx={{ borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+        <Card sx={{ borderRadius: '16px', border: '1px solid #e2e8f0' }}>
           <TableContainer>
             <Table size="small">
-              <TableHead sx={{ bgcolor: '#f8fafc' }}>
+              <TableHead sx={{ bgcolor: '#fafafa' }}>
                 <TableRow>
                   <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>DATE</TableCell>
                   <TableCell sx={{ py: 0.8, fontSize: '0.72rem' }}>EXPENSE TITLE & NOTES</TableCell>
@@ -1561,7 +1561,7 @@ export const ExpensesPage: React.FC = () => {
                       <TableRow key={item.id} hover>
                         <TableCell sx={{ py: 0.6, fontSize: '0.78rem' }}>{formatDate(item.expenseDate)}</TableCell>
                         <TableCell sx={{ py: 0.6 }}>
-                          <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a', fontSize: '0.8rem' }}>
+                          <Typography variant="body2" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.8rem' }}>
                             {item.expenseTitle}
                           </Typography>
                           {item.description && (
@@ -1575,7 +1575,7 @@ export const ExpensesPage: React.FC = () => {
                             <Chip
                               label={item.categoryName || 'General'}
                               size="small"
-                              sx={{ bgcolor: '#f5f8ff', color: '#0052ff', fontWeight: 600, fontSize: '0.68rem', height: 20 }}
+                              sx={{ bgcolor: '#fafafa', color: '#18181b', fontWeight: 600, fontSize: '0.68rem', height: 20 }}
                             />
                             <Chip
                               icon={<CorporateFareIcon sx={{ fontSize: '10px !important', color: '#1e40af !important' }} />}
@@ -1610,7 +1610,7 @@ export const ExpensesPage: React.FC = () => {
                             <Typography variant="caption" color="text.secondary">—</Typography>
                           )}
                         </TableCell>
-                        <TableCell align="right" sx={{ fontWeight: 800, color: item.status === 'Void' ? '#94a3b8' : '#dc2626', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.82rem', py: 0.6 }}>
+                        <TableCell align="right" sx={{ fontWeight: 800, color: item.status === 'Void' ? '#a1a1aa' : '#ef4444', fontFamily: "Space Mono, monospace", fontSize: '0.82rem', py: 0.6 }}>
                           -{formatINR(item.amount)}
                         </TableCell>
                         <TableCell align="center" sx={{ py: 0.6 }}>
@@ -1650,7 +1650,7 @@ export const ExpensesPage: React.FC = () => {
                                 sx={{ p: 0.4 }}
                               >
                                 {item.status === 'Void' ? (
-                                  <RestoreIcon sx={{ fontSize: 16, color: '#05b169' }} />
+                                  <RestoreIcon sx={{ fontSize: 16, color: '#22c55e' }} />
                                 ) : (
                                   <BlockIcon sx={{ fontSize: 16 }} />
                                 )}
@@ -1697,7 +1697,7 @@ export const ExpensesPage: React.FC = () => {
       />
 
       {/* View Detail Modal */}
-      <Dialog open={Boolean(viewDetailModal)} onClose={() => setViewDetailModal(null)} maxWidth="xs" fullWidth>
+      <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={Boolean(viewDetailModal)} onClose={() => setViewDetailModal(null)} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Expense Details
@@ -1715,7 +1715,7 @@ export const ExpensesPage: React.FC = () => {
               </Box>
               <Box>
                 <Typography variant="caption" color="text.secondary">AMOUNT</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 800, color: '#dc2626' }}>
+                <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444' }}>
                   -{formatINR(viewDetailModal.amount)}
                 </Typography>
               </Box>
@@ -1742,8 +1742,8 @@ export const ExpensesPage: React.FC = () => {
                     label={viewDetailModal.status === 'Void' ? 'VOIDED (Excluded from balance)' : 'COMPLETED (Active)'}
                     size="small"
                     sx={{
-                      bgcolor: viewDetailModal.status === 'Void' ? '#fee2e2' : '#ecfdf5',
-                      color: viewDetailModal.status === 'Void' ? '#dc2626' : '#065f46',
+                      bgcolor: viewDetailModal.status === 'Void' ? '#fef2f2' : '#f0fdf4',
+                      color: viewDetailModal.status === 'Void' ? '#ef4444' : '#15803d',
                       fontWeight: 800,
                       fontSize: '0.68rem',
                     }}
@@ -1797,7 +1797,7 @@ export const ExpensesPage: React.FC = () => {
       </Dialog>
 
       {/* Receipt Image Preview */}
-      <Dialog open={Boolean(previewReceipt)} onClose={() => setPreviewReceipt(null)} maxWidth="md" fullWidth>
+      <Dialog sx={{ "& .MuiDialog-paper": { borderRadius: "24px" } }} open={Boolean(previewReceipt)} onClose={() => setPreviewReceipt(null)} maxWidth="md" fullWidth>
         <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Receipt Attachment: {previewReceipt?.title}
@@ -1806,7 +1806,7 @@ export const ExpensesPage: React.FC = () => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers sx={{ textAlign: 'center', p: 3, bgcolor: '#f8fafc' }}>
+        <DialogContent dividers sx={{ textAlign: 'center', p: 3, bgcolor: '#fafafa' }}>
           {previewReceipt?.dataUrl && (
             <img
               src={previewReceipt.dataUrl}
