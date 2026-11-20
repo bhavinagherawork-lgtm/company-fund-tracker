@@ -2,6 +2,7 @@ import { getExcelArrayBuffer } from './excelService';
 import * as XLSX from 'xlsx';
 import { db } from '../database/db';
 import type { ExpenseRecord, IncomeRecord } from '../types';
+import { fetchWithRetry } from '../utils/httpClient';
 
 /**
  * Normalizes any date input (JS Date, Excel serial number, Google Sheet Date() string, or formatted string)
@@ -1093,7 +1094,7 @@ export async function syncFromGoogleAppsScript(webAppUrl: string): Promise<{ rec
       throw new Error('Please enter a valid Google Apps Script Web App URL.');
     }
 
-    const res = await fetch(cleanUrl);
+    const res = await fetchWithRetry(cleanUrl, { timeoutMs: 15000, maxRetries: 3 });
     if (!res.ok) {
       throw new Error(`Google Apps Script returned status ${res.status}`);
     }
@@ -1209,7 +1210,7 @@ export async function pushRecordToGoogleAppsScript(webAppUrl: string, record: an
   if (!cleanUrl.startsWith('http')) return;
 
   try {
-    await fetch(cleanUrl, {
+    await fetchWithRetry(cleanUrl, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -1219,6 +1220,8 @@ export async function pushRecordToGoogleAppsScript(webAppUrl: string, record: an
         action: 'addRecord',
         record,
       }),
+      timeoutMs: 10000,
+      maxRetries: 2,
     });
   } catch (err) {
     console.warn('Could not post to Google Apps Script Webhook:', err);

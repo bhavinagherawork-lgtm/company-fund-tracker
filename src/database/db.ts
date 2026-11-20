@@ -1,5 +1,5 @@
 import Dexie, { type Table } from 'dexie';
-import type { ExpenseCategory, IncomeRecord, ExpenseRecord, AppSetting, User, Office } from '../types';
+import type { ExpenseCategory, IncomeRecord, ExpenseRecord, AppSetting, User, Office, AuditLog } from '../types';
 import { initialCategories, initialIncomes, initialExpenses, initialSettings, initialUsers, initialOffices } from './seedData';
 
 export class ExpenseFlowDB extends Dexie {
@@ -9,6 +9,7 @@ export class ExpenseFlowDB extends Dexie {
   settings!: Table<AppSetting, string>;
   users!: Table<User, number>;
   offices!: Table<Office, number>;
+  auditLogs!: Table<AuditLog, number>;
 
   constructor() {
     super('ExpenseFlowDB');
@@ -26,6 +27,10 @@ export class ExpenseFlowDB extends Dexie {
 
     this.version(3).stores({
       offices: '++id, &name, code, isDefault, status, createdAt',
+    });
+
+    this.version(4).stores({
+      auditLogs: '++id, timestamp, action, resource, username, status',
     });
   }
 }

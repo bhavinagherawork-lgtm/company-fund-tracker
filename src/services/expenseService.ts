@@ -1,6 +1,8 @@
 import { db } from '../database/db';
 import type { ExpenseRecord } from '../types';
 import { triggerAutoSaveToExcel } from './syncService';
+import { validateExpenseInput } from '../utils/validators';
+import { logAuditEvent } from './auditService';
 
 export async function getExpenses(officeId?: number | 'ALL'): Promise<ExpenseRecord[]> {
   const all = await db.expenseRecords
@@ -15,6 +17,19 @@ export async function getExpenses(officeId?: number | 'ALL'): Promise<ExpenseRec
 }
 
 export async function addExpense(expense: Omit<ExpenseRecord, 'id' | 'createdAt'>): Promise<number> {
+  const validation = validateExpenseInput({
+    expenseTitle: expense.expenseTitle,
+    amount: expense.amount,
+    expenseDate: expense.expenseDate,
+    paymentMode: expense.paymentMode,
+    status: expense.status,
+  });
+
+  if (!validation.isValid) {
+    const firstErr = Object.values(validation.errors)[0] || 'Invalid expense record.';
+    throw new Error(firstErr);
+  }
+
   let categoryName = expense.categoryName;
   if (!categoryName && expense.categoryId) {
     const cat = await db.expenseCategories.get(expense.categoryId);
@@ -34,23 +49,53 @@ export async function addExpense(expense: Omit<ExpenseRecord, 'id' | 'createdAt'
     officeName = off?.name;
   }
 
+  // Integer paise rounding to eliminate float inaccuracy (Rule 8.6)
+  const safeAmount = Math.round(Number(expense.amount) * 100) / 100;
+
   const newRecord: ExpenseRecord = {
     ...expense,
     categoryName,
     officeId,
     officeName,
-    amount: Number(expense.amount),
+    amount: safeAmount,
     status: expense.status || 'Completed',
     createdAt: new Date().toISOString(),
   };
 
   const id = await db.expenseRecords.add(newRecord);
+
+  await logAuditEvent({
+    action: 'CREATE_EXPENSE',
+    resource: 'expenses',
+    username: 'Current User',
+    details: `${newRecord.expenseTitle} - ₹${newRecord.amount}`,
+    status: 'SUCCESS',
+  });
+
   // Auto-sync with connected Excel file
   triggerAutoSaveToExcel().catch(() => {});
   return Number(id);
 }
 
 export async function updateExpense(id: number, updates: Partial<ExpenseRecord>): Promise<void> {
+  if (updates.amount !== undefined || updates.expenseTitle !== undefined || updates.expenseDate !== undefined) {
+    const validation = validateExpenseInput({
+      expenseTitle: updates.expenseTitle !== undefined ? updates.expenseTitle : 'Valid Title',
+      amount: updates.amount !== undefined ? updates.amount : 100,
+      expenseDate: updates.expenseDate !== undefined ? updates.expenseDate : '2026-01-01',
+      paymentMode: updates.paymentMode,
+      status: updates.status,
+    });
+    if (!validation.isValid) {
+      const firstErr = Object.values(validation.errors)[0] || 'Invalid update data.';
+      throw new Error(firstErr);
+    }
+  }
+
+  if (updates.amount !== undefined) {
+    updates.amount = Math.round(Number(updates.amount) * 100) / 100;
+  }
+
   if (updates.categoryId && !updates.categoryName) {
     const cat = await db.expenseCategories.get(updates.categoryId);
     updates.categoryName = cat?.name;

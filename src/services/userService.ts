@@ -1,6 +1,18 @@
 import { db } from '../database/db';
 import type { User } from '../types';
 import { initialUsers } from '../database/seedData';
+import { hashPassword, verifyPassword } from '../utils/crypto';
+import { validateUserInput } from '../utils/validators';
+import { logAuditEvent } from './auditService';
+
+// Rule 5.8: Brute Force Protection (Per-Account Rate Limiter with 60s cooldown)
+interface LoginAttempt {
+  count: number;
+  lockedUntil: number;
+}
+const loginAttempts = new Map<string, LoginAttempt>();
+const MAX_FAILED_ATTEMPTS = 5;
+const LOCKOUT_DURATION_MS = 60000; // 60s cooldown
 
 /**
  * Ensures at least one mandatory user entry exists in the User table.
@@ -37,13 +49,25 @@ export async function getUserByUsername(username: string): Promise<User | undefi
 }
 
 /**
- * Creates a new user in the User table
+ * Creates a new user in the User table with validation and password hashing
  */
 export async function createUser(userData: Omit<User, 'id' | 'createdAt'>): Promise<number> {
-  const trimmedUsername = userData.username.trim().toLowerCase();
-  if (!trimmedUsername) {
-    throw new Error('Username is required.');
+  const validation = validateUserInput({
+    username: userData.username,
+    fullName: userData.fullName,
+    email: userData.email,
+    role: userData.role,
+    status: userData.status,
+    password: userData.passwordHash,
+    isNewUser: true,
+  });
+
+  if (!validation.isValid) {
+    const msg = Object.values(validation.errors)[0] || 'Invalid user data provided.';
+    throw new Error(msg);
   }
+
+  const trimmedUsername = userData.username.trim().toLowerCase();
 
   // Check username uniqueness
   const existing = await getUserByUsername(trimmedUsername);
@@ -59,18 +83,29 @@ export async function createUser(userData: Omit<User, 'id' | 'createdAt'>): Prom
     }
   }
 
+  // Hash password securely (Rule 5.1)
+  const secureHash = await hashPassword(userData.passwordHash);
+
   const newUser: User = {
     ...userData,
     username: trimmedUsername,
     fullName: userData.fullName.trim(),
     email: userData.email.trim(),
-    passwordHash: userData.passwordHash,
+    passwordHash: secureHash,
     role: userData.role || 'Viewer',
     status: userData.status || 'Active',
     createdAt: new Date().toISOString(),
   };
 
   const id = await db.users.add(newUser);
+  await logAuditEvent({
+    action: 'CREATE_USER',
+    resource: 'users',
+    username: newUser.username,
+    details: `Role: ${newUser.role}, Status: ${newUser.status}`,
+    status: 'SUCCESS',
+  });
+
   return Number(id);
 }
 
@@ -81,6 +116,22 @@ export async function updateUser(id: number, updates: Partial<User>): Promise<vo
   const user = await db.users.get(id);
   if (!user) {
     throw new Error('User not found.');
+  }
+
+  // Validate updates
+  const validation = validateUserInput({
+    username: updates.username || user.username,
+    fullName: updates.fullName || user.fullName,
+    email: updates.email !== undefined ? updates.email : user.email,
+    role: updates.role || user.role,
+    status: updates.status || user.status,
+    password: updates.passwordHash,
+    isNewUser: false,
+  });
+
+  if (!validation.isValid) {
+    const msg = Object.values(validation.errors)[0] || 'Invalid update parameters.';
+    throw new Error(msg);
   }
 
   // If changing username, check uniqueness
@@ -108,9 +159,23 @@ export async function updateUser(id: number, updates: Partial<User>): Promise<vo
     }
   }
 
+  // If updating password, hash it securely
+  const preparedUpdates = { ...updates };
+  if (updates.passwordHash && updates.passwordHash.trim()) {
+    preparedUpdates.passwordHash = await hashPassword(updates.passwordHash);
+  }
+
   await db.users.update(id, {
-    ...updates,
+    ...preparedUpdates,
     updatedAt: new Date().toISOString(),
+  });
+
+  await logAuditEvent({
+    action: 'UPDATE_USER',
+    resource: 'users',
+    username: user.username,
+    details: `Updated fields: ${Object.keys(updates).join(', ')}`,
+    status: 'SUCCESS',
   });
 }
 
@@ -140,11 +205,21 @@ export async function deleteUser(id: number, currentUserId?: number): Promise<{ 
   }
 
   await db.users.delete(id);
+  if (targetUser) {
+    await logAuditEvent({
+      action: 'DELETE_USER',
+      resource: 'users',
+      username: targetUser.username,
+      details: `Deleted user ID ${id}`,
+      status: 'SUCCESS',
+    });
+  }
   return { success: true, message: 'User deleted successfully.' };
 }
 
 /**
  * Authenticates a user with username/email and password
+ * Conforms to Rule 5.1 (Crypto hash verification) & Rule 5.8 (Brute force protection)
  */
 export async function authenticateUser(
   usernameOrEmail: string,
@@ -153,12 +228,39 @@ export async function authenticateUser(
   await ensureMandatoryUser();
   const trimmed = usernameOrEmail.trim().toLowerCase();
 
+  // Check rate limit lockout (Rule 5.8)
+  const attempt = loginAttempts.get(trimmed);
+  const nowMs = Date.now();
+  if (attempt && attempt.lockedUntil > nowMs) {
+    const remainingSeconds = Math.ceil((attempt.lockedUntil - nowMs) / 1000);
+    await logAuditEvent({
+      action: 'LOGIN_LOCKED',
+      resource: 'auth',
+      username: trimmed,
+      details: `Rate limit lockout active (${remainingSeconds}s remaining)`,
+      status: 'FAILURE',
+    });
+    return {
+      success: false,
+      error: `Too many failed login attempts. Please wait ${remainingSeconds} seconds before trying again.`,
+    };
+  }
+
   const all = await db.users.toArray();
   const user = all.find(
     (u) => u.username.toLowerCase() === trimmed || (u.email && u.email.toLowerCase() === trimmed)
   );
 
+  // Generic message on unknown user (Rule 5.1: prevent account enumeration)
   if (!user) {
+    trackFailedLogin(trimmed);
+    await logAuditEvent({
+      action: 'LOGIN_FAILED',
+      resource: 'auth',
+      username: trimmed,
+      details: 'User not found',
+      status: 'FAILURE',
+    });
     return { success: false, error: 'Invalid username or password.' };
   }
 
@@ -166,8 +268,27 @@ export async function authenticateUser(
     return { success: false, error: 'Account is deactivated. Please contact an administrator.' };
   }
 
-  if (user.passwordHash !== password) {
+  const isPasswordValid = await verifyPassword(password, user.passwordHash);
+  if (!isPasswordValid) {
+    trackFailedLogin(trimmed);
+    await logAuditEvent({
+      action: 'LOGIN_FAILED',
+      resource: 'auth',
+      username: user.username,
+      details: 'Invalid password credentials',
+      status: 'FAILURE',
+    });
     return { success: false, error: 'Invalid username or password.' };
+  }
+
+  // Clear failed attempt tracking on successful login
+  loginAttempts.delete(trimmed);
+
+  // If password was legacy unhashed, silently upgrade to salted hash (Rule 5.1)
+  if (!user.passwordHash.startsWith('ef_salt_v1:')) {
+    const upgradedHash = await hashPassword(password);
+    await db.users.update(user.id!, { passwordHash: upgradedHash });
+    user.passwordHash = upgradedHash;
   }
 
   // Update last login timestamp
@@ -175,5 +296,25 @@ export async function authenticateUser(
   await db.users.update(user.id!, { lastLoginAt: now });
   user.lastLoginAt = now;
 
+  await logAuditEvent({
+    action: 'LOGIN_SUCCESS',
+    resource: 'auth',
+    username: user.username,
+    userId: user.id,
+    details: `Role: ${user.role}`,
+    status: 'SUCCESS',
+  });
+
   return { success: true, user };
 }
+
+function trackFailedLogin(username: string): void {
+  const current = loginAttempts.get(username) || { count: 0, lockedUntil: 0 };
+  current.count += 1;
+  if (current.count >= MAX_FAILED_ATTEMPTS) {
+    current.lockedUntil = Date.now() + LOCKOUT_DURATION_MS;
+    current.count = 0; // reset counter after triggering lockout
+  }
+  loginAttempts.set(username, current);
+}
+

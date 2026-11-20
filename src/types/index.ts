@@ -118,3 +118,14 @@ export interface User {
   createdAt: string;
   updatedAt?: string;
 }
+
+export interface AuditLog {
+  id?: number;
+  timestamp: string; // UTC ISO-8601
+  userId?: number;
+  username: string;
+  action: string;
+  resource: string;
+  details?: string;
+  status: 'SUCCESS' | 'FAILURE';
+}

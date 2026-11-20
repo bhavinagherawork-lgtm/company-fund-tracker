@@ -49,6 +49,7 @@ import { OfficesDialog } from '../components/OfficesDialog';
 import { subscribeToSyncStatus, type SyncStatusState } from '../services/syncService';
 import { useAuth } from '../context/AuthContext';
 import { useOffice } from '../context/OfficeContext';
+import { hasPermission } from '../utils/permissions';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -122,14 +123,15 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
     };
   }, [selectedOfficeId]);
 
+  // Role-Based Access Control: Filter navigation items based on user permissions (Rule 5.2 & 5.3)
   const navItems = [
-    { text: 'Dashboard', icon: <DashboardIcon sx={{ fontSize: 19 }} />, id: 'Dashboard' },
-    { text: 'Expenses', icon: <ReceiptLongIcon sx={{ fontSize: 19 }} />, id: 'Expenses' },
-    { text: 'Income & Funds', icon: <AccountBalanceWalletIcon sx={{ fontSize: 19 }} />, id: 'Income' },
-    { text: 'Reports', icon: <AssessmentIcon sx={{ fontSize: 19 }} />, id: 'Reports' },
-    { text: 'Categories', icon: <CategoryIcon sx={{ fontSize: 19 }} />, id: 'Categories' },
-    { text: 'Users', icon: <PeopleIcon sx={{ fontSize: 19 }} />, id: 'Users' },
-  ];
+    { text: 'Dashboard', icon: <DashboardIcon sx={{ fontSize: 19 }} />, id: 'Dashboard', permission: 'VIEW_DASHBOARD' as const },
+    { text: 'Expenses', icon: <ReceiptLongIcon sx={{ fontSize: 19 }} />, id: 'Expenses', permission: 'VIEW_EXPENSES' as const },
+    { text: 'Income & Funds', icon: <AccountBalanceWalletIcon sx={{ fontSize: 19 }} />, id: 'Income', permission: 'VIEW_INCOME' as const },
+    { text: 'Reports', icon: <AssessmentIcon sx={{ fontSize: 19 }} />, id: 'Reports', permission: 'VIEW_REPORTS' as const },
+    { text: 'Categories', icon: <CategoryIcon sx={{ fontSize: 19 }} />, id: 'Categories', permission: 'MANAGE_CATEGORIES' as const },
+    { text: 'Users', icon: <PeopleIcon sx={{ fontSize: 19 }} />, id: 'Users', permission: 'MANAGE_USERS' as const },
+  ].filter((item) => hasPermission(currentUser?.role, item.permission));
 
   const currentTabInfo = TAB_TITLES[activeTab] || { title: activeTab, subtitle: 'Operations & Fund Manager' };
   const sidebarWidth = sidebarCollapsed ? 72 : 240;
