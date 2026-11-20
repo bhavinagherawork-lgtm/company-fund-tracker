@@ -37,7 +37,7 @@ export const initialCategories: ExpenseCategory[] = [
     "id": 5,
     "name": "Client & Guest Hospitality",
     "code": "GUEST",
-    "color": "#8b5cf6",
+    "color": "#0ea5e9",
     "isDefault": true,
     "description": "TeaPost tea for School Client, Kotak guest ice-cream & refreshments"
   },

@@ -459,14 +459,14 @@ export const ExpensesPage: React.FC = () => {
         </Alert>
       )}
 
-      {/* KPI Cards (Dynamically Filtered) */}
+      {/* KPI Cards (Dynamically Filtered - 60-30-10 Highlighter Rule) */}
       <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Posted Expenses {periodPreset !== 'ALL' && '(Filtered)'}
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
@@ -477,7 +477,7 @@ export const ExpensesPage: React.FC = () => {
                   <TrendingDownIcon sx={{ color: '#ef4444', fontSize: 20 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
                 Operational deductions in selected scope
               </Typography>
             </CardContent>
@@ -485,22 +485,22 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Active Expense Days
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#18181b', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {totalFilteredActiveDays} Days
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
                   <CalendarMonthIcon sx={{ color: '#18181b', fontSize: 20 }} />
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
+              <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.6, fontSize: '0.7rem' }}>
                 Calendar days with matching expenses
               </Typography>
             </CardContent>
@@ -508,18 +508,18 @@ export const ExpensesPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Matching Transactions
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: "Space Mono, monospace", fontSize: '1.25rem' }}>
                     {filteredExpenses.length} Records
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                <Box sx={{ p: 0.7, bgcolor: '#fafafa', borderRadius: '16px', border: '1px solid #e4e4e7' }}>
                   <ReceiptLongIcon sx={{ color: '#22c55e', fontSize: 20 }} />
                 </Box>
               </Box>

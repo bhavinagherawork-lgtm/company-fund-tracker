@@ -15,6 +15,7 @@ import {
   Chip,
   IconButton,
   Tooltip,
+  Slider,
 } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -25,6 +26,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import CalculateIcon from '@mui/icons-material/Calculate';
 import {
   BarChart,
   Bar,
@@ -80,6 +82,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
 
   const [openExpenseModal, setOpenExpenseModal] = useState(false);
   const [openIncomeModal, setOpenIncomeModal] = useState(false);
+  const [simulatedBurn, setSimulatedBurn] = useState<number>(25000);
 
   const loadData = useCallback(async () => {
     try {
@@ -95,6 +98,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       ]);
 
       setSummary(sum);
+      if (sum.currentMonthExpense > 0) {
+        setSimulatedBurn(Math.round(sum.currentMonthExpense));
+      }
       setCategoryData(cats);
       setMonthlyTrend(trends);
       setWeeklyData(weekRep.dayBreakdown.map(d => ({ day: d.day.split(' ')[0], amount: d.amount })));
@@ -120,13 +126,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
     );
   }
 
-  // Reui Palette Colors for Category Donut Chart
+  // Reui Palette Colors for Category Donut Chart (Purple/Violet purged per WebsiteRules.md)
   const REUI_CHART_COLORS = [
     '#18181b', // Obsidian
     '#eab308', // Gold
     '#22c55e', // Emerald
     '#3b82f6', // Sapphire
-    '#a855f7', // Purple
+    '#0ea5e9', // Sky Blue
     '#f97316', // Orange
     '#06b6d4', // Cyan
     '#71717a', // Slate
@@ -478,6 +484,222 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           </Card>
         </Grid>
       </Grid>
+
+      {/* Rule 5: The Free Sample (IKEA Effect) - Interactive Cash Runway & Burn Estimator */}
+      {(() => {
+        const runwayMonths = simulatedBurn > 0 ? Number((summary.availableBalance / simulatedBurn).toFixed(1)) : 999;
+        const dailySafe = simulatedBurn > 0 ? Math.round(simulatedBurn / 30) : 0;
+        const statusConfig =
+          runwayMonths >= 6
+            ? { label: 'Healthy Liquidity', color: '#15803d', bg: '#f0fdf4', border: '#bbf7d0' }
+            : runwayMonths >= 3
+            ? { label: 'Moderate Runway', color: '#a16207', bg: '#fefce8', border: '#fef08a' }
+            : { label: 'Attention Advised', color: '#b91c1c', bg: '#fef2f2', border: '#fecaca' };
+
+        return (
+          <Card
+            sx={{
+              mt: 2,
+              borderRadius: '16px',
+              border: '1px solid #e4e4e7',
+              bgcolor: '#ffffff',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+            }}
+          >
+            <CardContent sx={{ p: '18px 22px !important' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: { xs: 'flex-start', sm: 'center' }, flexWrap: 'wrap', gap: 1, mb: 1.5 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '8px',
+                      bgcolor: '#18181b',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <CalculateIcon sx={{ color: '#eab308', fontSize: 18 }} />
+                  </Box>
+                  <Box>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        fontWeight: 700,
+                        fontSize: '0.92rem',
+                        fontFamily: '"Space Grotesk", sans-serif',
+                        color: '#09090b',
+                      }}
+                    >
+                      Interactive Cash Runway & Burn Estimator
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.72rem' }}>
+                      Simulate operating burn rate to project runway months & daily operational ceilings
+                    </Typography>
+                  </Box>
+                </Box>
+                <Chip
+                  label={statusConfig.label}
+                  size="small"
+                  sx={{
+                    bgcolor: statusConfig.bg,
+                    color: statusConfig.color,
+                    border: `1px solid ${statusConfig.border}`,
+                    fontWeight: 700,
+                    fontSize: '0.7rem',
+                    height: 24,
+                    borderRadius: '9999px',
+                  }}
+                />
+              </Box>
+
+              <Grid container spacing={2.5} alignItems="center">
+                <Grid size={{ xs: 12, md: 5 }}>
+                  <Box sx={{ px: 0.5 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                      <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 600, fontSize: '0.74rem' }}>
+                        Simulated Monthly Operating Burn:
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontWeight: 700,
+                          color: '#09090b',
+                          fontFamily: '"Space Mono", monospace',
+                          fontSize: '0.84rem',
+                        }}
+                      >
+                        {formatINR(simulatedBurn)} / month
+                      </Typography>
+                    </Box>
+                    <Slider
+                      value={simulatedBurn}
+                      min={5000}
+                      max={Math.max(150000, Math.round(summary.totalExpense * 1.5) || 100000)}
+                      step={2500}
+                      onChange={(_, val) => setSimulatedBurn(val as number)}
+                      sx={{
+                        color: '#18181b',
+                        height: 6,
+                        '& .MuiSlider-thumb': {
+                          width: 16,
+                          height: 16,
+                          bgcolor: '#ffffff',
+                          border: '2.5px solid #18181b',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                          '&:hover, &.Mui-focusVisible': {
+                            boxShadow: '0 0 0 6px rgba(24, 24, 27, 0.16)',
+                          },
+                        },
+                        '& .MuiSlider-rail': {
+                          bgcolor: '#e4e4e7',
+                        },
+                      }}
+                    />
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: -0.5 }}>
+                      <Typography variant="caption" sx={{ color: '#a1a1aa', fontSize: '0.68rem' }}>
+                        Min: {formatINR(5000)}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: '#a1a1aa', fontSize: '0.68rem' }}>
+                        Max: {formatINR(Math.max(150000, Math.round(summary.totalExpense * 1.5) || 100000))}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+
+                <Grid size={{ xs: 12, md: 7 }}>
+                  <Grid container spacing={1.5}>
+                    <Grid size={{ xs: 4 }}>
+                      <Box
+                        sx={{
+                          p: 1.2,
+                          borderRadius: '12px',
+                          bgcolor: '#fafafa',
+                          border: '1px solid #e4e4e7',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', display: 'block' }}>
+                          Projected Runway
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: 700,
+                            color: statusConfig.color,
+                            fontFamily: '"Space Mono", monospace',
+                            fontSize: '1.2rem',
+                            mt: 0.3,
+                          }}
+                        >
+                          {runwayMonths > 99 ? '> 99' : runwayMonths} <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Mo</span>
+                        </Typography>
+                      </Box>
+                    </Grid>
+
+                    <Grid size={{ xs: 4 }}>
+                      <Box
+                        sx={{
+                          p: 1.2,
+                          borderRadius: '12px',
+                          bgcolor: '#fafafa',
+                          border: '1px solid #e4e4e7',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', display: 'block' }}>
+                          Daily Safe Burn
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: 700,
+                            color: '#09090b',
+                            fontFamily: '"Space Mono", monospace',
+                            fontSize: '1.05rem',
+                            mt: 0.3,
+                          }}
+                        >
+                          {formatINR(dailySafe)}
+                        </Typography>
+                      </Box>
+                    </Grid>
+
+                    <Grid size={{ xs: 4 }}>
+                      <Box
+                        sx={{
+                          p: 1.2,
+                          borderRadius: '12px',
+                          bgcolor: '#fafafa',
+                          border: '1px solid #e4e4e7',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', display: 'block' }}>
+                          Available Reserve
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: 700,
+                            color: '#22c55e',
+                            fontFamily: '"Space Mono", monospace',
+                            fontSize: '1.05rem',
+                            mt: 0.3,
+                          }}
+                        >
+                          {formatINR(summary.availableBalance)}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        );
+      })()}
 
       {/* Recent Day-Wise Expenditures Table (Soft Card 16px) */}
       <Card sx={{ mt: 2, borderRadius: '16px', border: '1px solid #e4e4e7', bgcolor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>

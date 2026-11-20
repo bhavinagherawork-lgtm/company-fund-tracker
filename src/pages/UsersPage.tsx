@@ -221,7 +221,7 @@ export const UsersPage: React.FC = () => {
       case 'Admin':
         return { bg: '#dbeafe', color: '#1e40af', border: '#bfdbfe' };
       case 'Manager':
-        return { bg: '#f3e8ff', color: '#6b21a8', border: '#e9d5ff' };
+        return { bg: '#fefce8', color: '#a16207', border: '#fef08a' };
       case 'Accountant':
         return { bg: '#dcfce7', color: '#15803d', border: '#bbf7d0' };
       default:
@@ -297,24 +297,24 @@ export const UsersPage: React.FC = () => {
         </Alert>
       )}
 
-      {/* KPI Cards */}
+      {/* KPI Cards (60-30-10 Highlighter Rule: Clean structural borders, reserved accents) */}
       <Grid container spacing={1.5} sx={{ mb: 1.8 }}>
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #0052ff', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Users
                   </Typography>
                   <Typography variant="h6" sx={{ fontWeight: 700, color: '#09090b', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {totalUsersCount} Accounts
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Enrolled system profiles
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#eff6ff', borderRadius: '9999px' }}>
+                <Box sx={{ p: 0.8, bgcolor: '#f4f4f5', borderRadius: '9999px' }}>
                   <PeopleIcon sx={{ color: '#18181b', fontSize: 18 }} />
                 </Box>
               </Box>
@@ -323,17 +323,17 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Active Users
                   </Typography>
                   <Typography variant="h6" sx={{ fontWeight: 700, color: '#22c55e', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {activeUsersCount} Active
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Permitted to authenticate
                   </Typography>
                 </Box>
@@ -346,22 +346,22 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #7c3aed', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Administrators
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#7c3aed', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#18181b', fontFamily: '"Space Mono", monospace', fontSize: '1.1rem', mt: 0.3 }}>
                     {adminCount} Admins
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Full operational authority
                   </Typography>
                 </Box>
-                <Box sx={{ p: 0.8, bgcolor: '#f5f3ff', borderRadius: '9999px' }}>
-                  <AdminPanelSettingsIcon sx={{ color: '#7c3aed', fontSize: 18 }} />
+                <Box sx={{ p: 0.8, bgcolor: '#f4f4f5', borderRadius: '9999px' }}>
+                  <AdminPanelSettingsIcon sx={{ color: '#18181b', fontSize: 18 }} />
                 </Box>
               </Box>
             </CardContent>
@@ -369,17 +369,17 @@ export const UsersPage: React.FC = () => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 3 }}>
-          <Card sx={{ borderLeft: '3px solid #f59e0b', borderRadius: '16px' }}>
+          <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
             <CardContent sx={{ p: '12px 14px !important' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Box>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Policy Status
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', color: '#f59e0b', fontSize: '1.0rem', mt: 0.3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: '"Space Grotesk", sans-serif', color: '#eab308', fontSize: '1.0rem', mt: 0.3 }}>
                     Mandatory 1+
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem', mt: 0.3, display: 'block' }}>
                     Protected from zero users
                   </Typography>
                 </Box>

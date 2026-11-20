@@ -305,18 +305,18 @@ export const ReportsPage: React.FC = () => {
             </Box>
           </Card>
 
-          {/* Weekly Summary KPIs */}
+          {/* Weekly Summary KPIs (60-30-10 Highlighter Rule) */}
           <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: '3px solid #dc2626', borderRadius: '16px' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Weekly Expense
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#ef4444', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
                     -{formatINR(weeklyReport.totalExpense)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
                     Mon through Sun total outflow
                   </Typography>
                 </CardContent>
@@ -324,15 +324,15 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: '3px solid #05b169', borderRadius: '16px' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Total Inflow Received
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#22c55e', mt: 0.3, fontFamily: '"Space Mono", monospace', fontSize: '1.25rem' }}>
                     +{formatINR(weeklyReport.totalIncome)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
                     Funds credited during this week
                   </Typography>
                 </CardContent>
@@ -340,9 +340,9 @@ export const ReportsPage: React.FC = () => {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 4 }}>
-              <Card sx={{ borderLeft: `3px solid ${weeklyReport.netCashFlow >= 0 ? '#18181b' : '#f59e0b'}`, borderRadius: '16px' }}>
+              <Card sx={{ border: '1px solid #e4e4e7', borderRadius: '16px' }}>
                 <CardContent sx={{ p: '12px 14px !important' }}>
-                  <Typography variant="caption" sx={{ color: '#5b616e', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontWeight: 700, fontSize: '0.68rem', textTransform: 'uppercase' }}>
                     Net Cash Position
                   </Typography>
                   <Typography
@@ -357,7 +357,7 @@ export const ReportsPage: React.FC = () => {
                   >
                     {formatINR(weeklyReport.netCashFlow)}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#5b616e', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
+                  <Typography variant="caption" sx={{ color: '#71717a', display: 'block', mt: 0.5, fontSize: '0.7rem' }}>
                     Inflow minus outflow difference
                   </Typography>
                 </CardContent>

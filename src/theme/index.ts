@@ -339,5 +339,28 @@ export const theme = createTheme({
         },
       },
     },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#18181b',
+            color: '#ffffff',
+            '& .MuiTypography-root': {
+              color: '#ffffff',
+            },
+            '& .MuiListItemText-primary': {
+              color: '#ffffff',
+            },
+          },
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: '0.85rem',
+        },
+      },
+    },
   },
 });

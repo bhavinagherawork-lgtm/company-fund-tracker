@@ -192,6 +192,15 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, activeTab, onSel
             {(isDrawer || !sidebarCollapsed) && (
               <ListItemText
                 primary={item.text}
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: '0.85rem',
+                    fontWeight: isSelected ? 700 : 500,
+                    fontFamily: isSelected ? '"Space Grotesk", sans-serif' : 'Inter, sans-serif',
+                    letterSpacing: '-0.01em',
+                    color: isSelected ? '#ffffff !important' : '#71717a',
+                  },
+                }}
                 slotProps={{
                   primary: {
                     sx: {

@@ -87,24 +87,24 @@ export const LoginPage: React.FC = () => {
         {/* Brand Accent Top Stripe */}
         <Box sx={{ height: 4, bgcolor: '#18181b' }} />
 
-        <CardContent sx={{ p: '32px 28px !important' }}>
+        <CardContent sx={{ p: '28px 26px !important' }}>
           {/* Logo & System Title */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 3 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
             <Box
               sx={{
-                width: 46,
-                height: 46,
+                width: 44,
+                height: 44,
                 borderRadius: '12px',
                 bgcolor: '#18181b',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                mb: 1.5,
+                mb: 1.2,
                 boxShadow: '0 4px 14px rgba(24, 24, 27, 0.25)',
                 border: '1px solid #27272a',
               }}
             >
-              <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 24 }} />
+              <AccountBalanceWalletIcon sx={{ color: '#eab308', fontSize: 22 }} />
             </Box>
             <Typography
               variant="h5"
@@ -113,22 +113,43 @@ export const LoginPage: React.FC = () => {
                 color: '#09090b',
                 fontFamily: '"Space Grotesk", sans-serif',
                 letterSpacing: '-0.02em',
-                fontSize: '1.35rem',
+                fontSize: '1.3rem',
               }}
             >
               ExpenseFlow
             </Typography>
-            <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              Operations & Audited Funds Manager
-            </Typography>
+            <Chip
+              label="For Business Owners, Office Managers & Finance Teams"
+              size="small"
+              sx={{
+                mt: 0.6,
+                bgcolor: '#fafafa',
+                color: '#71717a',
+                border: '1px solid #e4e4e7',
+                fontSize: '0.66rem',
+                fontWeight: 600,
+                height: 22,
+                borderRadius: '9999px',
+              }}
+            />
           </Box>
 
-          <Box sx={{ mb: 2.5, textAlign: 'center' }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#09090b', fontSize: '0.98rem', fontFamily: '"Space Grotesk", sans-serif' }}>
-              Sign In to Your Workspace
+          {/* Rule 1: The Mirror Test (Pain points, outcome promise, clear action) */}
+          <Box sx={{ mb: 2.2, textAlign: 'center', px: 0.5 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: 700,
+                color: '#09090b',
+                fontSize: '0.94rem',
+                fontFamily: '"Space Grotesk", sans-serif',
+                lineHeight: 1.35,
+              }}
+            >
+              Stop untracked petty cash leaks & audit multi-office finances in real-time.
             </Typography>
-            <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.78rem' }}>
-              Enter your credentials to access company finances
+            <Typography variant="body2" sx={{ color: '#71717a', fontSize: '0.76rem', mt: 0.5, lineHeight: 1.4 }}>
+              Instant balance verification, zero unaccounted cash discrepancies, and 1-click Google Sheet / Excel sync.
             </Typography>
           </Box>
 
@@ -275,6 +296,39 @@ export const LoginPage: React.FC = () => {
                 </Box>
               </Box>
               <Chip label="Admin" size="small" sx={{ bgcolor: '#18181b', color: '#eab308', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px' }} />
+            </Box>
+
+            <Box
+              onClick={() => handleQuickFill('manager', 'manager123')}
+              sx={{
+                p: '10px 14px',
+                borderRadius: '9999px',
+                bgcolor: '#ffffff',
+                border: '1px solid #e4e4e7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+                transition: 'all 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                '&:hover': {
+                  borderColor: '#18181b',
+                  bgcolor: '#fafafa',
+                  transform: 'translateX(2px)',
+                },
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+                <KeyIcon sx={{ fontSize: 16, color: '#eab308' }} />
+                <Box>
+                  <Typography variant="caption" sx={{ fontWeight: 600, color: '#09090b', display: 'block', fontSize: '0.76rem' }}>
+                    manager / manager123
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#71717a', fontSize: '0.68rem' }}>
+                    Branch Office Manager
+                  </Typography>
+                </Box>
+              </Box>
+              <Chip label="Manager" size="small" sx={{ bgcolor: '#fefce8', color: '#a16207', fontWeight: 700, fontSize: '0.65rem', height: 20, borderRadius: '9999px', border: '1px solid #fef08a' }} />
             </Box>
 
             <Box
